@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FindNearestEnemy : MonoBehaviour
 {
+    public GameObject nearestEnemy;
+
     // Update is called once per frame
     void Update()
     {
@@ -13,7 +15,7 @@ public class FindNearestEnemy : MonoBehaviour
     void findNearest()
     {
         float shortestDistanceToEnemy = Mathf.Infinity;
-        GameObject nearestEnemy = null;
+        nearestEnemy = null;
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
         foreach(GameObject currentEnemy in enemies)
