@@ -8,11 +8,13 @@ public class AttackWithWeapon : MonoBehaviour
     public Weapon equippedWeapon;
 
     //object references
-    public FindNearestEnemy nearestEnemy;
+    private FindNearestEnemy nearestEnemy;
+    private float nextFireTime;
 
     private void Start()
     {
         nearestEnemy = gameObject.GetComponent<FindNearestEnemy>();
+        nextFireTime = Time.time;
     }
 
     // Update is called once per frame
@@ -23,7 +25,7 @@ public class AttackWithWeapon : MonoBehaviour
 
     void Attack()
     {
-        if(nearestEnemy.nearestEnemy && nearestEnemy.distanceToNearestEnemy <= equippedWeapon.range)
+        if(nearestEnemy.nearestEnemy && nearestEnemy.distanceToNearestEnemy <= equippedWeapon.range && Time.time >= nextFireTime)
         {
             if (equippedWeapon.hitscan)
             {
@@ -38,6 +40,8 @@ public class AttackWithWeapon : MonoBehaviour
             {
                 Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
             }
+
+            nextFireTime = Time.time + equippedWeapon.attackCooldownTime;
         }
     }
 }

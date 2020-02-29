@@ -16,7 +16,7 @@ MonoBehaviour:
   description: Pew pew
   sprite: {fileID: 0}
   attackDamage: 1
-  attackRate: 5
+  attackCooldownTime: 0.5
   range: 20
   onHitEffect: {fileID: 0}
   hitscan: 0

@@ -9,7 +9,7 @@ public class Weapon : ScriptableObject
     public string description;
     public Sprite sprite;
     public int attackDamage;
-    public int attackRate;
+    public float attackCooldownTime;
     public int range;
     public Sprite onHitEffect;
     public bool hitscan;
