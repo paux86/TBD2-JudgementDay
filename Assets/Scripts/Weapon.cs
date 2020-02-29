@@ -13,7 +13,5 @@ public class Weapon : ScriptableObject
     public int range;
     public Sprite onHitEffect;
     public bool hitscan;
-    public float projectileSpeed;
-    public Sprite projectileSprite;
-    public Collider2D hurtBox;
+    public GameObject projectile;
 }
