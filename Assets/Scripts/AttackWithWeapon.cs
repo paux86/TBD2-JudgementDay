@@ -38,6 +38,7 @@ public class AttackWithWeapon : MonoBehaviour
             }
             else
             {
+                Debug.Log("testing");
                 Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
             }
 
