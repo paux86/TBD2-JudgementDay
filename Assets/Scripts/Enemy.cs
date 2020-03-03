@@ -6,10 +6,10 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField] int health = 100;
+    [SerializeField] int armor = 10;
     [SerializeField] float attackCounter;
     [SerializeField] float maxTimeBetweeAttacks = 3f;
     [SerializeField] float minTimeBetweenAttacks = 0.2f;
-    [SerializeField] GameObject projectile; // if enemy is projectile type. Probably need scripts for each type of enemy.
     [SerializeField] float projectileSpeed = 10f;
 
     // Start is called before the first frame update
@@ -24,12 +24,17 @@ public class Enemy : MonoBehaviour
         
     }
 
+    //armor peircing/Destroying attacks attacks can access this.
+    public void DecreaseArmor(int decrementBy)
+    {
+        this.armor -= decrementBy;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         
-        DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
-        health -= damageDealer.GetDamage();
-        damageDealer.DestroyProjectileOnHit();
+        Projectile projectile = other.gameObject.GetComponent<Projectile>();
+        health -= (projectile.GetDamage() - armor);
 
         if (health <= 0)
         {

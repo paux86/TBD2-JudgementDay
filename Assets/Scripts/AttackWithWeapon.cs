@@ -38,8 +38,10 @@ public class AttackWithWeapon : MonoBehaviour
             }
             else
             {
-                Debug.Log("testing");
-                Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
+                
+                GameObject projectileObject = Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
+                Projectile projectile =  projectileObject.GetComponent<Projectile>();
+                projectile.SetDamage(equippedWeapon.GetAttackDamage());
             }
 
             nextFireTime = Time.time + equippedWeapon.attackCooldownTime;

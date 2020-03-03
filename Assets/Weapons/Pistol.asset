@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Pistol
   description: Pew pew
   sprite: {fileID: 0}
-  attackDamage: 1
+  attackDamage: 50
   attackCooldownTime: 0.5
   range: 150
   onHitEffect: {fileID: 0}
