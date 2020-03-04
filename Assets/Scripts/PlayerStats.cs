@@ -7,41 +7,52 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int maxHealth = 100;
     [SerializeField] private int moneyCount = 0;
     [SerializeField] private float armor = 0;
+    [SerializeField] private Weapon weapon;
     private int health;
 
     // Start is called before the first frame update
     void Start()
     {
-        setHealth(maxHealth);
+        SetHealth(maxHealth);
     }
 
-    public int getHealth()
+    public int GetHealth()
     {
         return health;
     }
 
-    public int getMoneyCount()
+    public int GetMoneyCount()
     {
         return moneyCount;
     }
 
-    public float getArmor()
+    public float GetArmor()
     {
         return armor;
     }
 
-    public void setHealth(int number)
+    public Weapon GetWeapon()
+    {
+        return weapon;
+    }
+
+    public void SetHealth(int number)
     {
         health = number;
     }
 
-    public void setMoney(int number)
+    public void SetMoney(int number)
     {
         moneyCount = number;
     }
 
-    public void setArmor(float number)
+    public void SetArmor(float number)
     {
         armor = number;
+    }
+
+    public void SetWeapon(Weapon newWeapon)
+    {
+        weapon = newWeapon;
     }
 }
