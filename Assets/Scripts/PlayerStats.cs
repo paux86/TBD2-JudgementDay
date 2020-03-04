@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private int health = 100;
+    [SerializeField] public int maxHealth = 100;
+    [SerializeField] private int health;
     [SerializeField] private int moneyCount = 0;
     [SerializeField] private float armor = 0;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        setHealth(maxHealth);
+    }
 
     public int getHealth()
     {
@@ -37,4 +44,6 @@ public class PlayerStats : MonoBehaviour
     {
         armor = number;
     }
+}
+
 }
