@@ -7,7 +7,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] public int maxHealth = 100;
     [SerializeField] private int moneyCount = 0;
     [SerializeField] private float armor = 0;
-    [SerializeField] private int health;
+    private int health;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +44,4 @@ public class PlayerStats : MonoBehaviour
     {
         armor = number;
     }
-}
-
 }
