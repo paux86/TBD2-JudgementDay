@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8547551043304789790}
   - component: {fileID: 1225818360}
   - component: {fileID: 1225818359}
+  - component: {fileID: -1937787682610275051}
   m_Layer: 0
   m_Name: Frank
   m_TagString: Enemy
@@ -130,9 +131,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  armor: 10
   attackCounter: 0
   maxTimeBetweeAttacks: 3
   minTimeBetweenAttacks: 0.2
-  projectile: {fileID: 7431447641463773922, guid: cec679c96be012d49a0e0ad76469f9a8,
-    type: 3}
   projectileSpeed: 10
+--- !u!114 &-1937787682610275051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103205593204535534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c8046720f51f1498c48d48b1b90cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  waveConfig: {fileID: 11400000, guid: c9cbef63b373d024086d887756a85650, type: 2}
