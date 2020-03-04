@@ -34,11 +34,14 @@ public class Enemy : MonoBehaviour
     {
         
         Projectile projectile = other.gameObject.GetComponent<Projectile>();
-        health -= (projectile.GetDamage() - armor);
-
-        if (health <= 0)
+        if(projectile)
         {
-            Destroy(gameObject);
+            health -= (projectile.GetDamage() - armor);
+
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

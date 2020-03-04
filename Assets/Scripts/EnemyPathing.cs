@@ -6,22 +6,29 @@ public class EnemyPathing : MonoBehaviour
 {
     [SerializeField] List<Transform> waypoints;
     [SerializeField] WaveConfig waveConfig;
+    [SerializeField] bool isStatic = false;
     float moveSpeed;
     int waypointIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        moveSpeed = waveConfig.GetMoveSpeed();
-        waypoints = waveConfig.GetWayPoints();
-        transform.position = waypoints[waypointIndex].transform.position;
+        if(!isStatic)
+        {
+            moveSpeed = waveConfig.GetMoveSpeed();
+            waypoints = waveConfig.GetWayPoints();
+            transform.position = waypoints[waypointIndex].transform.position;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        Move();
+       if(!isStatic)
+        {
+            Move();
+        }
     }
 
 
