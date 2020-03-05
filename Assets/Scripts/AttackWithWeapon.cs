@@ -8,12 +8,12 @@ public class AttackWithWeapon : MonoBehaviour
     public Weapon equippedWeapon;
 
     //object references
-    private FindNearestEnemy nearestEnemy;
+    private FindNearestTarget nearestEnemy;
     private float nextFireTime;
 
     private void Start()
     {
-        nearestEnemy = gameObject.GetComponent<FindNearestEnemy>();
+        nearestEnemy = gameObject.GetComponent<FindNearestTarget>();
         nextFireTime = Time.time;
     }
 
@@ -25,7 +25,7 @@ public class AttackWithWeapon : MonoBehaviour
 
     void Attack()
     {
-        if(nearestEnemy.nearestEnemy && nearestEnemy.distanceToNearestEnemy <= equippedWeapon.range && Time.time >= nextFireTime)
+        if(nearestEnemy.nearestTarget && nearestEnemy.distanceToNearestEnemy <= equippedWeapon.range && Time.time >= nextFireTime)
         {
             if (equippedWeapon.hitscan)
             {
