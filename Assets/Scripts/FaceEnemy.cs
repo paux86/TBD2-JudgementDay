@@ -14,12 +14,6 @@ public class FaceEnemy : MonoBehaviour
         nearestEnemy = gameObject.GetComponent<FindNearestEnemy>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         if(nearestEnemy.nearestEnemy)
