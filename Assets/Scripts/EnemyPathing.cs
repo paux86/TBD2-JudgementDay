@@ -9,6 +9,7 @@ public class EnemyPathing : MonoBehaviour
     [SerializeField] bool isStatic = false;
     float moveSpeed;
     int waypointIndex = 0;
+    Rigidbody2D rigidBody;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,8 @@ public class EnemyPathing : MonoBehaviour
             waypoints = waveConfig.GetWayPoints();
             transform.position = waypoints[waypointIndex].transform.position;
         }
+
+        rigidBody =  gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -42,7 +45,12 @@ public class EnemyPathing : MonoBehaviour
         {
             var targetPosition = waypoints[waypointIndex].transform.position;
             var movementThisFrame = moveSpeed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
+            Vector2 moveMent;
+            moveMent = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
+            rigidBody.MovePosition(moveMent);
+
+
+
 
             if (transform.position == targetPosition)
             {

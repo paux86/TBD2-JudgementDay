@@ -21,15 +21,16 @@ public class Enemy : MonoBehaviour
     {
         
     }
+  
 
-    
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         
         Projectile projectile = other.gameObject.GetComponent<Projectile>();
         if(projectile)
         {
+            Debug.Log("Testies");
             health -= (projectile.GetDamage());
 
             if (health <= 0)
