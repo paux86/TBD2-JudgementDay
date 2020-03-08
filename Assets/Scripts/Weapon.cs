@@ -14,4 +14,9 @@ public class Weapon : ScriptableObject
     public Sprite onHitEffect;
     public bool hitscan;
     public GameObject projectile;
+
+    public int GetAttackDamage()
+    {
+        return this.attackDamage;
+    }
 }

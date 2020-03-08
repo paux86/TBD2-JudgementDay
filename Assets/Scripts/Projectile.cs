@@ -7,6 +7,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] float speed = 20f;
     [SerializeField] float travelDistance = -1;
     private Rigidbody2D rb;
+    private int damage = 100;
     private Vector2 startingPos;
     
     // Start is called before the first frame update
@@ -37,5 +38,15 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
+
+    public int GetDamage()
+    {
+        return this.damage;
     }
 }
