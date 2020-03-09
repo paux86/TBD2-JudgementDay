@@ -23,14 +23,14 @@ public class PlayerStats : MonoBehaviour
         return armor;
     }
 
-    public void setHealth(int number)
+    public void incrementHealth(int number)
     {
-        health = number;
+        health += number;
     }
 
-    public void setMoney(int number)
+    public void incrementMoney(int number)
     {
-        moneyCount = number;
+        moneyCount += number;
     }
 
     public void setArmor(float number)
