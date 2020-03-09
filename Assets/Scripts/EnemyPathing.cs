@@ -7,6 +7,7 @@ public class EnemyPathing : MonoBehaviour
     [SerializeField] List<Transform> waypoints;
     [SerializeField] WaveConfig waveConfig;
     [SerializeField] bool isStatic = false;
+    [SerializeField] float minDistance = 10;
     float moveSpeed;
     int waypointIndex = 0;
     Rigidbody2D rigidBody;
@@ -61,7 +62,6 @@ public class EnemyPathing : MonoBehaviour
             if(player)
             {
                 Vector2 targetPosition = player.transform.position;
-                float minDistance = 10;
                 if( (targetPosition - (Vector2) gameObject.transform.position).sqrMagnitude > minDistance)
                 {
                     var movementThisFrame = moveSpeed * Time.deltaTime;
