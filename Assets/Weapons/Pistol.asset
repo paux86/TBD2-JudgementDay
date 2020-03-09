@@ -17,7 +17,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   attackDamage: 50
   attackCooldownTime: 0.5
-  range: 150
+  range: 200
   onHitEffect: {fileID: 0}
   hitscan: 0
   projectile: {fileID: 8322329796702154963, guid: 658c933cf41e6f44dba601e0245981d1,
