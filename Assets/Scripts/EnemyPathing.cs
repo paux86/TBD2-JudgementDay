@@ -49,12 +49,34 @@ public class EnemyPathing : MonoBehaviour
             moveMent = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
             rigidBody.MovePosition(moveMent);
 
-
-
-
             if (transform.position == targetPosition)
             {
                 waypointIndex++;
+            }
+
+        }
+        else        
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if(player)
+            {
+                Vector2 targetPosition = player.transform.position;
+                float minDistance = 10;
+                if( (targetPosition - (Vector2) gameObject.transform.position).sqrMagnitude > minDistance)
+                {
+                    var movementThisFrame = moveSpeed * Time.deltaTime;
+                    Vector2 moveMent;
+                    moveMent = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
+                    rigidBody.MovePosition(moveMent);
+                }
+                Vector2 lookDir = targetPosition - rigidBody.position;
+                float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+                rigidBody.rotation = angle;
+                
+            }
+            else
+            {
+                Debug.Log("No Player Found");
             }
 
         }
