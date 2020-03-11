@@ -769,7 +769,7 @@ PrefabInstance:
     - target: {fileID: 5316566818852915567, guid: 263f57311ae1fa644b27ac84318c73a0,
         type: 3}
       propertyPath: m_Name
-      value: Right Doorway (1)
+      value: Top Mid Doorway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 263f57311ae1fa644b27ac84318c73a0, type: 3}
@@ -1717,7 +1717,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.0206614, y: -4.6}
+  m_Offset: {x: -2.0805426, y: -4.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1728,7 +1728,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.158677, y: 1.3000002}
+  m_Size: {x: 3.0389147, y: 1.3000002}
   m_EdgeRadius: 0
 --- !u!1 &1172773778
 GameObject:
@@ -2042,6 +2042,86 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 263f57311ae1fa644b27ac84318c73a0, type: 3}
+--- !u!1001 &2069079046
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842866, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842868, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemySpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842869, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: waveConfigs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170659230361842869, guid: 544e5215421142240a75c37da5149d24,
+        type: 3}
+      propertyPath: waveConfigs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 84c97c549681a62498900ac113e5e8f7,
+        type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 544e5215421142240a75c37da5149d24, type: 3}
 --- !u!1001 &2110828356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2052,7 +2132,7 @@ PrefabInstance:
     - target: {fileID: 3659020115928583548, guid: 3b7627e4ba03d2a42bd0cdf7bf8971b7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.07
+      value: -0.34
       objectReference: {fileID: 0}
     - target: {fileID: 3659020115928583548, guid: 3b7627e4ba03d2a42bd0cdf7bf8971b7,
         type: 3}
@@ -2107,7 +2187,7 @@ PrefabInstance:
     - target: {fileID: 5570618579510140347, guid: 3b7627e4ba03d2a42bd0cdf7bf8971b7,
         type: 3}
       propertyPath: m_Name
-      value: Left Doorway (1)
+      value: Botttom Mid Doorway
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b7627e4ba03d2a42bd0cdf7bf8971b7, type: 3}
