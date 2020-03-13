@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class WinCondition : MonoBehaviour
 {
-    bool isWon;
+    //bool isWon;
 
     void Start(){
-        isWon = false;
+        //isWon = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(wave.isFinished && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) //wave.isFinished placeholder for implementation with Wave Spawner
-        {
-            isWon = true;
-        }
+       // if(wave.isFinished && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) //wave.isFinished placeholder for implementation with Wave Spawner
+       // {
+        //    isWon = true;
+        //}
     }
 }
