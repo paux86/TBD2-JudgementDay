@@ -19,6 +19,8 @@ public class BossAttack : MonoBehaviour
         Collider2D collInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
         if(collInfo != null)
         {
+            if(gameObject.GetComponent<Boss>().isEnraged == true)
+                collInfo.GetComponent<PlayerStats>().TakeDamage(enragedAttackDamage);
             collInfo.GetComponent<PlayerStats>().TakeDamage(attackDamage);
         }
     }
