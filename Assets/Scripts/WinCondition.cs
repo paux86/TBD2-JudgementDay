@@ -13,9 +13,12 @@ public class WinCondition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(wave.isFinished && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) //wave.isFinished placeholder for implementation with Wave Spawner
+        //placeholder code should not cause compilation errors. commenting this out for now.
+        /*
+        if (wave.isFinished && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) //wave.isFinished placeholder for implementation with Wave Spawner
         {
             isWon = true;
         }
+        */
     }
 }
