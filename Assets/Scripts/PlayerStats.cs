@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] int health = 100;
+    [SerializeField] int maxHealth = 100;
     [SerializeField] HealthBar healthBar;
+
+    private int health;
 
     private void Start()
     {
-        healthBar.SetMaxHealth(health);
+        health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     public void TakeDamage(int attackDamage)
     {
         health -= attackDamage;
         healthBar.SetHealth(health);
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
