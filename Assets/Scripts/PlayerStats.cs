@@ -10,12 +10,14 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] HealthBar healthBar;
     [SerializeField] Weapon[] weaponInventory = new Weapon[3];
     [SerializeField] Weapon currentWeapon;
+
     private int health;
 
     private void Start()
     {
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+
         currentWeapon = weaponInventory[0];
         armor = GetArmor();
         moneyCount = GetMoneyCount();
@@ -89,5 +91,15 @@ public class PlayerStats : MonoBehaviour
     {
         health -= attackDamage;
         healthBar.SetHealth(health);
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }
