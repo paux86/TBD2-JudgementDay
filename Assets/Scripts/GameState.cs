@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
@@ -9,26 +10,30 @@ public class GameState : MonoBehaviour
     [SerializeField] bool[] levelsComplete;
     private EnemySpawner enemySpawner;
     private SceneLoader sceneLoader;
-    int loopstuff;
 
 
     private void Start()
     {
-        levelsComplete = new bool[numLevels];
-        UpdateObjects();
-        loopstuff = 0;
+        levelsComplete = new bool[SceneManager.sceneCountInBuildSettings];
+        if(SceneManager.GetActiveScene().buildIndex != 0 )
+        {
+            UpdateObjects();
+        }
     }
 
     private void Update()
     {
        
 
-        if((GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) && (enemySpawner.isWavesComplete()))
+       if(SceneManager.GetActiveScene().buildIndex != 0)
         {
-            enemySpawner.SetWaveComplete(false);
-            sceneLoader.ChangeToLevelSelect();
-            StartCoroutine(Wait());
+            if (enemySpawner != null && (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) && (enemySpawner.isWavesComplete()))
+            {
+                enemySpawner.SetWaveComplete(false);
+                levelsComplete[SceneManager.GetActiveScene().buildIndex] = true;
+                sceneLoader.ChangeToLevelSelect();
 
+            }
         }
 
    
@@ -50,15 +55,29 @@ public class GameState : MonoBehaviour
 
     private void UpdateObjects()
     {
-        enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
-        sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
+        
+        if(FindObjectOfType<EnemySpawner>() != null)
+        {
+            enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
+            sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
+
+        }
     }
 
     IEnumerator Wait()
     {
         yield return new WaitForSecondsRealtime(8);
-        Debug.Log("test");
         UpdateObjects();
 
+    }
+
+    public bool[] GetLevelsComplete()
+    {
+        return this.levelsComplete;
+    }
+
+    public void WaitAndUpdateObjects()
+    {
+        StartCoroutine(Wait());
     }
 }

@@ -4,11 +4,27 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
+
+
+
 public class SceneLoader : MonoBehaviour
 {
+
+    public void Start()
+    {
+        GetGameState();
+
+
+    }
+
+    GameState gameState;
     public string GetLevelNameFromButton()
     {
         string levelName = EventSystem.current.currentSelectedGameObject.name;
+        int dot = levelName.LastIndexOf('.');
+        dot++;
+        levelName = levelName.Substring(dot);
+       
 
 
         return levelName;
@@ -16,12 +32,32 @@ public class SceneLoader : MonoBehaviour
 
     public void ChangeSceneButton()
     {
-
+        if (gameState != null)
+        {
+            gameState.WaitAndUpdateObjects();
+        }
         SceneManager.LoadScene(GetLevelNameFromButton());
     }
 
     public void ChangeToLevelSelect()
     {
+      
         SceneManager.LoadScene("LevelSelect");
     }
+
+
+    private void GetGameState()
+    {
+        if (FindObjectOfType<GameState>() != null)
+        {
+            gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
+        }
+        else
+        {
+            Debug.Log("GameState object missing or not found within SceneManager");
+        }
+    }
+
 }
+
+  

@@ -16,7 +16,10 @@ public class PlayerStats : MonoBehaviour
     private void Start()
     {
         health = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        if(healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
 
         currentWeapon = weaponInventory[0];
         armor = GetArmor();
