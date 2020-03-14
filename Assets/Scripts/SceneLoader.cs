@@ -10,15 +10,18 @@ public class SceneLoader : MonoBehaviour
     {
         string levelName = EventSystem.current.currentSelectedGameObject.name;
 
-        Debug.Log(levelName);
-
 
         return levelName;
     }
 
-    public void ChangeScene()
+    public void ChangeSceneButton()
     {
 
         SceneManager.LoadScene(GetLevelNameFromButton());
+    }
+
+    public void ChangeToLevelSelect()
+    {
+        SceneManager.LoadScene("LevelSelect");
     }
 }
