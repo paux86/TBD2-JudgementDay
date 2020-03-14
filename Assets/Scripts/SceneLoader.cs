@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
+    GameState gameState;
 
     public void Start()
     {
@@ -17,7 +18,7 @@ public class SceneLoader : MonoBehaviour
 
     }
 
-    GameState gameState;
+    
     public string GetLevelNameFromButton()
     {
         string levelName = EventSystem.current.currentSelectedGameObject.name;
