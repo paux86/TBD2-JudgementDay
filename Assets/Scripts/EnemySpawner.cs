@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] List<WaveConfig> waveConfigs;
     [SerializeField] int startingWave = 0;
     [SerializeField] bool looping = false;
+    public bool isFinishedSpawning = false;
 
 
 
@@ -41,5 +42,7 @@ public class EnemySpawner : MonoBehaviour
                 yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
             }
         }
+
+        isFinishedSpawning = true;
     }
 }
