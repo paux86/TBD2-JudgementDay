@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d787e0bdaf7b0489d3859cacbb11f0, type: 3}
   m_Name: Shotgun
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Shotgun
+  description: Kapow
   sprite: {fileID: 0}
-  attackDamage: 0
-  attackCooldownTime: 0
-  range: 0
+  attackDamage: 50
+  attackCooldownTime: 1.5
+  range: 10
   onHitEffect: {fileID: 0}
   hitscan: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 8775354500243431138, guid: e3afa4b06a23fd24887789a44118a6e9,
+    type: 3}
