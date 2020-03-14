@@ -209,6 +209,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5346659269109345701, guid: 4ff0114fa385b8b4891ef55dd6782989,
+        type: 3}
+      propertyPath: isStatic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5315118515349189343, guid: 4ff0114fa385b8b4891ef55dd6782989,
         type: 3}
       propertyPath: m_IsTrigger
@@ -565,7 +570,7 @@ GameObject:
   - component: {fileID: 1107659791}
   m_Layer: 8
   m_Name: soldier1_machine
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -584,6 +589,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearestTarget: {fileID: 0}
   distanceToNearestEnemy: 0
+  selfTag: Player
+  targetTag: Enemy
 --- !u!114 &1107659786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,6 +1283,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5346659269109345701, guid: 4ff0114fa385b8b4891ef55dd6782989,
+        type: 3}
+      propertyPath: isStatic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1937787682610275051, guid: 4ff0114fa385b8b4891ef55dd6782989,
         type: 3}
       propertyPath: isStatic
@@ -1636,6 +1648,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5346659269109345701, guid: 4ff0114fa385b8b4891ef55dd6782989,
+        type: 3}
+      propertyPath: isStatic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1937787682610275051, guid: 4ff0114fa385b8b4891ef55dd6782989,
         type: 3}
       propertyPath: isStatic

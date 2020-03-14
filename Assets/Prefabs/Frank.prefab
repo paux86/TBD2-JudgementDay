@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 3790650516509750841}
   - component: {fileID: 8547551043304789790}
   - component: {fileID: 1225818359}
-  - component: {fileID: -1937787682610275051}
   - component: {fileID: -6836263537827121752}
   - component: {fileID: -5315118515349189343}
-  m_Layer: 12
+  - component: {fileID: 7883591814567866362}
+  - component: {fileID: -7744249323065494141}
+  - component: {fileID: -5346659269109345701}
+  m_Layer: 9
   m_Name: Frank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -101,21 +103,6 @@ MonoBehaviour:
   attackCounter: 0
   maxTimeBetweeAttacks: 3
   minTimeBetweenAttacks: 0.2
---- !u!114 &-1937787682610275051
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9103205593204535534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02c8046720f51f1498c48d48b1b90cb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints: []
-  waveConfig: {fileID: 0}
-  isStatic: 0
 --- !u!50 &-6836263537827121752
 Rigidbody2D:
   serializedVersion: 4
@@ -171,3 +158,49 @@ PolygonCollider2D:
       - {x: 0.38750002, y: -0.5375}
       - {x: 0.6125, y: -0.4375}
       - {x: 0.6125, y: -0.0875}
+--- !u!114 &7883591814567866362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103205593204535534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fdb6421d142924d9105f3114aa7e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 3790650516509750841}
+  equippedWeapon: {fileID: 11400000, guid: c7aef2b1cec81b51fb4af9bad8553d53, type: 2}
+--- !u!114 &-7744249323065494141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103205593204535534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd66b3830103fd943a8dcafad8f86d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearestTarget: {fileID: 0}
+  distanceToNearestEnemy: 0
+  selfTag: Enemy
+  targetTag: Player
+--- !u!114 &-5346659269109345701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103205593204535534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02c8046720f51f1498c48d48b1b90cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  waveConfig: {fileID: 0}
+  isStatic: 0
+  minDistance: 50
