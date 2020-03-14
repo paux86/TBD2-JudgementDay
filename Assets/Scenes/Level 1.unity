@@ -128,6 +128,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5346659269109345701, guid: 4ff0114fa385b8b4891ef55dd6782989,
+        type: 3}
+      propertyPath: isStatic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5315118515349189343, guid: 4ff0114fa385b8b4891ef55dd6782989,
         type: 3}
       propertyPath: m_IsTrigger
@@ -341,6 +346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearestTarget: {fileID: 0}
   distanceToNearestEnemy: 0
+  selfTag: Player
+  targetTag: Enemy
 --- !u!114 &1107659786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,6 +878,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5346659269109345701, guid: 4ff0114fa385b8b4891ef55dd6782989,
+        type: 3}
+      propertyPath: isStatic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1937787682610275051, guid: 4ff0114fa385b8b4891ef55dd6782989,
         type: 3}
       propertyPath: isStatic
@@ -1231,6 +1243,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5346659269109345701, guid: 4ff0114fa385b8b4891ef55dd6782989,
+        type: 3}
+      propertyPath: isStatic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1937787682610275051, guid: 4ff0114fa385b8b4891ef55dd6782989,
         type: 3}
       propertyPath: isStatic
