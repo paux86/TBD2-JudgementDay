@@ -30,6 +30,24 @@ public class SceneLoader : MonoBehaviour
         return levelName;
     }
 
+
+    public void LoadNextScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
+    public void LoadStartScene()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+
     public void ChangeSceneButton()
     {
         if (gameState != null)
