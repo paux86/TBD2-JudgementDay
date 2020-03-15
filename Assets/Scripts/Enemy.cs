@@ -6,9 +6,6 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField] int maxHealth = 100;
-    [SerializeField] float attackCounter;
-    [SerializeField] float maxTimeBetweeAttacks = 3f;
-    [SerializeField] float minTimeBetweenAttacks = 0.2f;
     [SerializeField] int money = 1;
 
     private int health;
@@ -35,23 +32,5 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    /*private void OnCollisionEnter2D(Collision2D other)
-    {
-        
-        Projectile projectile = other.gameObject.GetComponent<Projectile>();
-        if(projectile)
-        {
-            Debug.Log("Testies");
-            health -= (projectile.GetDamage());
-
-            if (health <= 0)
-            {
-                Destroy(gameObject);
-            }
-        }
-        else 
-        {
-            Debug.Log("Testies");
-        }
-    }*/
+   
 }
