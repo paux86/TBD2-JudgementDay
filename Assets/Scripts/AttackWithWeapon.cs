@@ -6,6 +6,7 @@ public class AttackWithWeapon : MonoBehaviour
 {
     public Transform firePoint;
     public Weapon equippedWeapon;
+    public LineRenderer lineRenderer;
 
     //object references
     private FindNearestTarget nearestEnemy;
@@ -29,11 +30,29 @@ public class AttackWithWeapon : MonoBehaviour
         {
             if (equippedWeapon.hitscan)
             {
-                RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right);
+                int mask = ~(1 << gameObject.layer);
+                RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right, equippedWeapon.range, mask);
 
                 if (hitInfo)
                 {
-                    //todo   
+                    //needs to be optimized
+                    Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
+                    Boss boss = hitInfo.transform.GetComponent<Boss>();
+                    PlayerStats player = hitInfo.transform.GetComponent<PlayerStats>();
+
+                    if (enemy != null)
+                        enemy.TakeDamage(equippedWeapon.attackDamage);
+                    else if (boss != null)
+                        boss.TakeDamage(equippedWeapon.attackDamage);
+                    else if (player != null)
+                    {
+                        Debug.Log("Hit player");
+                        player.TakeDamage(equippedWeapon.attackDamage);
+                    }
+
+                    lineRenderer.enabled = true;
+                    lineRenderer.SetPosition(0, firePoint.position);
+                    lineRenderer.SetPosition(1, hitInfo.point);
                 }
             }
             else
@@ -41,7 +60,7 @@ public class AttackWithWeapon : MonoBehaviour
                 
                 GameObject projectileObject = Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
                 Projectile projectile =  projectileObject.GetComponent<Projectile>();
-                projectile.SetDamage(equippedWeapon.GetAttackDamage());
+                projectile.SetDamage(equippedWeapon.attackDamage);
             }
 
             nextFireTime = Time.time + equippedWeapon.attackCooldownTime;
