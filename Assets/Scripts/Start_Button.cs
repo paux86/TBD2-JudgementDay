@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Start_Button : MonoBehaviour
 {
-    [SerializeField] SceneLoader sceneLoader;
+    [SerializeField] SceneLoader sceneLoader = default;
     // Update is called once per frame
     void Update()
     {

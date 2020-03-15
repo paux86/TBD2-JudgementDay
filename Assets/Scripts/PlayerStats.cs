@@ -7,7 +7,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int moneyCount = 0;
     [SerializeField] private float armor = 0.0f;
     [SerializeField] int maxHealth = 100;
-    [SerializeField] HealthBar healthBar;
+    [SerializeField] HealthBar healthBar = default;
     [SerializeField] Weapon[] weaponInventory = new Weapon[3];
     [SerializeField] Weapon currentWeapon;
 
