@@ -198,7 +198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyCount: 0
   armor: 0
-  maxHealth: 100
+  maxHealth: 500
   healthBar: {fileID: 2490174875742954289, guid: 918a07dd784c10347b5b999ff8defee4,
     type: 3}
   weaponInventory:
