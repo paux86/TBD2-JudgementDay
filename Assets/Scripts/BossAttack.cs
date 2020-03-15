@@ -6,9 +6,9 @@ public class BossAttack : MonoBehaviour
 {
     [SerializeField] int attackDamage = 20;
     [SerializeField] int enragedAttackDamage = 40;
-    [SerializeField] Vector3 attackOffset;
+    [SerializeField] Vector3 attackOffset = default;
     [SerializeField] float attackRange = 1f;
-    [SerializeField] LayerMask attackMask;
+    [SerializeField] LayerMask attackMask = default;
     
     public void Attack()
     {

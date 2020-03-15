@@ -6,10 +6,10 @@ public class FindNearestTarget : MonoBehaviour
 {
     public GameObject nearestTarget;
     public float distanceToNearestEnemy;
-    [SerializeField] string selfTag;
-    [SerializeField] string targetTag;
+    [SerializeField] string selfTag = default;
+    [SerializeField] string targetTag = default;
 
-    // Update is called once per frame
+    // Update is called once per frame//
     void Update()
     {
         findNearest();

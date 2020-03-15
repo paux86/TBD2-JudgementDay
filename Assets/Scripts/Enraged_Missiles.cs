@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enraged_Missiles : MonoBehaviour
 {
-    [SerializeField] GameObject missile;
+    [SerializeField] GameObject missile = default;
     [SerializeField] float offset = 3f;
     [SerializeField] int numberOfMissiles = 10;
 
