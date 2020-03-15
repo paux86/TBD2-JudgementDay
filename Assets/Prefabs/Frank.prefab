@@ -203,4 +203,4 @@ MonoBehaviour:
   waypoints: []
   waveConfig: {fileID: 0}
   isStatic: 0
-  minDistance: 50
+  minDistance: 10

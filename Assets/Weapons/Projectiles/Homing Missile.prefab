@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1822398574422587926}
   - component: {fileID: 1822398574422587923}
   - component: {fileID: 1822398574422588140}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: Homing Missile
   m_TagString: Enemy
   m_Icon: {fileID: 0}
