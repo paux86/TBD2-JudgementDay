@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7883591814567866362}
   - component: {fileID: -7744249323065494141}
   - component: {fileID: -5346659269109345701}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Frank
   m_TagString: Enemy
   m_Icon: {fileID: 0}

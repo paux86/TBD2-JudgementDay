@@ -11,6 +11,8 @@ public class EnemyPathing : MonoBehaviour
     float moveSpeed;
     int waypointIndex = 0;
     Rigidbody2D rigidBody;
+    private int frames;
+    const int MAX_FRAMES = 200;
 
     // Start is called before the first frame update
     void Start()
@@ -42,8 +44,12 @@ public class EnemyPathing : MonoBehaviour
     }
     private void Move()
     {
-        if (waypointIndex <= waypoints.Count - 1)
+        frames++;
+        frames = frames % 10000; // Just making sure the number doesn't get stupid
+        if (waypointIndex <= waypoints.Count - 1 && frames < MAX_FRAMES)
         {
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.angularVelocity = 0f;
             var targetPosition = waypoints[waypointIndex].transform.position;
             var movementThisFrame = moveSpeed * Time.deltaTime;
             Vector2 moveMent;
@@ -56,13 +62,15 @@ public class EnemyPathing : MonoBehaviour
             }
 
         }
-        else        
+        else
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if(player)
+            if (player)
             {
+                rigidBody.velocity = Vector3.zero;
+                rigidBody.angularVelocity = 0f;
                 Vector2 targetPosition = player.transform.position;
-                if( (targetPosition - (Vector2) gameObject.transform.position).sqrMagnitude > minDistance)
+                if ((targetPosition - (Vector2)gameObject.transform.position).sqrMagnitude > minDistance)
                 {
                     var movementThisFrame = moveSpeed * Time.deltaTime;
                     Vector2 moveMent;
@@ -72,14 +80,16 @@ public class EnemyPathing : MonoBehaviour
                 Vector2 lookDir = targetPosition - rigidBody.position;
                 float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
                 rigidBody.rotation = angle;
-                
+
             }
             else
             {
                 Debug.Log("No Player Found");
             }
-
         }
+
         
     }
+
+    
 }

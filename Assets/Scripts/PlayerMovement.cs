@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] public float playerSpeed = 5f;
+    [SerializeField] public float playerSpeed = 9f;
     private Vector3 destination;
+    private Rigidbody2D rigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
         destination = transform.position;
+        rigidBody = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -26,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, destination, playerSpeed * Time.deltaTime);
+        rigidBody.velocity = Vector3.zero;
+        rigidBody.angularVelocity = 0f;
+        rigidBody.MovePosition(Vector3.MoveTowards(transform.position, destination, playerSpeed * Time.deltaTime));
     }
 }

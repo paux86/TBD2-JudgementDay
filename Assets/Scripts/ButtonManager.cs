@@ -15,7 +15,6 @@ public class ButtonManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
         sceneName = gameObject.name;
         sceneNum = sceneName[0] - '0';
         sceneName = sceneName.Substring(sceneName.LastIndexOf('.') + 1);
@@ -30,18 +29,18 @@ public class ButtonManager : MonoBehaviour
 
             switch (sceneNum)
             {
-                case 1:
+                case 2:
                     //do nothing
                     break;
-                case 2:
                 case 3:
-                    if (levelsComplete[1] == false)
+                case 4:
+                    if (levelsComplete[2] == false)
                     {
                         button.interactable = false;
                     }
                     break;
-                case 4:
-                    if (levelsComplete[1] == true && (levelsComplete[2] == true || levelsComplete[3] == true))
+                case 5:
+                    if (levelsComplete[2] == true && (levelsComplete[4] == true || levelsComplete[3] == true))
                     {
                         button.interactable = true;
                     }
