@@ -17,7 +17,7 @@ public class ButtonManager : MonoBehaviour
     {
         
         sceneName = gameObject.name;
-        sceneNum = Int32.Parse(sceneName.Substring(0, 1));
+        sceneNum = sceneName[0] - '0';
         sceneName = sceneName.Substring(sceneName.LastIndexOf('.') + 1);
         button = gameObject.GetComponent<Button>();
 
