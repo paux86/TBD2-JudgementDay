@@ -30,6 +30,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidBody.velocity = Vector3.zero;
         rigidBody.angularVelocity = 0f;
-        rigidBody.MovePosition(Vector3.MoveTowards(transform.position, destination, playerSpeed * Time.deltaTime));
+        rigidBody.MovePosition(Vector3.MoveTowards(transform.position, destination, playerSpeed * Time.fixedDeltaTime));
     }
 }
