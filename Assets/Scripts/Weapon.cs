@@ -10,13 +10,15 @@ public class Weapon : ScriptableObject
     public Sprite sprite;
     public int attackDamage;
     public float attackCooldownTime;
-    public int range;
+    public float range;
     public Sprite onHitEffect;
     public bool hitscan;
     public GameObject projectile;
 
+    //the data here is all public and can be accessed directly
+    /*
     public int GetAttackDamage()
     {
         return this.attackDamage;
-    }
+    }*/
 }
