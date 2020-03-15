@@ -25,7 +25,7 @@ public class GameState : MonoBehaviour
     {
        
 
-       if(SceneManager.GetActiveScene().buildIndex != 1)
+       if(SceneManager.GetActiveScene().buildIndex > 1)
         {
             if (enemySpawner != null && (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) && (enemySpawner.isWavesComplete()))
             {
@@ -33,6 +33,10 @@ public class GameState : MonoBehaviour
                 levelsComplete[SceneManager.GetActiveScene().buildIndex] = true;
                 sceneLoader.ChangeToLevelSelect();
 
+            }
+            else if(GameObject.FindGameObjectsWithTag("Player").Length <= 0)
+            {
+                SceneManager.LoadScene(0);
             }
         }
 
