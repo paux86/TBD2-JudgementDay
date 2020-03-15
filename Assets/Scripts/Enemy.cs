@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float attackCounter;
     [SerializeField] float maxTimeBetweeAttacks = 3f;
     [SerializeField] float minTimeBetweenAttacks = 0.2f;
+    [SerializeField] int money = 1;
 
     private int health;
 
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().IncrementMoneyCount(money);
         Destroy(gameObject);
     }
 
