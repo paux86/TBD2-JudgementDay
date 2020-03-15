@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] List<WaveConfig> waveConfigs;
     [SerializeField] int startingWave = 0;
     [SerializeField] bool looping = false;
+    [SerializeField] bool isComplete = false; // for debugging
 
 
 
@@ -40,6 +41,17 @@ public class EnemySpawner : MonoBehaviour
                 var currentWave = waveConfigs[i];
                 yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
             }
+            isComplete = true;
         }
+    }
+
+    public bool isWavesComplete()
+    {
+        return this.isComplete;
+    }
+
+    public void SetWaveComplete(bool isComplete)
+    {
+        this.isComplete = isComplete;
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class WinCondition : MonoBehaviour
 {
-    bool isWon;
+    //bool isWon;
 
     void Start(){
-        isWon = false;
+        //isWon = false;
     }
 
     // Update is called once per frame
