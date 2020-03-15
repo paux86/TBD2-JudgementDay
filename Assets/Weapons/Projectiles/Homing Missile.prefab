@@ -147,6 +147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearestTarget: {fileID: 0}
   distanceToNearestEnemy: 0
+  selfTag: Enemy
+  targetTag: Player
 --- !u!58 &1822398574422588140
 CircleCollider2D:
   m_ObjectHideFlags: 0
