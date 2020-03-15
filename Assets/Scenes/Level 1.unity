@@ -618,6 +618,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Force 9_16 On Build
       objectReference: {fileID: 0}
+    - target: {fileID: 4706982973293221984, guid: c906a89702c71d14f9be6311ef447651,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c906a89702c71d14f9be6311ef447651, type: 3}
 --- !u!1 &562532124
