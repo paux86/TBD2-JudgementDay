@@ -15,7 +15,7 @@ public class GameState : MonoBehaviour
     private void Start()
     {
         levelsComplete = new bool[SceneManager.sceneCountInBuildSettings];
-        if(SceneManager.GetActiveScene().buildIndex != 0 )
+        if(SceneManager.GetActiveScene().buildIndex != 1 )
         {
             UpdateObjects();
         }
@@ -25,7 +25,7 @@ public class GameState : MonoBehaviour
     {
        
 
-       if(SceneManager.GetActiveScene().buildIndex != 0)
+       if(SceneManager.GetActiveScene().buildIndex != 1)
         {
             if (enemySpawner != null && (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) && (enemySpawner.isWavesComplete()))
             {

@@ -129,7 +129,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7479734216084199599}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -199,7 +199,8 @@ MonoBehaviour:
   moneyCount: 0
   armor: 0
   maxHealth: 100
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 2490174875742954289, guid: 918a07dd784c10347b5b999ff8defee4,
+    type: 3}
   weaponInventory:
   - {fileID: 0}
   - {fileID: 0}
@@ -229,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5bbf5f128f67465280726530e38f18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 12
 --- !u!95 &-1948253271990080039
 Animator:
   serializedVersion: 3

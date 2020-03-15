@@ -16,6 +16,9 @@ public class MoneyCounter : MonoBehaviour
     void Update()
     {
         Text counterText = gameObject.GetComponent<UnityEngine.UI.Text>();
-        counterText.text = "Money: " + player.GetComponent<PlayerStats>().GetMoneyCount();
+        if(player != null)
+        {
+            counterText.text = "Money: " + player.GetComponent<PlayerStats>().GetMoneyCount();
+        }
     }
 }
