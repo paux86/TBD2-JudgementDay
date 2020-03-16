@@ -14,10 +14,23 @@ public class EnemyPathing : MonoBehaviour
     private int frames;
     const int MAX_FRAMES = 200;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        if(!isDoneSpawning && waveConfig != null)
+
+        float wepDistance = gameObject.GetComponent<AttackWithWeapon>().equippedWeapon.range;
+        if (minDistance > wepDistance)
+        {
+            minDistance = wepDistance;
+        }
+
+        if(moveSpeed <= 0)
+        {
+            moveSpeed = GetComponent<Enemy>().GetMoveSpeed();
+        }
+
+        if (!isDoneSpawning && waveConfig != null)
         {
             moveSpeed = waveConfig.GetMoveSpeed();
             waypoints = waveConfig.GetWayPoints();
@@ -26,8 +39,7 @@ public class EnemyPathing : MonoBehaviour
         else
         {
             isDoneSpawning = true;
-            moveSpeed = 10f;
-            minDistance = gameObject.GetComponent<AttackWithWeapon>().equippedWeapon.range;
+            
         }
 
         rigidBody =  gameObject.GetComponent<Rigidbody2D>();

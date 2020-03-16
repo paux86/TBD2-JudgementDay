@@ -101,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   money: 1
+  moveSpeed: 10
 --- !u!50 &-6836263537827121752
 Rigidbody2D:
   serializedVersion: 4
@@ -202,5 +203,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   waveConfig: {fileID: 0}
-  isStatic: 0
-  minDistance: 10
+  isDoneSpawning: 0
+  minDistance: 1
