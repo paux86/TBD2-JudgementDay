@@ -6,7 +6,7 @@ public class EnemyPathing : MonoBehaviour
 {
     [SerializeField] List<Transform> waypoints;
     [SerializeField] WaveConfig waveConfig;
-    [SerializeField] bool isStatic = false;
+    [SerializeField] bool isDoneSpawning = false;
     [SerializeField] float minDistance = 10;
     float moveSpeed;
     int waypointIndex = 0;
@@ -17,11 +17,17 @@ public class EnemyPathing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(!isStatic)
+        if(!isDoneSpawning && waveConfig != null)
         {
             moveSpeed = waveConfig.GetMoveSpeed();
             waypoints = waveConfig.GetWayPoints();
             transform.position = waypoints[waypointIndex].transform.position;
+        }
+        else
+        {
+            isDoneSpawning = true;
+            moveSpeed = 10f;
+            minDistance = gameObject.GetComponent<AttackWithWeapon>().equippedWeapon.range;
         }
 
         rigidBody =  gameObject.GetComponent<Rigidbody2D>();
@@ -31,9 +37,13 @@ public class EnemyPathing : MonoBehaviour
     void Update()
     {
 
-       if(!isStatic)
+       if(!isDoneSpawning)
         {
             Move();
+        }
+       else
+        {
+            MoveTowardsPlayer();
         }
     }
 
@@ -64,32 +74,36 @@ public class EnemyPathing : MonoBehaviour
         }
         else
         {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player)
-            {
-                rigidBody.velocity = Vector3.zero;
-                rigidBody.angularVelocity = 0f;
-                Vector2 targetPosition = player.transform.position;
-                if ((targetPosition - (Vector2)gameObject.transform.position).sqrMagnitude > minDistance)
-                {
-                    var movementThisFrame = moveSpeed * Time.deltaTime;
-                    Vector2 moveMent;
-                    moveMent = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
-                    rigidBody.MovePosition(moveMent);
-                }
-                Vector2 lookDir = targetPosition - rigidBody.position;
-                float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-                rigidBody.rotation = angle;
-
-            }
-            else
-            {
-                Debug.Log("No Player Found");
-            }
+            isDoneSpawning = true;
         }
 
-        
+
     }
 
-    
+    private void MoveTowardsPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player)
+        {
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.angularVelocity = 0f;
+            Vector2 targetPosition = player.transform.position;
+            if ((targetPosition - (Vector2)gameObject.transform.position).sqrMagnitude > minDistance)
+            {
+                var movementThisFrame = moveSpeed * Time.deltaTime;
+                Vector2 moveMent;
+                moveMent = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
+                rigidBody.MovePosition(moveMent);
+            }
+            Vector2 lookDir = targetPosition - rigidBody.position;
+            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+            rigidBody.rotation = angle;
+
+        }
+        else
+        {
+            Debug.Log("No Player Found");
+        }
+    }
+
 }
