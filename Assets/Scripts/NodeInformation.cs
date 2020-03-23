@@ -9,6 +9,7 @@ public class NodeInformation : MonoBehaviour
     NodeInformation[] previousNodes;
     int row;
     int col;
+    Vector2 nodePoint;
 
     public void SetNodeId(string nodeId)
     {
@@ -34,6 +35,11 @@ public class NodeInformation : MonoBehaviour
     {
         this.row = row;
         this.col = col;
+    }
+
+    public void SetNodePoint(Vector2 point)
+    {
+        this.nodePoint = point;
     }
 
 

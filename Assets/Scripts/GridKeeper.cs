@@ -22,7 +22,6 @@ public class GridKeeper : MonoBehaviour
         int gridCount = FindObjectsOfType<Grid>().Length;
         GameState gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
 
-        Debug.Log(gridCount);
         if (gridCount > 1)
         {
             gameObject.SetActive(false);

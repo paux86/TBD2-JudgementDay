@@ -115,7 +115,10 @@ public class GameState : MonoBehaviour
 
     public void SetActiveLevelGrid(bool active)
     {
-        this.levelGrid.SetActive(active);
+       if(levelGrid != null)
+        {
+            this.levelGrid.SetActive(active);
+        }
     }
 
    

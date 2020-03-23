@@ -7,12 +7,14 @@ public class MapGenerator : MonoBehaviour
 {
     [SerializeField] GridLayout grid;
     [SerializeField] GameObject levelButtonPrefab;
+    [SerializeField] GameObject PathSpritePrefab;
     [SerializeField] GameObject foreground;
+    [SerializeField] GameObject background;
     [SerializeField] GameState gameState;
     [SerializeField] int maxY = 3;
-    [SerializeField] int minY= -9;
+    //[SerializeField] int minY= -9;
     [SerializeField] int minX = -6;
-    [SerializeField] int maxX = 5;
+    //[SerializeField] int maxX = 4;
     [SerializeField] int buttonSpacing = 3;
     [SerializeField] int levelCreationPercentage = 70;
     [SerializeField] int tiers = 5;
@@ -32,6 +34,8 @@ public class MapGenerator : MonoBehaviour
         {
             GenerateLevelButtonsAndNodeMatrix(GenerateTierMatrix(tiers,maxLevelsPerTier));
         }
+
+        DrawPointToPointPath(new Vector2(-6, -9), new Vector2(3, 3));
 
     }
 
@@ -54,29 +58,6 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    void CreatePrefabInstance(float xCoord, float yCoord, NodeInformation node)
-    {
-        GameObject instance = (GameObject)Instantiate(levelButtonPrefab);
-
-        if (instance != null)
-        {
-            UpdateNewNode(node, instance);
-            instance.transform.SetParent(foreground.transform);
-            instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3(xCoord, yCoord, 0) + new Vector3(.5f, .5f, .5f)));
-        }
-        else
-        {
-            Debug.Log("Level Button Prefab is null when using MapGenerator");
-        }
-
-    }
-
-    private static void UpdateNewNode(NodeInformation node, GameObject instance)
-    {
-        NodeInformation newNode = instance.GetComponent<NodeInformation>();
-        newNode.SetRowCol(node.GetRow(), node.GetCol());
-        newNode.SetNodeId(node.GetNodeId());
-    }
 
     void GenerateLevelButtonsAndNodeMatrix(int[,] tierMatrix)
     {
@@ -93,6 +74,7 @@ public class MapGenerator : MonoBehaviour
                     currentNode =  CreatePrefabInstanceAndNodeInfo(x, y);
                     currentNode.SetNodeId(i + "." + j);
                     currentNode.SetRowCol(i, j);
+                    currentNode.SetNodePoint(new Vector2(x, y));
                     nodeTierMatrix[i, j] = currentNode;
                 }
                 
@@ -106,29 +88,6 @@ public class MapGenerator : MonoBehaviour
         
     }
 
-    void GenerateLevelButtons(int[,] tierMatrix)
-    {
-        int y = maxY;
-        int x = minX;
-        NodeInformation[,] nodeTierMatrix = gameState.GetNodeTierMatrix();
-        for (int i = 0; i < tierMatrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < tierMatrix.GetLength(1); j++)
-            {
-                if (nodeTierMatrix[i, j] != null)
-                {
-                    CreatePrefabInstance(x, y,nodeTierMatrix[i,j]);
-                    
-                }
-
-                x += buttonSpacing;
-            }
-            x = minX;
-            y -= buttonSpacing;
-        }
-
-
-    }
 
     int[,] GenerateTierMatrix(int tiers, int maxLevelsPerTier)
     {
@@ -152,8 +111,21 @@ public class MapGenerator : MonoBehaviour
         return tierMatrix;
     }
 
-    //check above, if there's one there connect.
+    void DrawPointToPointPath(Vector2 pointA, Vector2 pointB)
+    {
+        const int NUM_PATHS = 20;
+        
+        for (int i = 0; i <= NUM_PATHS; i++)
+        {
+            GameObject instance = (GameObject)Instantiate(PathSpritePrefab);
+            instance.transform.SetParent(background.transform);
+            instance.transform.position = Vector2.MoveTowards(pointA + new Vector2(0.5f,0.5f), pointB + new Vector2(0.5f, 0.5f), NUM_PATHS - i);
+            
+        }
 
 
-   
+    }
+
+
+
 }
