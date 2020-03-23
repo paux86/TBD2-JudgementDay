@@ -10,6 +10,9 @@ public class GameState : MonoBehaviour
     [SerializeField] bool[] levelsComplete;
     private EnemySpawner enemySpawner;
     private SceneLoader sceneLoader;
+    int[,] tierMatrix;
+    NodeInformation[,] nodeTierMatrix;
+    GameObject levelGrid;
 
 
     private void Start()
@@ -84,4 +87,36 @@ public class GameState : MonoBehaviour
     {
         StartCoroutine(Wait());
     }
+
+    public bool IsNodeTierMatrixInitialized()
+    {
+        return nodeTierMatrix != null;
+    }
+
+    public NodeInformation[,] GetNodeTierMatrix()
+    {
+        return this.nodeTierMatrix;
+    }
+
+    public void SetNodeTierMatrix(NodeInformation[,] nodeTierMatrix)
+    {
+       this.nodeTierMatrix = nodeTierMatrix;
+    }
+
+    public void SetLevelGrid(GameObject levelGrid)
+    {
+        this.levelGrid = levelGrid;
+    }
+
+    public GameObject GetLevelGrid()
+    {
+        return this.levelGrid;
+    }
+
+    public void SetActiveLevelGrid(bool active)
+    {
+        this.levelGrid.SetActive(active);
+    }
+
+   
 }

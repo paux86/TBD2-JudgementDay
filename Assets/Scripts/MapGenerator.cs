@@ -1,33 +1,159 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] GridLayout grid;
-    [SerializeField] GameObject prefab;
+    [SerializeField] GameObject levelButtonPrefab;
     [SerializeField] GameObject foreground;
-    const int MAX_Y = 8;
-    const int MIN_Y= -9;
-    const int MIN_X = -5;
-    const int MAX_X = 4;
+    [SerializeField] GameState gameState;
+    [SerializeField] int maxY = 3;
+    [SerializeField] int minY= -9;
+    [SerializeField] int minX = -6;
+    [SerializeField] int maxX = 5;
+    [SerializeField] int buttonSpacing = 3;
+    [SerializeField] int levelCreationPercentage = 70;
+    [SerializeField] int tiers = 5;
+    [SerializeField] int maxLevelsPerTier = 4;
+
+    
+
+
+    
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+       if(!gameState.IsNodeTierMatrixInitialized())
+        {
+            GenerateLevelButtonsAndNodeMatrix(GenerateTierMatrix(tiers,maxLevelsPerTier));
+        }
 
-        GameObject instance = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
+    }
 
-        if(instance != null)
+    NodeInformation CreatePrefabInstanceAndNodeInfo(float xCoord, float yCoord)
+    {
+        GameObject instance = (GameObject)Instantiate(levelButtonPrefab);
+        NodeInformation nodeInfo = instance.GetComponent<NodeInformation>();
+
+        if (instance != null)
         {
             instance.transform.SetParent(foreground.transform);
-            instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3(5, 8, 0) + new Vector3(.5f, .5f, .5f)));
+            instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3(xCoord, yCoord, 0) + new Vector3(.5f, .5f, .5f)));
         }
+        else
+        {
+            Debug.Log("Level Button Prefab is null when using MapGenerator");
+        }
+
+        return nodeInfo;
+    }
+
+
+    void CreatePrefabInstance(float xCoord, float yCoord, NodeInformation node)
+    {
+        GameObject instance = (GameObject)Instantiate(levelButtonPrefab);
+
+        if (instance != null)
+        {
+            UpdateNewNode(node, instance);
+            instance.transform.SetParent(foreground.transform);
+            instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3(xCoord, yCoord, 0) + new Vector3(.5f, .5f, .5f)));
+        }
+        else
+        {
+            Debug.Log("Level Button Prefab is null when using MapGenerator");
+        }
+
+    }
+
+    private static void UpdateNewNode(NodeInformation node, GameObject instance)
+    {
+        NodeInformation newNode = instance.GetComponent<NodeInformation>();
+        newNode.SetRowCol(node.GetRow(), node.GetCol());
+        newNode.SetNodeId(node.GetNodeId());
+    }
+
+    void GenerateLevelButtonsAndNodeMatrix(int[,] tierMatrix)
+    {
+        int y = maxY;
+        int x = minX;
+        NodeInformation currentNode;
+        NodeInformation[,] nodeTierMatrix = new NodeInformation[tiers,maxLevelsPerTier];
+        for(int i = 0; i < tierMatrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < tierMatrix.GetLength(1); j++)
+            {
+                if(tierMatrix[i,j] == 1)
+                {
+                    currentNode =  CreatePrefabInstanceAndNodeInfo(x, y);
+                    currentNode.SetNodeId(i + "." + j);
+                    currentNode.SetRowCol(i, j);
+                    nodeTierMatrix[i, j] = currentNode;
+                }
+                
+                x += buttonSpacing;
+            }
+            x = minX;
+            y -= buttonSpacing;
+        }
+        gameState.SetNodeTierMatrix(nodeTierMatrix);
+
         
     }
+
+    void GenerateLevelButtons(int[,] tierMatrix)
+    {
+        int y = maxY;
+        int x = minX;
+        NodeInformation[,] nodeTierMatrix = gameState.GetNodeTierMatrix();
+        for (int i = 0; i < tierMatrix.GetLength(0); i++)
+        {
+            for (int j = 0; j < tierMatrix.GetLength(1); j++)
+            {
+                if (nodeTierMatrix[i, j] != null)
+                {
+                    CreatePrefabInstance(x, y,nodeTierMatrix[i,j]);
+                    
+                }
+
+                x += buttonSpacing;
+            }
+            x = minX;
+            y -= buttonSpacing;
+        }
+
+
+    }
+
+    int[,] GenerateTierMatrix(int tiers, int maxLevelsPerTier)
+    {
+        int[,] tierMatrix = new int[tiers, maxLevelsPerTier];
+        for (int i = 0; i < tiers; i++)
+        {
+            int guaranteedLevel = Random.Range(1, maxLevelsPerTier);
+            for (int j = 0; j < maxLevelsPerTier; j++)
+            {
+                if (j == guaranteedLevel)
+                {
+                    tierMatrix[i, j] = 1;
+                }
+                else if (Random.Range(1, 100) < levelCreationPercentage)
+                {
+                    tierMatrix[i, j] = 1;
+                }
+            }
+        }
+
+        return tierMatrix;
+    }
+
+    //check above, if there's one there connect.
+
 
    
 }

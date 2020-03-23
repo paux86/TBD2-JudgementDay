@@ -62,6 +62,10 @@ public class SceneLoader : MonoBehaviour
     {
       
         SceneManager.LoadScene("LevelSelect");
+        if(gameState != null)
+        {
+            gameState.SetActiveLevelGrid(true);
+        }
     }
 
 

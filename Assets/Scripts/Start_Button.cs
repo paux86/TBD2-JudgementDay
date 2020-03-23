@@ -10,7 +10,7 @@ public class Start_Button : MonoBehaviour
     {
         if(Input.anyKeyDown)
         {
-            sceneLoader.LoadNextScene();
+            sceneLoader.ChangeToLevelSelect();
         }
     }
 }
