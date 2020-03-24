@@ -19,11 +19,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] int levelCreationPercentage = 70;
     [SerializeField] int tiers = 5;
     [SerializeField] int maxLevelsPerTier = 4;
+    NodeInformation[,] nodeTierMatrix;
 
-    
 
 
-    
+
+
 
 
 
@@ -33,9 +34,8 @@ public class MapGenerator : MonoBehaviour
        if(!gameState.IsNodeTierMatrixInitialized())
         {
             GenerateLevelButtonsAndNodeMatrix(GenerateTierMatrix(tiers,maxLevelsPerTier));
+            CreateNodeConnections();
         }
-
-        DrawPointToPointPath(new Vector2(-6, -9), new Vector2(3, 3));
 
     }
 
@@ -63,13 +63,13 @@ public class MapGenerator : MonoBehaviour
     {
         int y = maxY;
         int x = minX;
-        NodeInformation currentNode;
-        NodeInformation[,] nodeTierMatrix = new NodeInformation[tiers,maxLevelsPerTier];
+        nodeTierMatrix = new NodeInformation[tiers,maxLevelsPerTier];
         for(int i = 0; i < tierMatrix.GetLength(0); i++)
         {
             for (int j = 0; j < tierMatrix.GetLength(1); j++)
             {
-                if(tierMatrix[i,j] == 1)
+                NodeInformation currentNode;
+                if (tierMatrix[i,j] == 1)
                 {
                     currentNode =  CreatePrefabInstanceAndNodeInfo(x, y);
                     currentNode.SetNodeId(i + "." + j);
@@ -113,16 +113,114 @@ public class MapGenerator : MonoBehaviour
 
     void DrawPointToPointPath(Vector2 pointA, Vector2 pointB)
     {
-        const int NUM_PATHS = 20;
+        const int NUM_PATHS = 100;
+        Vector2 currentPos = pointA + new Vector2(0.5f, 0.5f);
         
         for (int i = 0; i <= NUM_PATHS; i++)
         {
             GameObject instance = (GameObject)Instantiate(PathSpritePrefab);
             instance.transform.SetParent(background.transform);
-            instance.transform.position = Vector2.MoveTowards(pointA + new Vector2(0.5f,0.5f), pointB + new Vector2(0.5f, 0.5f), NUM_PATHS - i);
+            instance.transform.position = Vector2.MoveTowards(currentPos, pointB + new Vector2(0.5f, 0.5f), 0.1f);
+            instance.transform.Rotate(new Vector3(0, 0, Random.Range(0, 359)));
+            currentPos = instance.transform.position;
             
         }
 
+
+    }
+
+    void CreateNodeConnections()
+    {
+        bool zeroFlag = true;
+        
+        for(int i = nodeTierMatrix.GetLength(0) -1; i >= 1; i--)
+        {
+            for(int j = 0; j < nodeTierMatrix.GetLength(1); j++)
+            {
+                if(nodeTierMatrix[i,j] != null)
+                {
+                  if(nodeTierMatrix[(i-1),j] != null)
+                    {
+                        nodeTierMatrix[i, j].AddNextNode(nodeTierMatrix[(i - 1), j]);
+                        nodeTierMatrix[(i - 1), j].AddPreviousNode(nodeTierMatrix[i, j]);
+                        DrawPointToPointPath(nodeTierMatrix[i, j].GetNodePoint(), nodeTierMatrix[(i - 1), j].GetNodePoint());
+                    }
+
+                    for (int k = j + 1; k < nodeTierMatrix.GetLength(1) && zeroFlag; k++)
+                    {
+
+                        if (nodeTierMatrix[(i - 1), k] != null && (nodeTierMatrix[i,k] == null || nodeTierMatrix[i,j].GetNumNextNodes() == 0))
+                        {
+
+                            nodeTierMatrix[i, j].AddNextNode(nodeTierMatrix[(i - 1), k]);
+                            nodeTierMatrix[(i - 1), k].AddPreviousNode(nodeTierMatrix[i, j]);
+                            DrawPointToPointPath(nodeTierMatrix[i, j].GetNodePoint(), nodeTierMatrix[(i - 1), k].GetNodePoint());
+
+                            if(nodeTierMatrix[i, k] != null && nodeTierMatrix[i, j].GetNumNextNodes() > 0)
+                            {
+                                zeroFlag = false;
+                            }
+                        }
+                        else if (nodeTierMatrix[(i - 1), k] != null && nodeTierMatrix[i, k] != null)
+                        {
+
+                            zeroFlag = false;
+                        }
+
+                    }
+                    zeroFlag = true;
+                }
+            }
+        }
+
+        
+        int closeCol = nodeTierMatrix.GetLength(1) + 1;
+        zeroFlag = true;
+        for (int i = nodeTierMatrix.GetLength(0) - 1; i >= 0; i--)
+        {
+            for(int j = nodeTierMatrix.GetLength(1) - 1; j >= 0; j--)
+            {
+                if(nodeTierMatrix[i,j] != null)
+                {
+                    if (nodeTierMatrix[i, j].GetNumNextNodes() == 0 && i > 0)
+                    {
+                        for (int k = nodeTierMatrix.GetLength(1) - 1; k >= 0 && zeroFlag; k--)
+                        {
+                            if (nodeTierMatrix[(i - 1), k] != null)
+                            {
+                                nodeTierMatrix[i, j].AddNextNode(nodeTierMatrix[(i - 1), k]);
+                                nodeTierMatrix[(i - 1), k].AddPreviousNode(nodeTierMatrix[i, j]);
+                                DrawPointToPointPath(nodeTierMatrix[i, j].GetNodePoint(), nodeTierMatrix[(i - 1), k].GetNodePoint());
+                                zeroFlag = false;
+                            }
+                        }
+                        zeroFlag = true;
+                       
+                    }
+                    if (nodeTierMatrix[i, j].GetNumPreviousNodes() == 0 && i < (nodeTierMatrix.GetLength(0) - 1))
+                    {
+                        
+                        closeCol = nodeTierMatrix.GetLength(1) +1;
+                        for (int k = nodeTierMatrix.GetLength(1) - 1; k >= 0; k--)
+                        {
+                            if (nodeTierMatrix[(i + 1), k] != null)
+                            {
+                                if(Mathf.Abs(j - k) < Mathf.Abs(j - closeCol))
+                                {
+                                    closeCol = k;
+                                }
+                            }
+                        }
+                        nodeTierMatrix[i, j].AddPreviousNode(nodeTierMatrix[(i + 1), closeCol]);
+                        nodeTierMatrix[(i + 1), closeCol].AddNextNode(nodeTierMatrix[i, j]);
+                        DrawPointToPointPath(nodeTierMatrix[i, j].GetNodePoint(), nodeTierMatrix[(i + 1), closeCol].GetNodePoint());
+                        
+
+                        
+                    }
+                }
+            }
+        }
 
     }
 

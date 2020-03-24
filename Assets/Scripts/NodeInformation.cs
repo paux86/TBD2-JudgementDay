@@ -5,11 +5,15 @@ using UnityEngine;
 public class NodeInformation : MonoBehaviour
 {
     string nodeId;
-    NodeInformation[] nextNodes;
-    NodeInformation[] previousNodes;
+    NodeInformation[] nextNodes = new NodeInformation[5];
+    NodeInformation[] previousNodes = new NodeInformation[5];
+    int numNextNode;
+    int numPreviousNode;
     int row;
     int col;
     Vector2 nodePoint;
+
+    
 
     public void SetNodeId(string nodeId)
     {
@@ -40,6 +44,33 @@ public class NodeInformation : MonoBehaviour
     public void SetNodePoint(Vector2 point)
     {
         this.nodePoint = point;
+    }
+
+    public Vector2 GetNodePoint()
+    {
+        return this.nodePoint;
+    }
+
+    public void AddNextNode(NodeInformation node)
+    {
+        nextNodes[numNextNode] = node;
+        numNextNode++;
+    }
+
+    public void AddPreviousNode(NodeInformation node)
+    {
+        previousNodes[numPreviousNode] = node;
+        numPreviousNode++;
+    }
+
+    public int GetNumPreviousNodes()
+    {
+        return this.numPreviousNode;
+    }
+
+    public int GetNumNextNodes()
+    {
+        return this.numNextNode;
     }
 
 
