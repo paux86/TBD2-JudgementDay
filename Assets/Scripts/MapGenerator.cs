@@ -1,20 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 //using UnityEditor;
 
 public class MapGenerator : MonoBehaviour
 {
+#pragma warning disable 0649
     [SerializeField] GridLayout grid;
     [SerializeField] GameObject levelButtonPrefab;
     [SerializeField] GameObject PathSpritePrefab;
     [SerializeField] GameObject foreground;
     [SerializeField] GameObject background;
     [SerializeField] GameState gameState;
+#pragma warning restore 0649
     [SerializeField] int maxY = 3;
     //[SerializeField] int minY= -9;
     [SerializeField] int minX = -6;
-    //[SerializeField] int maxX = 4;
+    [SerializeField] int maxX = 4;
     [SerializeField] int buttonSpacing = 3;
     [SerializeField] int levelCreationPercentage = 70;
     [SerializeField] int tiers = 5;
@@ -31,10 +31,18 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       if(!gameState.IsNodeTierMatrixInitialized())
+       if(gameState != null)
         {
-            GenerateLevelButtonsAndNodeMatrix(GenerateTierMatrix(tiers,maxLevelsPerTier));
-            CreateNodeConnections();
+            if (!gameState.IsNodeTierMatrixInitialized())
+            {
+                GenerateLevelButtonsAndNodeMatrix(GenerateTierMatrix(tiers, maxLevelsPerTier));
+                CreateNodeConnections();
+                CreateAndConnectBossTier();
+            }
+        }
+       else
+        {
+            Debug.Log("GameState not set for MapGenerator in inspector");
         }
 
     }
@@ -46,12 +54,26 @@ public class MapGenerator : MonoBehaviour
 
         if (instance != null)
         {
-            instance.transform.SetParent(foreground.transform);
-            instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3(xCoord, yCoord, 0) + new Vector3(.5f, .5f, .5f)));
+            if(foreground != null)
+            {
+                instance.transform.SetParent(foreground.transform);
+            }
+            else
+            {
+                Debug.Log("foreground not set in MapGenerator inspector");
+            }
+            if(grid != null)
+            {
+                instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(new Vector3(xCoord, yCoord, 0) + new Vector3(.5f, .5f, .5f)));
+            }
+            else
+            {
+                Debug.Log("Grid not set for MapGenerator in inspector");
+            }
         }
         else
         {
-            Debug.Log("Level Button Prefab is null when using MapGenerator");
+            Debug.Log("Level Button Prefab not set for MapGenerator in inspector");
         }
 
         return nodeInfo;
@@ -75,6 +97,11 @@ public class MapGenerator : MonoBehaviour
                     currentNode.SetNodeId(i + "." + j);
                     currentNode.SetRowCol(i, j);
                     currentNode.SetNodePoint(new Vector2(x, y));
+                    if(i == (tierMatrix.GetLength(0) - 1))
+                    {
+                        currentNode.SetSelectable(true);
+                        
+                    }
                     nodeTierMatrix[i, j] = currentNode;
                 }
                 
@@ -119,10 +146,32 @@ public class MapGenerator : MonoBehaviour
         for (int i = 0; i <= NUM_PATHS; i++)
         {
             GameObject instance = (GameObject)Instantiate(PathSpritePrefab);
-            instance.transform.SetParent(background.transform);
-            instance.transform.position = Vector2.MoveTowards(currentPos, pointB + new Vector2(0.5f, 0.5f), 0.1f);
-            instance.transform.Rotate(new Vector3(0, 0, Random.Range(0, 359)));
-            currentPos = instance.transform.position;
+           if(instance != null)
+            {
+                if(background != null)
+                {
+                    instance.transform.SetParent(background.transform);
+                }
+                else
+                {
+                    Debug.Log("Background not set for MapGenerator in inspector");
+                }
+                if (grid != null)
+                {
+                    instance.transform.position = grid.LocalToWorld(grid.CellToLocalInterpolated(Vector2.MoveTowards(currentPos, pointB + new Vector2(0.5f, 0.5f), 0.1f)));
+
+                }
+                else
+                {
+                    Debug.Log("Grid not set for MapGenerator in inspector");
+                }
+                instance.transform.Rotate(new Vector3(0, 0, Random.Range(0, 359)));
+                currentPos = instance.transform.position;
+            }
+           else
+            {
+                Debug.Log("Path sprite prefab not set up in MapGenerator in inspector");
+            }
             
         }
 
@@ -222,6 +271,24 @@ public class MapGenerator : MonoBehaviour
             }
         }
 
+    }
+
+    private void CreateAndConnectBossTier()
+    {
+        NodeInformation bossNode = CreatePrefabInstanceAndNodeInfo((minX + maxX) / 2, maxY + 3);
+        bossNode.SetNodeId("Boss Node"); 
+        bossNode.SetNodePoint(new Vector2((minX + maxX)/2, maxY +3));
+        const int FINAL_TIER = 0;
+
+        for(int i = 0; i < nodeTierMatrix.GetLength(1); i++)
+        {
+            if(nodeTierMatrix[FINAL_TIER,i] != null)
+            {
+                nodeTierMatrix[FINAL_TIER, i].AddNextNode(bossNode);
+                bossNode.AddPreviousNode(nodeTierMatrix[FINAL_TIER, i]);
+                DrawPointToPointPath(nodeTierMatrix[FINAL_TIER, i].GetNodePoint(), bossNode.GetNodePoint());
+            }
+        }
     }
 
 

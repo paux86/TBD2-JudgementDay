@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 
@@ -17,20 +14,6 @@ public class SceneLoader : MonoBehaviour
 
 
     }
-
-    
-    public string GetLevelNameFromButton()
-    {
-        string levelName = EventSystem.current.currentSelectedGameObject.name;
-        int dot = levelName.LastIndexOf('.');
-        dot++;
-        levelName = levelName.Substring(dot);
-       
-
-
-        return levelName;
-    }
-
 
     public void LoadNextScene()
     {
@@ -49,13 +32,24 @@ public class SceneLoader : MonoBehaviour
     }
 
 
-    public void ChangeSceneButton()
+    public void ChangeSceneButton(NodeInformation selectedNode)
     {
         if (gameState != null)
         {
             gameState.WaitAndUpdateObjects();
         }
-        SceneManager.LoadScene(GetLevelNameFromButton());
+
+
+       if(selectedNode != null)
+        {
+            gameState.SetSelectedNode(selectedNode);
+            SceneManager.LoadScene(selectedNode.GetScene());
+        }
+       else
+        {
+            Debug.Log("node passed to SceneLoader.ChangeSceneButton is null");
+        }
+        
     }
 
     public void ChangeToLevelSelect()

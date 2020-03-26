@@ -1,63 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
 
-    GameState gameState;
-    [SerializeField] bool[] levelsComplete;
-    [SerializeField] int sceneNum;
-    [SerializeField] string sceneName;
-    private Button button;
-    // Start is called before the first frame update
-    void Start()
+    RaycastHit hit;
+    Ray ray;
+    bool downClick;
+    GameObject clickedButtonObject;
+    SceneLoader sceneLoader;
+    [SerializeField] string ButtonPrefabName = "LevelTile(Clone)";
+
+
+
+    private void Start()
     {
-        sceneName = gameObject.name;
-        sceneNum = sceneName[0] - '0';
-        sceneName = sceneName.Substring(sceneName.LastIndexOf('.') + 1);
-        button = gameObject.GetComponent<Button>();
-
-   
-        
-        if(FindObjectOfType<GameState>() != null)
-        {
-            gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
-            levelsComplete = gameState.GetLevelsComplete();
-
-            switch (sceneNum)
-            {
-                case 2:
-                    //do nothing
-                    break;
-                case 3:
-                case 4:
-                    if (levelsComplete[2] == false)
-                    {
-                        button.interactable = false;
-                    }
-                    break;
-                case 5:
-                    if (levelsComplete[2] == true && (levelsComplete[4] == true || levelsComplete[3] == true))
-                    {
-                        button.interactable = true;
-                    }
-                    else
-                    {
-                        button.interactable = false;
-                    }
-                    break;
-            }
-        }
-        else
-        {
-            Debug.Log("GameState object missing or not found within buttonmanager");
-        }
-
-        
+        sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
     }
 
- 
+    private void Update()
+    {
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            downClick = true;
+        }
+
+        if (Physics.Raycast(ray, out hit) && downClick)
+        {
+
+         if(Physics.Raycast(ray, out hit) && Input.GetMouseButtonUp(0) && string.Equals(ButtonPrefabName,hit.collider.gameObject.name) )
+            {
+                
+                clickedButtonObject = hit.collider.gameObject;
+                NodeInformation clickedNode = clickedButtonObject.GetComponent<NodeInformation>();
+                if(clickedNode != null)
+                {
+                    sceneLoader.ChangeSceneButton(clickedNode);
+                }
+            }
+         else if(Input.GetMouseButtonUp(0))
+            {
+                downClick = false;
+            }
+        }
+    }
+
+
 }

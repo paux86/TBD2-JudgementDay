@@ -1,23 +1,20 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
-   
-    [SerializeField] int numLevels;
-    [SerializeField] bool[] levelsComplete;
     private EnemySpawner enemySpawner;
     private SceneLoader sceneLoader;
-    int[,] tierMatrix;
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
+    NodeInformation currentSelectedNode;
+
+    
 
 
     private void Start()
     {
-        levelsComplete = new bool[SceneManager.sceneCountInBuildSettings];
         if(SceneManager.GetActiveScene().buildIndex != 1 )
         {
             UpdateObjects();
@@ -33,7 +30,7 @@ public class GameState : MonoBehaviour
             if (enemySpawner != null && (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) && (enemySpawner.isWavesComplete()))
             {
                 enemySpawner.SetWaveComplete(false);
-                levelsComplete[SceneManager.GetActiveScene().buildIndex] = true;
+                currentSelectedNode.SetIsComplete(true);
                 sceneLoader.ChangeToLevelSelect();
 
             }
@@ -78,10 +75,6 @@ public class GameState : MonoBehaviour
 
     }
 
-    public bool[] GetLevelsComplete()
-    {
-        return this.levelsComplete;
-    }
 
     public void WaitAndUpdateObjects()
     {
@@ -121,5 +114,22 @@ public class GameState : MonoBehaviour
         }
     }
 
-   
+    public void SetSelectedNode(NodeInformation selection)
+    {
+        this.currentSelectedNode = selection;
+
+        UpdateTier(selection);
+    }
+
+    private void UpdateTier(NodeInformation selection)
+    {
+        for (int i = 0; i < nodeTierMatrix.GetLength(1); i++)
+        {
+            if (i != selection.GetCol() && nodeTierMatrix[selection.GetRow(),i] != null)
+            {
+                nodeTierMatrix[selection.GetRow(), i].SetSelectable(false);
+            }
+        }
+    }
+
 }
