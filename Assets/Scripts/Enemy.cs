@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] int maxHealth = 100;
     [SerializeField] int money = 1;
+    [SerializeField] float moveSpeed = 10f;
 
     private int health;
 
@@ -30,6 +31,11 @@ public class Enemy : MonoBehaviour
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().IncrementMoneyCount(money);
         Destroy(gameObject);
+    }
+
+    public float GetMoveSpeed()
+    {
+        return this.moveSpeed;
     }
 
    
