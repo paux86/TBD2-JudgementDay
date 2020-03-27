@@ -9,9 +9,12 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     [SerializeField] HealthBar healthBar = default;
     [SerializeField] Weapon[] weaponInventory = new Weapon[3];
-    [SerializeField] Weapon currentWeapon;
+    [SerializeField] public Weapon currentWeapon;
 
     private int health;
+    private int currentWeaponSlot;
+    private int numberOfEquippedWeapons = 0;
+    private int weaponInventorySize;
 
     private void Start()
     {
@@ -21,7 +24,16 @@ public class PlayerStats : MonoBehaviour
             healthBar.SetMaxHealth(maxHealth);
         }
 
+        //weaponInventory = new Weapon[weaponInventorySize];
         currentWeapon = weaponInventory[0];
+        currentWeaponSlot = 0;
+        weaponInventorySize = weaponInventory.Length;
+        for(int i = 0; i < weaponInventorySize; i++)
+        {
+            if (weaponInventory[i] != null)
+                numberOfEquippedWeapons++;
+        }
+
         armor = GetArmor();
         moneyCount = GetMoneyCount();
     }
@@ -66,9 +78,16 @@ public class PlayerStats : MonoBehaviour
         return currentWeapon;
     }
 
+    public void SwapToNextWeapon()
+    {
+        currentWeaponSlot = (currentWeaponSlot + 1) % weaponInventorySize;
+        currentWeapon = weaponInventory[currentWeaponSlot];
+    }
+
     public void ChangeCurrentWeapon(int number)
     {
         currentWeapon = weaponInventory[number];
+        currentWeaponSlot = number;
     }
 
     public void AddWeaponToInventory(Weapon newWeapon)
