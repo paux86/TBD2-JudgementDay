@@ -9,12 +9,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] GameObject PathSpritePrefab;
     [SerializeField] GameObject foreground;
     [SerializeField] GameObject background;
-    [SerializeField] GameState gameState;
 #pragma warning restore 0649
+     GameState gameState;
     [SerializeField] int maxY = 3;
     //[SerializeField] int minY= -9;
     [SerializeField] int minX = -6;
-    [SerializeField] int maxX = 4;
+    //[SerializeField] int maxX = 4;
     [SerializeField] int buttonSpacing = 3;
     [SerializeField] int levelCreationPercentage = 70;
     [SerializeField] int tiers = 5;
@@ -31,6 +31,7 @@ public class MapGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
        if(gameState != null)
         {
             if (!gameState.IsNodeTierMatrixInitialized())
@@ -42,7 +43,7 @@ public class MapGenerator : MonoBehaviour
         }
        else
         {
-            Debug.Log("GameState not set for MapGenerator in inspector");
+            Debug.Log("GameState in MapGenerator is null");
         }
 
     }
@@ -93,10 +94,18 @@ public class MapGenerator : MonoBehaviour
                 NodeInformation currentNode;
                 if (tierMatrix[i,j] == 1)
                 {
-                    currentNode =  CreatePrefabInstanceAndNodeInfo(x, y);
+                    int xOffset = 0;
+                    int yOffset = 0;
+                    if ((i != tierMatrix.GetLength(0) - 1) && j != 0 && j != (tierMatrix.GetLength(1) - 1))
+                    {
+                        xOffset = Random.Range(-1, 2);
+                        //yOffset = Random.Range(-1, 2);
+                        
+                    }
+                    currentNode =  CreatePrefabInstanceAndNodeInfo(x + xOffset, y + yOffset);
                     currentNode.SetNodeId(i + "." + j);
                     currentNode.SetRowCol(i, j);
-                    currentNode.SetNodePoint(new Vector2(x, y));
+                    currentNode.SetNodePoint(new Vector2(x + xOffset, y + yOffset));
                     if(i == (tierMatrix.GetLength(0) - 1))
                     {
                         currentNode.SetSelectable(true);
@@ -128,7 +137,7 @@ public class MapGenerator : MonoBehaviour
                 {
                     tierMatrix[i, j] = 1;
                 }
-                else if (Random.Range(1, 100) < levelCreationPercentage)
+                else if (Random.Range(1, 100 + 1) < levelCreationPercentage)
                 {
                     tierMatrix[i, j] = 1;
                 }
@@ -223,8 +232,8 @@ public class MapGenerator : MonoBehaviour
         }
 
         
-        int closeCol = nodeTierMatrix.GetLength(1) + 1;
-        zeroFlag = true;
+        int closeCol = 99999;
+        
         for (int i = nodeTierMatrix.GetLength(0) - 1; i >= 0; i--)
         {
             for(int j = nodeTierMatrix.GetLength(1) - 1; j >= 0; j--)
@@ -233,23 +242,31 @@ public class MapGenerator : MonoBehaviour
                 {
                     if (nodeTierMatrix[i, j].GetNumNextNodes() == 0 && i > 0)
                     {
-                        for (int k = nodeTierMatrix.GetLength(1) - 1; k >= 0 && zeroFlag; k--)
+                        closeCol = 99999;
+                        for (int k = nodeTierMatrix.GetLength(1) - 1; k >= 0; k--)
                         {
+                            
                             if (nodeTierMatrix[(i - 1), k] != null)
                             {
-                                nodeTierMatrix[i, j].AddNextNode(nodeTierMatrix[(i - 1), k]);
-                                nodeTierMatrix[(i - 1), k].AddPreviousNode(nodeTierMatrix[i, j]);
-                                DrawPointToPointPath(nodeTierMatrix[i, j].GetNodePoint(), nodeTierMatrix[(i - 1), k].GetNodePoint());
-                                zeroFlag = false;
+                                if (Mathf.Abs(j - k) < Mathf.Abs(j - closeCol))
+                                {
+                                    closeCol = k;
+                                   
+                                }
+
                             }
                         }
-                        zeroFlag = true;
-                       
+                        
+                        nodeTierMatrix[i, j].AddNextNode(nodeTierMatrix[(i - 1), closeCol]);
+                        nodeTierMatrix[(i - 1), closeCol].AddPreviousNode(nodeTierMatrix[i, j]);
+                        DrawPointToPointPath(nodeTierMatrix[i, j].GetNodePoint(), nodeTierMatrix[(i - 1), closeCol].GetNodePoint());
+
+
                     }
                     if (nodeTierMatrix[i, j].GetNumPreviousNodes() == 0 && i < (nodeTierMatrix.GetLength(0) - 1))
                     {
                         
-                        closeCol = nodeTierMatrix.GetLength(1) +1;
+                        closeCol = 999999;
                         for (int k = nodeTierMatrix.GetLength(1) - 1; k >= 0; k--)
                         {
                             if (nodeTierMatrix[(i + 1), k] != null)
@@ -275,9 +292,10 @@ public class MapGenerator : MonoBehaviour
 
     private void CreateAndConnectBossTier()
     {
-        NodeInformation bossNode = CreatePrefabInstanceAndNodeInfo((minX + maxX) / 2, maxY + 3);
+        const int cameraCenter = -2;
+        NodeInformation bossNode = CreatePrefabInstanceAndNodeInfo(cameraCenter, maxY + 3);
         bossNode.SetNodeId("Boss Node"); 
-        bossNode.SetNodePoint(new Vector2((minX + maxX)/2, maxY +3));
+        bossNode.SetNodePoint(new Vector2(cameraCenter, maxY +3));
         const int FINAL_TIER = 0;
 
         for(int i = 0; i < nodeTierMatrix.GetLength(1); i++)

@@ -3,43 +3,55 @@
 public class ButtonManager : MonoBehaviour
 {
 
-    RaycastHit hit;
-    Ray ray;
+    RaycastHit2D hit;
     bool downClick;
     GameObject clickedButtonObject;
     SceneLoader sceneLoader;
-    [SerializeField] string ButtonPrefabName = "LevelTile(Clone)";
+    [SerializeField] string buttonPrefabName = "LevelTile(Clone)";
+    int buttonLayer;
 
 
 
     private void Start()
     {
         sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
+        buttonLayer = 1 << LayerMask.NameToLayer("Button");
+
     }
 
     private void Update()
     {
-        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
 
         if(Input.GetMouseButtonDown(0))
         {
             downClick = true;
         }
 
-        if (Physics.Raycast(ray, out hit) && downClick)
+        hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 10000,buttonLayer,0,10000);
+
+       
+
+        if (hit.collider != null && downClick)
         {
 
-         if(Physics.Raycast(ray, out hit) && Input.GetMouseButtonUp(0) && string.Equals(ButtonPrefabName,hit.collider.gameObject.name) )
+            if (hit.collider != null && Input.GetMouseButtonUp(0) && string.Equals(buttonPrefabName, hit.collider.gameObject.name))
             {
-                
                 clickedButtonObject = hit.collider.gameObject;
-                NodeInformation clickedNode = clickedButtonObject.GetComponent<NodeInformation>();
-                if(clickedNode != null)
+                NodeInformation clickednode = clickedButtonObject.GetComponent<NodeInformation>();
+                if (clickednode != null)
                 {
-                    sceneLoader.ChangeSceneButton(clickedNode);
+                    if(sceneLoader != null)
+                    {
+                        sceneLoader.ChangeSceneButton(clickednode);
+                    }
+                    else
+                    {
+                        Debug.LogError("sceneloader is nulll in button manager");
+                    }
                 }
             }
-         else if(Input.GetMouseButtonUp(0))
+            else if (Input.GetMouseButtonUp(0))
             {
                 downClick = false;
             }

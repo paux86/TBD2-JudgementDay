@@ -40,14 +40,21 @@ public class SceneLoader : MonoBehaviour
         }
 
 
-       if(selectedNode != null)
+       if(selectedNode != null && gameState != null)
         {
             gameState.SetSelectedNode(selectedNode);
             SceneManager.LoadScene(selectedNode.GetScene());
         }
        else
         {
-            Debug.Log("node passed to SceneLoader.ChangeSceneButton is null");
+            if(selectedNode == null)
+            {
+                Debug.Log("node passed to SceneLoader.ChangeSceneButton is null");
+            }
+            else
+            {
+                Debug.LogError("gamestate in Sceneloader is null");
+            }
         }
         
     }

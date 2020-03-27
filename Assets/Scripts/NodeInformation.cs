@@ -16,7 +16,7 @@ public class NodeInformation : MonoBehaviour
     Vector2 nodePoint;
     bool selectable;
     bool isComplete;
-    BoxCollider boxCollider;
+    BoxCollider2D boxCollider;
     SpriteRenderer spriteRenderer;
     int sceneBuildIndex = 2;
     GameState gameState;
@@ -26,7 +26,7 @@ public class NodeInformation : MonoBehaviour
 
     private void Start()
     {
-        boxCollider = gameObject.GetComponent<BoxCollider>();
+        boxCollider = gameObject.GetComponent<BoxCollider2D>();
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
         SetupNode();
@@ -57,7 +57,7 @@ public class NodeInformation : MonoBehaviour
         }
         else
         {
-            sceneBuildIndex = Random.Range(2, 4);
+            sceneBuildIndex = Random.Range(2, 5);
         }
     }
 

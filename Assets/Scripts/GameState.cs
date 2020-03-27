@@ -116,19 +116,33 @@ public class GameState : MonoBehaviour
 
     public void SetSelectedNode(NodeInformation selection)
     {
-        this.currentSelectedNode = selection;
+        if(selection != null)
+        {
+            this.currentSelectedNode = selection;
 
-        UpdateTier(selection);
+            UpdateTier(selection);
+        }
+        else
+        {
+            Debug.LogError("GameState.SetSelectNode input is null!");
+        }
     }
 
     private void UpdateTier(NodeInformation selection)
     {
-        for (int i = 0; i < nodeTierMatrix.GetLength(1); i++)
+        if (nodeTierMatrix != null)
         {
-            if (i != selection.GetCol() && nodeTierMatrix[selection.GetRow(),i] != null)
+            for (int i = 0; i < nodeTierMatrix.GetLength(1); i++)
             {
-                nodeTierMatrix[selection.GetRow(), i].SetSelectable(false);
+                if (nodeTierMatrix[selection.GetRow(), i] != null && i != selection.GetCol())
+                {
+                    nodeTierMatrix[selection.GetRow(), i].SetSelectable(false);
+                }
             }
+        }
+        else
+        {
+            Debug.LogError("NodeTierMatrix in GameState is null");
         }
     }
 
