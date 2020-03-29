@@ -334,7 +334,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  currentWeapon: {fileID: 0}
+  currentWeapon: {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
 --- !u!114 &393917524174957352
 MonoBehaviour:
   m_ObjectHideFlags: 0

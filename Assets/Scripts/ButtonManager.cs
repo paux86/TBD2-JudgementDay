@@ -1,63 +1,62 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class ButtonManager : MonoBehaviour
 {
 
-    GameState gameState;
-    [SerializeField] bool[] levelsComplete;
-    [SerializeField] int sceneNum;
-    [SerializeField] string sceneName;
-    private Button button;
-    // Start is called before the first frame update
-    void Start()
+    RaycastHit2D hit;
+    bool downClick;
+    GameObject clickedButtonObject;
+    SceneLoader sceneLoader;
+    [SerializeField] string buttonPrefabName = "LevelTile(Clone)";
+    int buttonLayer;
+
+
+
+    private void Start()
     {
-        sceneName = gameObject.name;
-        sceneNum = sceneName[0] - '0';
-        sceneName = sceneName.Substring(sceneName.LastIndexOf('.') + 1);
-        button = gameObject.GetComponent<Button>();
+        sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
+        buttonLayer = 1 << LayerMask.NameToLayer("Button");
 
-   
+    }
+
+    private void Update()
+    {
         
-        if(FindObjectOfType<GameState>() != null)
-        {
-            gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
-            levelsComplete = gameState.GetLevelsComplete();
 
-            switch (sceneNum)
+        if(Input.GetMouseButtonDown(0))
+        {
+            downClick = true;
+        }
+
+        hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 10000,buttonLayer,0,10000);
+
+       
+
+        if (hit.collider != null && downClick)
+        {
+
+            if (hit.collider != null && Input.GetMouseButtonUp(0) && string.Equals(buttonPrefabName, hit.collider.gameObject.name))
             {
-                case 2:
-                    //do nothing
-                    break;
-                case 3:
-                case 4:
-                    if (levelsComplete[2] == false)
+                clickedButtonObject = hit.collider.gameObject;
+                NodeInformation clickednode = clickedButtonObject.GetComponent<NodeInformation>();
+                if (clickednode != null)
+                {
+                    if(sceneLoader != null)
                     {
-                        button.interactable = false;
-                    }
-                    break;
-                case 5:
-                    if (levelsComplete[2] == true && (levelsComplete[4] == true || levelsComplete[3] == true))
-                    {
-                        button.interactable = true;
+                        sceneLoader.ChangeSceneButton(clickednode);
                     }
                     else
                     {
-                        button.interactable = false;
+                        Debug.LogError("sceneloader is nulll in button manager");
                     }
-                    break;
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                downClick = false;
             }
         }
-        else
-        {
-            Debug.Log("GameState object missing or not found within buttonmanager");
-        }
-
-        
     }
 
- 
+
 }
