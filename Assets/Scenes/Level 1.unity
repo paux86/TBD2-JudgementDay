@@ -237,6 +237,24 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1814829729}
+    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
+        type: 3}
+      propertyPath: weaponInventory.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe,
+        type: 2}
+    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
+        type: 3}
+      propertyPath: weaponInventory.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: a5e0ad468259b6f4ab3fbbfa505f827e,
+        type: 2}
+    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
+        type: 3}
+      propertyPath: weaponInventory.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae,
+        type: 2}
     - target: {fileID: 7479734216084199597, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -299,6 +317,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b29fa5acc6c9b24e93d67345d50a9c8, type: 3}
+--- !u!114 &162859243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 126595725, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 162859242}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68644121f7d09e549b27f3f9ca5fbb42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &165142584
 GameObject:
   m_ObjectHideFlags: 0
@@ -1280,6 +1310,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8872752524042332794, guid: 366a54c25026ef347adab43fae3a5669,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 162859243}
     - target: {fileID: 8872752524171840013, guid: 366a54c25026ef347adab43fae3a5669,
         type: 3}
       propertyPath: m_Name
