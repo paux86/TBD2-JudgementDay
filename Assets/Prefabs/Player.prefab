@@ -177,6 +177,7 @@ GameObject:
   - component: {fileID: -3092085366361487339}
   - component: {fileID: -1948253271990080039}
   - component: {fileID: 7202298198229960030}
+  - component: {fileID: 126595725}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -331,9 +332,9 @@ MonoBehaviour:
   maxHealth: 150
   healthBar: {fileID: 0}
   weaponInventory:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
+  - {fileID: 11400000, guid: a5e0ad468259b6f4ab3fbbfa505f827e, type: 2}
+  - {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae, type: 2}
   currentWeapon: {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
 --- !u!114 &393917524174957352
 MonoBehaviour:
@@ -411,3 +412,17 @@ PolygonCollider2D:
       - {x: 0.6375, y: -0.5375}
       - {x: 0.6375, y: 0.0125}
       - {x: 0.2375, y: 0.5375}
+--- !u!114 &126595725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7479734216084199599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68644121f7d09e549b27f3f9ca5fbb42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: {fileID: 7479734216084199596}
+  player: {fileID: -8495037631226691877}
