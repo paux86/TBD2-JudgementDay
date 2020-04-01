@@ -12,7 +12,7 @@ public class EnemyPathing : MonoBehaviour
     int waypointIndex = 0;
     Rigidbody2D rigidBody;
     private float totalDeltaTime;
-    [SerializeField] float MAX_SPAWN_TIME = 3;
+    [SerializeField] float maxPathingTime = 3;
 
 
     // Start is called before the first frame update
@@ -68,7 +68,7 @@ public class EnemyPathing : MonoBehaviour
     {
         totalDeltaTime += Time.deltaTime;
         totalDeltaTime = totalDeltaTime % 10000; // Just making sure the number doesn't get stupid
-        if (waypointIndex <= waypoints.Count - 1 && totalDeltaTime < MAX_SPAWN_TIME)
+        if (waypointIndex <= waypoints.Count - 1 && totalDeltaTime < maxPathingTime)
         {
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = 0f;
