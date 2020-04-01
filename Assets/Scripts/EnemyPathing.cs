@@ -11,8 +11,8 @@ public class EnemyPathing : MonoBehaviour
     float moveSpeed;
     int waypointIndex = 0;
     Rigidbody2D rigidBody;
-    private int frames;
-    const int MAX_FRAMES = 200;
+    private float totalDeltaTime;
+    [SerializeField] float MAX_SPAWN_TIME = 3;
 
 
     // Start is called before the first frame update
@@ -66,14 +66,14 @@ public class EnemyPathing : MonoBehaviour
     }
     private void Move()
     {
-        frames++;
-        frames = frames % 10000; // Just making sure the number doesn't get stupid
-        if (waypointIndex <= waypoints.Count - 1 && frames < MAX_FRAMES)
+        totalDeltaTime += Time.deltaTime;
+        totalDeltaTime = totalDeltaTime % 10000; // Just making sure the number doesn't get stupid
+        if (waypointIndex <= waypoints.Count - 1 && totalDeltaTime < MAX_SPAWN_TIME)
         {
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = 0f;
             var targetPosition = waypoints[waypointIndex].transform.position;
-            var movementThisFrame = moveSpeed * Time.deltaTime;
+            var movementThisFrame = moveSpeed * Time.fixedDeltaTime;
             Vector2 moveMent;
             moveMent = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
             rigidBody.MovePosition(moveMent);
@@ -102,7 +102,7 @@ public class EnemyPathing : MonoBehaviour
             Vector2 targetPosition = player.transform.position;
             if ((targetPosition - (Vector2)gameObject.transform.position).sqrMagnitude > minDistance)
             {
-                var movementThisFrame = moveSpeed * Time.deltaTime;
+                var movementThisFrame = moveSpeed * Time.fixedDeltaTime;
                 Vector2 moveMent;
                 moveMent = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
                 rigidBody.MovePosition(moveMent);
@@ -114,7 +114,7 @@ public class EnemyPathing : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Player Found");
+            Debug.Log("No Player Found in enemy pathing script");
         }
     }
 
