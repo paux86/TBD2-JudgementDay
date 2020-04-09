@@ -57,7 +57,7 @@ public class AttackWithWeapon : MonoBehaviour
             }
             else
             {
-                
+                lineRenderer.enabled = false;
                 GameObject projectileObject = Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
                 Projectile projectile =  projectileObject.GetComponent<Projectile>();
                 projectile.SetDamage(equippedWeapon.attackDamage);
