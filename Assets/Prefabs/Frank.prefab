@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 7a9480a5fd05ae744975586e7085a8fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  attackCounter: 0
-  maxTimeBetweeAttacks: 3
-  minTimeBetweenAttacks: 0.2
+  money: 1
+  moveSpeed: 10
+  DropItemChance: 100
 --- !u!50 &-6836263537827121752
 Rigidbody2D:
   serializedVersion: 4
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3790650516509750841}
   equippedWeapon: {fileID: 11400000, guid: c7aef2b1cec81b51fb4af9bad8553d53, type: 2}
+  lineRenderer: {fileID: 0}
 --- !u!114 &-7744249323065494141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,5 +203,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   waveConfig: {fileID: 0}
-  isStatic: 0
+  isDoneSpawning: 0
   minDistance: 10
+  maxPathingTime: 3
