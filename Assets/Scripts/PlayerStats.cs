@@ -86,8 +86,12 @@ public class PlayerStats : MonoBehaviour
 
     public void ChangeCurrentWeapon(int number)
     {
-        currentWeapon = weaponInventory[number];
-        currentWeaponSlot = number;
+        if(number >= 0 && number < numberOfEquippedWeapons)
+        {
+            currentWeapon = weaponInventory[number];
+            currentWeaponSlot = number;
+        }
+        Debug.Log(number);
     }
 
     public void AddWeaponToInventory(Weapon newWeapon)
