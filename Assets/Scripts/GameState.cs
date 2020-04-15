@@ -6,6 +6,8 @@ public class GameState : MonoBehaviour
 {
     private EnemySpawner enemySpawner;
     private SceneLoader sceneLoader;
+
+    private PersistentStats persistentStats;
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
@@ -31,6 +33,7 @@ public class GameState : MonoBehaviour
             {
                 enemySpawner.SetWaveComplete(false);
                 currentSelectedNode.SetIsComplete(true);
+                persistentStats.updateStats();
                 sceneLoader.ChangeToLevelSelect();
 
             }
@@ -64,6 +67,7 @@ public class GameState : MonoBehaviour
         {
             enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
             sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
+            persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
 
         }
     }
