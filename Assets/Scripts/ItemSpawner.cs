@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ItemSpawner : MonoBehaviour
 {
-
+#pragma warning disable 0649
     [SerializeField] Weapon weapon;
     [SerializeField] UsableItem item;
+#pragma warning restore 0649
     public void SpawnUsableItemOrWeapon(Vector2 position,int type)
     {
         GameObject itemObject = new GameObject();
