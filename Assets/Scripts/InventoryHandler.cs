@@ -10,13 +10,10 @@ public class InventoryHandler : MonoBehaviour
 
     private bool isOpen = false;
 
-    private void Start()
-    {
-        InitializeButtons();
-    }
 
     public void ToggleInventory()
     {
+        LoadButtons();
         isOpen = !isOpen;
 
         if (inventoryLists.Length > 0)
@@ -33,23 +30,35 @@ public class InventoryHandler : MonoBehaviour
             Time.timeScale = 0;
     }
 
-    private void InitializeButtons()
+    private void LoadButtons()
     {
+        //init weapons
+        Component[] wepButtons;
+        wepButtons = inventoryLists[0].GetComponentsInChildren(typeof(Button));
         SwapWeapon swapReference = playerReference.GetComponent<SwapWeapon>();
 
-        foreach(GameObject list in inventoryLists)
+        if (wepButtons != null)
         {
-            Component[] buttons;
-            buttons = list.GetComponentsInChildren(typeof(Button));
-
-            if(buttons != null)
+            for (int i = 0; i < wepButtons.Length; i++)
             {
-                for(int i = 0; i < buttons.Length; i++)
-                {
-                    int b = i;
-                    buttons[i].GetComponentInChildren<Text>().text = "" + i;
-                    buttons[i].GetComponent<Button>().onClick.AddListener(() => swapReference.Swap(b));
-                }
+                int b = i;
+                wepButtons[i].GetComponentInChildren<Text>().text = "Wep" + i;
+                wepButtons[i].GetComponent<Button>().onClick.AddListener(() => swapReference.Swap(b));
+            }
+        }
+
+        //init items
+        Component[] itemButtons;
+        itemButtons = inventoryLists[1].GetComponentsInChildren(typeof(Button));
+        PlayerStats playerStatsReference = playerReference.GetComponent<PlayerStats>();
+
+        if (itemButtons != null)
+        {
+            for (int i = 0; i < itemButtons.Length; i++)
+            {
+                int b = i;
+                itemButtons[i].GetComponentInChildren<Text>().text = "Item" + i;
+                itemButtons[i].GetComponent<Button>().onClick.AddListener(() => playerStatsReference.UseItem(b));
             }
         }
     }

@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] HealthBar healthBar = default;
     [SerializeField] Weapon[] weaponInventory = new Weapon[3];
     [SerializeField] public Weapon currentWeapon;
+    [SerializeField] UsableItem[] itemInventory = new UsableItem[3];
 
     private int health;
     private int currentWeaponSlot;
@@ -91,7 +92,10 @@ public class PlayerStats : MonoBehaviour
             currentWeapon = weaponInventory[number];
             currentWeaponSlot = number;
         }
-        Debug.Log(number);
+        else
+        {
+            Debug.Log("No weapon in slot" + number);
+        }
     }
 
     public void AddWeaponToInventory(Weapon newWeapon)
@@ -127,6 +131,18 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void UseItem(int slotNum)
+    {
+        if(itemInventory[slotNum] != null)
+        {
+            itemInventory[slotNum].Use(this);
+        }
+        else
+        {
+            Debug.Log("No item in slot " + slotNum);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
