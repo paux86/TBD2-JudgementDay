@@ -12,12 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d787e0bdaf7b0489d3859cacbb11f0, type: 3}
   m_Name: MeleeBat
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Baseball Bat
+  description: An aluminum bat, ideal for bashing heads.
   sprite: {fileID: 0}
-  attackDamage: 0
-  attackCooldownTime: 0
-  range: 0
+  attackDamage: 100
+  attackCooldownTime: 1
+  range: 3
   onHitEffect: {fileID: 0}
   hitscan: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 2005556199441388566, guid: 89a9621f2100f664b9b3dc05c29f8d84,
+    type: 3}
