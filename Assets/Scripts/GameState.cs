@@ -146,4 +146,20 @@ public class GameState : MonoBehaviour
         }
     }
 
+    public void StartNewMap()
+    {
+        if (levelGrid != null)
+        {
+            nodeTierMatrix = null;
+            currentSelectedNode = null;
+            GridKeeper gridObj = levelGrid.GetComponent<GridKeeper>();
+            gridObj.DestroyGrid();
+            sceneLoader.ChangeToLevelSelect();
+        }
+        else
+        {
+            Debug.LogError("Level grid doesn't exist in GameState");
+        }
+    }
+
 }

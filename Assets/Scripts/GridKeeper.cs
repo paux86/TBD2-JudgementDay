@@ -31,4 +31,9 @@ public class GridKeeper : MonoBehaviour
             gameState.SetLevelGrid(gameObject);
         }
     }
+
+    public void DestroyGrid()
+    {
+        Destroy(gameObject);
+    }
 }

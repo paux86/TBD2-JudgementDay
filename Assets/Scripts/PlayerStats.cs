@@ -86,8 +86,12 @@ public class PlayerStats : MonoBehaviour
 
     public void ChangeCurrentWeapon(int number)
     {
-        currentWeapon = weaponInventory[number];
-        currentWeaponSlot = number;
+        if(number >= 0 && number < numberOfEquippedWeapons)
+        {
+            currentWeapon = weaponInventory[number];
+            currentWeaponSlot = number;
+        }
+        Debug.Log(number);
     }
 
     public void AddWeaponToInventory(Weapon newWeapon)
@@ -123,5 +127,11 @@ public class PlayerStats : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Collided with this item. Will delte it now. Please code an option to add me to player inventory later");
+        Destroy(collision.gameObject);
     }
 }
