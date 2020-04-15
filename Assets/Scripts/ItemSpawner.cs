@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemSpawner : MonoBehaviour
 {
 #pragma warning disable 0649
+    //these are placeholders for whatever a loot table will contain
     [SerializeField] Weapon weapon;
     [SerializeField] UsableItem item;
 #pragma warning restore 0649
