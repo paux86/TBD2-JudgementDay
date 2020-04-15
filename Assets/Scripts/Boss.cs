@@ -8,12 +8,14 @@ public class Boss : MonoBehaviour
     public bool isEnraged;
     public bool isInvulnerable = false;
     private int health;
+    GameState gameState;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         isEnraged = false;
+        gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
     }
 
     public void TakeDamage(int damage)
@@ -38,5 +40,11 @@ public class Boss : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        StartNewMap();
+    }
+
+    private void StartNewMap()
+    {
+        gameState.StartNewMap();
     }
 }

@@ -128,4 +128,10 @@ public class PlayerStats : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Collided with this item. Will delte it now. Please code an option to add me to player inventory later");
+        Destroy(collision.gameObject);
+    }
 }
