@@ -13,6 +13,7 @@ public class Weapon : ScriptableObject
     public float range;
     public Sprite onHitEffect;
     public bool hitscan;
+    public bool isMelee;
     public GameObject projectile;
 
     //the data here is all public and can be accessed directly
