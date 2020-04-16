@@ -8,9 +8,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float armor = 0.0f;
     [SerializeField] int maxHealth = 100;
     [SerializeField] HealthBar healthBar = default;
-    [SerializeField] Weapon[] weaponInventory = new Weapon[3];
+    [SerializeField] public Weapon[] weaponInventory = new Weapon[3];
     [SerializeField] public Weapon currentWeapon;
-    [SerializeField] UsableItem[] itemInventory = new UsableItem[3];
+    [SerializeField] public UsableItem[] itemInventory = new UsableItem[3];
 
     private int health;
     private int currentWeaponSlot;
@@ -23,6 +23,10 @@ public class PlayerStats : MonoBehaviour
     {
 
         persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
+        this.moneyCount = persistentStats.moneyCount;
+        this.weaponInventory = persistentStats.GetWeaponInventory();
+        this.itemInventory = persistentStats.GetItemInventory();
+
 
         health = maxHealth;
         if(healthBar != null)
@@ -41,7 +45,6 @@ public class PlayerStats : MonoBehaviour
         }
 
         armor = GetArmor();
-        moneyCount = persistentStats.moneyCount;
     }
 
     public int GetMoneyCount()
@@ -120,6 +123,18 @@ public class PlayerStats : MonoBehaviour
         {
             weaponInventory[weaponInventory.Length] = newWeapon;
         }
+    }
+
+    public Weapon[] GetWeaponInventory(){
+        Weapon[] returnWeaponInventory = new Weapon[weaponInventory.Length];
+        weaponInventory.CopyTo(returnWeaponInventory, 0);
+        return returnWeaponInventory;
+    }
+
+    public UsableItem[] GetItemInventory(){
+        UsableItem[] returnItemInventory = new UsableItem[itemInventory.Length];
+        itemInventory.CopyTo(returnItemInventory, 0);
+        return returnItemInventory;
     }
 
     public void TakeDamage(int attackDamage)
