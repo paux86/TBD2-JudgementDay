@@ -8,7 +8,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float armor = 0.0f;
     [SerializeField] int maxHealth = 100;
     [SerializeField] HealthBar healthBar = default;
-    [SerializeField] public Weapon[] weaponInventory = new Weapon[3];
+    [SerializeField] public Weapon[] weaponInventory = new Weapon[3]; // 0 melee < 5 range, 1 medium < 50, 2 long > 50
     [SerializeField] public Weapon currentWeapon;
     [SerializeField] public UsableItem[] itemInventory = new UsableItem[3];
 
@@ -18,6 +18,10 @@ public class PlayerStats : MonoBehaviour
     private int weaponInventorySize;
 
     private PersistentStats persistentStats;
+
+    const int WEAPON_TYPE = 0;
+    const int ITEM_TYPE = 1;
+
 
     private void Start()
     {
@@ -158,6 +162,10 @@ public class PlayerStats : MonoBehaviour
         if(itemInventory[slotNum] != null)
         {
             itemInventory[slotNum].Use(this);
+            if(itemInventory[slotNum].IsConsumable)
+            {
+                itemInventory[slotNum] = null;
+            }
         }
         else
         {
@@ -167,7 +175,59 @@ public class PlayerStats : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collided with this item. Will delte it now. Please code an option to add me to player inventory later");
-        Destroy(collision.gameObject);
+        DropContainer dropContainer = collision.gameObject.GetComponent<DropContainer>();
+        if(dropContainer.GetItemType() == WEAPON_TYPE)
+        {
+            UpdateWeaponSlot(dropContainer.GetWeapon());
+            Destroy(collision.gameObject);
+        }
+        else if(dropContainer.GetItemType() == ITEM_TYPE)
+        {
+            if(UpdateItemSlot(dropContainer.GetItem()))
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+        
     }
+
+    private void UpdateWeaponSlot(Weapon weapon)
+    {
+        const int MELEE_SLOT = 0;
+        const int MELEE_RANGE = 5;
+        const int MED_SLOT = 1;
+        const int MED_RANGE = 50;
+        const int LONG_SLOT = 2;
+
+        switch(weapon.range)
+        {
+            case float n when (n <= MELEE_RANGE):
+                weaponInventory[MELEE_SLOT] = weapon;
+                    break;
+            case float n when (n <= MED_RANGE):
+                weaponInventory[MED_SLOT] = weapon;
+                break;
+            case float n when (n > MED_RANGE):
+                weaponInventory[LONG_SLOT] = weapon;
+                break;
+        }
+    }
+
+    private bool UpdateItemSlot(UsableItem usableItem)
+    {
+        bool foundSlot = false;
+
+        for(int i = 0; i < itemInventory.Length && !foundSlot; i++)
+        {
+            if(itemInventory[i] == null)
+            {
+                itemInventory[i] = usableItem;
+                foundSlot = true;
+            }
+        }
+
+        return foundSlot;
+    }
+
+
 }
