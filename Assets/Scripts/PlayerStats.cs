@@ -17,8 +17,13 @@ public class PlayerStats : MonoBehaviour
     private int numberOfEquippedWeapons = 0;
     private int weaponInventorySize;
 
+    private PersistentStats persistentStats;
+
     private void Start()
     {
+
+        persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
+
         health = maxHealth;
         if(healthBar != null)
         {
@@ -36,7 +41,7 @@ public class PlayerStats : MonoBehaviour
         }
 
         armor = GetArmor();
-        moneyCount = GetMoneyCount();
+        moneyCount = persistentStats.moneyCount;
     }
 
     public int GetMoneyCount()
