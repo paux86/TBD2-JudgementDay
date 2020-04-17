@@ -8,6 +8,7 @@ public class UsableItem : ScriptableObject
     public string itemName;
     public string description;
     public Sprite sprite;
+    public Sprite buttonSprite;
     public bool IsConsumable;
     public List<UsableItemEffect> Effects;
 
