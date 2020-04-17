@@ -8,7 +8,11 @@ public class AttackWithWeapon : MonoBehaviour
     public Weapon equippedWeapon;
     public LineRenderer lineRenderer;
     public Animator animator;
+<<<<<<< HEAD
     public bool inMeleeRange = false;
+=======
+    public bool inMelee = false;
+>>>>>>> 6692045767c1722be646b39f344a395c251e00fe
 
     //object references
     private FindNearestTarget nearestEnemy;
@@ -70,7 +74,6 @@ public class AttackWithWeapon : MonoBehaviour
                 Projectile projectile =  projectileObject.GetComponent<Projectile>();
                 projectile.SetDamage(equippedWeapon.attackDamage);
             }
-
             nextFireTime = Time.time + equippedWeapon.attackCooldownTime;
         }
         else
