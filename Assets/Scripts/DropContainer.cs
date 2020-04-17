@@ -75,4 +75,21 @@ public class DropContainer : MonoBehaviour
         return item;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (this.type == WEAPON_TYPE)
+        {
+            collision.gameObject.GetComponent<PlayerStats>().UpdateWeaponSlot(this.weapon);
+            Destroy(gameObject);
+        }
+        else if (this.type == ITEM_TYPE)
+        {
+            if (collision.gameObject.GetComponent<PlayerStats>().UpdateItemSlot(this.item))
+            {
+                Destroy(gameObject);
+            }
+        }
+
+    }
+
 }

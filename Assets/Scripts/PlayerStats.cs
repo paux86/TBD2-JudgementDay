@@ -19,9 +19,6 @@ public class PlayerStats : MonoBehaviour
 
     private PersistentStats persistentStats;
 
-    const int WEAPON_TYPE = 0;
-    const int ITEM_TYPE = 1;
-
 
     private void Start()
     {
@@ -179,25 +176,9 @@ public class PlayerStats : MonoBehaviour
         InventoryHandler.UpdateItemButton(this,invButtons,slotNum);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        DropContainer dropContainer = collision.gameObject.GetComponent<DropContainer>();
-        if(dropContainer.GetItemType() == WEAPON_TYPE)
-        {
-            UpdateWeaponSlot(dropContainer.GetWeapon());
-            Destroy(collision.gameObject);
-        }
-        else if(dropContainer.GetItemType() == ITEM_TYPE)
-        {
-            if(UpdateItemSlot(dropContainer.GetItem()))
-            {
-                Destroy(collision.gameObject);
-            }
-        }
-        
-    }
+   
 
-    private void UpdateWeaponSlot(Weapon weapon)
+    public void UpdateWeaponSlot(Weapon weapon)
     {
         const int MELEE_SLOT = 0;
         const int MELEE_RANGE = 5;
@@ -219,7 +200,7 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    private bool UpdateItemSlot(UsableItem usableItem)
+    public bool UpdateItemSlot(UsableItem usableItem)
     {
         bool foundSlot = false;
 
@@ -235,25 +216,40 @@ public class PlayerStats : MonoBehaviour
         return foundSlot;
     }
 
-    public Sprite GetButtonSpriteForItemButton(int index)
+    public Sprite GetButtonSpriteForItemButton(int index, Component itemButton)
     {
         Sprite itemButtonSprite = null;
 
-        if(itemInventory[index] != null && itemInventory[index].buttonSprite != null)
+        if(itemInventory[index] != null)
         {
-            itemButtonSprite = itemInventory[index].buttonSprite;
+            if(itemInventory[index].buttonSprite != null)
+            {
+                itemButtonSprite = itemInventory[index].buttonSprite;
+            }
+            else
+            {
+                itemButton.GetComponentInChildren<Text>().text = "noSpr";
+            }
         }
 
         return itemButtonSprite;
     }
 
-    public Sprite GetButtonSpriteForWeaponButton(int index)
+    public Sprite GetButtonSpriteForWeaponButton(int index, Component weaponButton)
     {
         Sprite weaponButtonSprite = null;
 
-        if(weaponInventory[index] != null && weaponInventory[index].buttonSprite != null)
+        if(weaponInventory[index] != null)
         {
-            weaponButtonSprite = weaponInventory[index].buttonSprite;
+            if(weaponInventory[index].buttonSprite != null)
+            {
+                weaponButtonSprite = weaponInventory[index].buttonSprite;
+            }
+            else
+            {
+                weaponButton.GetComponentInChildren<Text>().text = "noSpr";
+            }
+
         }
         return weaponButtonSprite;
     }
