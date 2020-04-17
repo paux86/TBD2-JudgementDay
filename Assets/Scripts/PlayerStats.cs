@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -14,7 +15,6 @@ public class PlayerStats : MonoBehaviour
 
     private int health;
     private int currentWeaponSlot;
-    private int numberOfEquippedWeapons = 0;
     private int weaponInventorySize;
 
     private PersistentStats persistentStats;
@@ -42,11 +42,6 @@ public class PlayerStats : MonoBehaviour
         currentWeapon = weaponInventory[0];
         currentWeaponSlot = 0;
         weaponInventorySize = weaponInventory.Length;
-        for(int i = 0; i < weaponInventorySize; i++)
-        {
-            if (weaponInventory[i] != null)
-                numberOfEquippedWeapons++;
-        }
 
         armor = GetArmor();
     }
@@ -99,7 +94,7 @@ public class PlayerStats : MonoBehaviour
 
     public void ChangeCurrentWeapon(int number)
     {
-        if(number >= 0 && number < numberOfEquippedWeapons)
+        if(number >= 0 && number < weaponInventory.Length && weaponInventory[number] != null)
         {
             currentWeapon = weaponInventory[number];
             currentWeaponSlot = number;
@@ -166,11 +161,22 @@ public class PlayerStats : MonoBehaviour
             {
                 itemInventory[slotNum] = null;
             }
+            UpdateItemButton(slotNum);
         }
         else
         {
             Debug.Log("No item in slot " + slotNum);
         }
+    }
+
+    private void UpdateItemButton(int slotNum)
+    {
+        GameObject inventoryList = GameObject.Find("Item Inventory Buttons");
+        Component[] invButtons;
+        invButtons = inventoryList.GetComponentsInChildren(typeof(Button));
+
+
+        InventoryHandler.UpdateItemButton(this,invButtons,slotNum);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -227,6 +233,29 @@ public class PlayerStats : MonoBehaviour
         }
 
         return foundSlot;
+    }
+
+    public Sprite GetButtonSpriteForItemButton(int index)
+    {
+        Sprite itemButtonSprite = null;
+
+        if(itemInventory[index] != null && itemInventory[index].buttonSprite != null)
+        {
+            itemButtonSprite = itemInventory[index].buttonSprite;
+        }
+
+        return itemButtonSprite;
+    }
+
+    public Sprite GetButtonSpriteForWeaponButton(int index)
+    {
+        Sprite weaponButtonSprite = null;
+
+        if(weaponInventory[index] != null && weaponInventory[index].buttonSprite != null)
+        {
+            weaponButtonSprite = weaponInventory[index].buttonSprite;
+        }
+        return weaponButtonSprite;
     }
 
 
