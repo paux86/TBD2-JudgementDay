@@ -7,6 +7,8 @@ public class AttackWithWeapon : MonoBehaviour
     public Transform firePoint;
     public Weapon equippedWeapon;
     public LineRenderer lineRenderer;
+    public Animator animator;
+    public bool inMeleeRange = false;
 
     //object references
     private FindNearestTarget nearestEnemy;
@@ -59,12 +61,22 @@ public class AttackWithWeapon : MonoBehaviour
             {
                 if(lineRenderer != null)
                     lineRenderer.enabled = false;
+                if(equippedWeapon.isMelee)
+                {
+                    inMeleeRange = true;
+                    animator.SetBool("inMeleeRange", inMeleeRange);
+                }
                 GameObject projectileObject = Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
                 Projectile projectile =  projectileObject.GetComponent<Projectile>();
                 projectile.SetDamage(equippedWeapon.attackDamage);
             }
 
             nextFireTime = Time.time + equippedWeapon.attackCooldownTime;
+        }
+        else
+        {
+            inMeleeRange = false;
+            animator.SetBool("inMeleeRange", inMeleeRange);
         }
     }
 }
