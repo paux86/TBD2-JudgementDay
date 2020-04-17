@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -8,16 +9,16 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float armor = 0.0f;
     [SerializeField] int maxHealth = 100;
     [SerializeField] HealthBar healthBar = default;
-    [SerializeField] public Weapon[] weaponInventory = new Weapon[3];
+    [SerializeField] public Weapon[] weaponInventory = new Weapon[3]; // 0 melee < 5 range, 1 medium < 50, 2 long > 50
     [SerializeField] public Weapon currentWeapon;
     [SerializeField] public UsableItem[] itemInventory = new UsableItem[3];
 
     private int health;
     private int currentWeaponSlot;
-    private int numberOfEquippedWeapons = 0;
     private int weaponInventorySize;
 
     private PersistentStats persistentStats;
+
 
     private void Start()
     {
@@ -38,11 +39,6 @@ public class PlayerStats : MonoBehaviour
         currentWeapon = weaponInventory[0];
         currentWeaponSlot = 0;
         weaponInventorySize = weaponInventory.Length;
-        for(int i = 0; i < weaponInventorySize; i++)
-        {
-            if (weaponInventory[i] != null)
-                numberOfEquippedWeapons++;
-        }
 
         armor = GetArmor();
     }
@@ -95,7 +91,7 @@ public class PlayerStats : MonoBehaviour
 
     public void ChangeCurrentWeapon(int number)
     {
-        if(number >= 0 && number < numberOfEquippedWeapons)
+        if(number >= 0 && number < weaponInventory.Length && weaponInventory[number] != null)
         {
             currentWeapon = weaponInventory[number];
             currentWeaponSlot = number;
@@ -158,6 +154,11 @@ public class PlayerStats : MonoBehaviour
         if(itemInventory[slotNum] != null)
         {
             itemInventory[slotNum].Use(this);
+            if(itemInventory[slotNum].IsConsumable)
+            {
+                itemInventory[slotNum] = null;
+            }
+            UpdateItemButton(slotNum);
         }
         else
         {
@@ -165,9 +166,93 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void UpdateItemButton(int slotNum)
     {
-        Debug.Log("Collided with this item. Will delte it now. Please code an option to add me to player inventory later");
-        Destroy(collision.gameObject);
+        GameObject inventoryList = GameObject.Find("Item Inventory Buttons");
+        Component[] invButtons;
+        invButtons = inventoryList.GetComponentsInChildren(typeof(Button));
+
+
+        InventoryHandler.UpdateItemButton(this,invButtons,slotNum);
     }
+
+   
+
+    public void UpdateWeaponSlot(Weapon weapon)
+    {
+        const int MELEE_SLOT = 0;
+        const int MELEE_RANGE = 5;
+        const int MED_SLOT = 1;
+        const int MED_RANGE = 50;
+        const int LONG_SLOT = 2;
+
+        switch(weapon.range)
+        {
+            case float n when (n <= MELEE_RANGE):
+                weaponInventory[MELEE_SLOT] = weapon;
+                    break;
+            case float n when (n <= MED_RANGE):
+                weaponInventory[MED_SLOT] = weapon;
+                break;
+            case float n when (n > MED_RANGE):
+                weaponInventory[LONG_SLOT] = weapon;
+                break;
+        }
+    }
+
+    public bool UpdateItemSlot(UsableItem usableItem)
+    {
+        bool foundSlot = false;
+
+        for(int i = 0; i < itemInventory.Length && !foundSlot; i++)
+        {
+            if(itemInventory[i] == null)
+            {
+                itemInventory[i] = usableItem;
+                foundSlot = true;
+            }
+        }
+
+        return foundSlot;
+    }
+
+    public Sprite GetButtonSpriteForItemButton(int index, Component itemButton)
+    {
+        Sprite itemButtonSprite = null;
+
+        if(itemInventory[index] != null)
+        {
+            if(itemInventory[index].buttonSprite != null)
+            {
+                itemButtonSprite = itemInventory[index].buttonSprite;
+            }
+            else
+            {
+                itemButton.GetComponentInChildren<Text>().text = "noSpr";
+            }
+        }
+
+        return itemButtonSprite;
+    }
+
+    public Sprite GetButtonSpriteForWeaponButton(int index, Component weaponButton)
+    {
+        Sprite weaponButtonSprite = null;
+
+        if(weaponInventory[index] != null)
+        {
+            if(weaponInventory[index].buttonSprite != null)
+            {
+                weaponButtonSprite = weaponInventory[index].buttonSprite;
+            }
+            else
+            {
+                weaponButton.GetComponentInChildren<Text>().text = "noSpr";
+            }
+
+        }
+        return weaponButtonSprite;
+    }
+
+
 }

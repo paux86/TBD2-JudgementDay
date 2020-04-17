@@ -14,6 +14,7 @@ public class Weapon : ScriptableObject
     public Sprite onHitEffect;
     public bool hitscan;
     public GameObject projectile;
+    public Sprite buttonSprite;
 
     //the data here is all public and can be accessed directly
     /*
