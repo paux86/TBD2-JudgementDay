@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pistol
   description: Pew pew
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: e9ad549a248ded54cbe4c9577f0f98a8, type: 3}
   attackDamage: 50
   attackCooldownTime: 0.5
   range: 200
@@ -22,3 +22,4 @@ MonoBehaviour:
   hitscan: 0
   projectile: {fileID: 8322329796702154963, guid: 658c933cf41e6f44dba601e0245981d1,
     type: 3}
+  buttonSprite: {fileID: 21300000, guid: 07ab12b36a3f1e74c98b3c5a8249af63, type: 3}
