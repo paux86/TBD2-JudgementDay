@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8447665005701732111}
   - component: {fileID: 3095405699430548375}
   - component: {fileID: 627172058762002976}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: MeleeArc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
