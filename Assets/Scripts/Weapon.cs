@@ -7,6 +7,7 @@ public class Weapon : ScriptableObject
 {
     public new string name;
     public string description;
+    public int cost;
     public Sprite sprite;
     public int attackDamage;
     public float attackCooldownTime;
