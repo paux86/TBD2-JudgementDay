@@ -417,7 +417,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   weaponInventory:
   - {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
-  - {fileID: 11400000, guid: a5e0ad468259b6f4ab3fbbfa505f827e, type: 2}
+  - {fileID: 11400000, guid: 829a34d048a6a59478309d3c7c0606af, type: 2}
   - {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae, type: 2}
   currentWeapon: {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
 --- !u!114 &393917524174957352
