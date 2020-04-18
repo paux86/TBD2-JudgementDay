@@ -12,17 +12,25 @@ public class Enemy : MonoBehaviour
     ItemSpawner itemSpawner;
 
     private int health;
+    private Material matFlash;
+    private Material matDefault;
+    private SpriteRenderer rendererReference;
+    private bool damageFlashIsExecuting = false;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         itemSpawner = FindObjectOfType<ItemSpawner>().GetComponent<ItemSpawner>();
+        rendererReference = GetComponent<SpriteRenderer>();
+        matFlash = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        matDefault = rendererReference.material;
     }
 
     public void TakeDamage(int damage)
     {
         health -= damage;
+        StartCoroutine("Flash");
 
         if (health <= 0)
         {
@@ -45,5 +53,15 @@ public class Enemy : MonoBehaviour
         return this.moveSpeed;
     }
 
-   
+   private IEnumerator Flash()
+    {
+        if (damageFlashIsExecuting)
+            yield break;
+
+        damageFlashIsExecuting = true;
+        rendererReference.material = matFlash;
+        yield return new WaitForSeconds(0.1f);
+        rendererReference.material = matDefault;
+        damageFlashIsExecuting = false;
+    }
 }
