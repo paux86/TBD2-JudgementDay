@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     private Material matDefault;
     private SpriteRenderer rendererReference;
     private bool damageFlashIsExecuting = false;
+    private UnityEngine.Object deathSpatter;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class Enemy : MonoBehaviour
         rendererReference = GetComponent<SpriteRenderer>();
         matFlash = Resources.Load("WhiteFlash", typeof(Material)) as Material;
         matDefault = rendererReference.material;
+        deathSpatter = Resources.Load("Spatter");
     }
 
     public void TakeDamage(int damage)
@@ -45,6 +47,9 @@ public class Enemy : MonoBehaviour
         {
             itemSpawner.SpawnUsableItemOrWeapon(transform.position, Random.Range(0, 2));
         }
+
+        GameObject onDeathEffect = (GameObject)Instantiate(deathSpatter);
+        onDeathEffect.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Destroy(gameObject);
     }
 
