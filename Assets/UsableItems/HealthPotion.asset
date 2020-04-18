@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Health Potion
   description: This will restore a bit of health
+  cost: 5
   sprite: {fileID: 21300000, guid: 6bb75e3fb3f5328469c04af4039aec44, type: 3}
   buttonSprite: {fileID: 21300000, guid: c7bcd6468a29a784fafe260061f12534, type: 3}
   IsConsumable: 1

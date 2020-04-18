@@ -7,6 +7,7 @@ public class UsableItem : ScriptableObject
 {
     public string itemName;
     public string description;
+    public int cost;
     public Sprite sprite;
     public Sprite buttonSprite;
     public bool IsConsumable;
