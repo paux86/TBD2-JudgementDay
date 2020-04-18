@@ -74,8 +74,8 @@ public class AttackWithWeapon : MonoBehaviour
         }
         else
         {
-            inMeleeRange = false;
-            animator.SetBool("inMeleeRange", inMeleeRange);
+                inMeleeRange = false;
+                animator.SetBool("inMeleeRange", inMeleeRange);
         }
     }
 }
