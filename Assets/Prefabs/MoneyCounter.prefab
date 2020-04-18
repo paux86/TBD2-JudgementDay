@@ -77,7 +77,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Money: '
+  m_Text: 'Treasure: '
 --- !u!114 &1812768634782416150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,3 +90,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468360b422bdc4e1196c847a8ab54aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currency: Treasure

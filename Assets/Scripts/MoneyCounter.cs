@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class MoneyCounter : MonoBehaviour
 {
     GameObject player;
+
+    public string currency;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,7 @@ public class MoneyCounter : MonoBehaviour
         Text counterText = gameObject.GetComponent<UnityEngine.UI.Text>();
         if(player != null)
         {
-            counterText.text = "Money: " + player.GetComponent<PlayerStats>().GetMoneyCount();
+            counterText.text = currency + ": " + player.GetComponent<PlayerStats>().GetMoneyCount();
         }
     }
 }
