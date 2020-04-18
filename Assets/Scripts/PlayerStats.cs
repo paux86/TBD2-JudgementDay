@@ -135,8 +135,8 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int attackDamage)
     {
-        health -= attackDamage;
-        healthBar.SetHealth(health);
+        //health -= attackDamage;
+        //healthBar.SetHealth(health);
 
         if (health <= 0)
         {

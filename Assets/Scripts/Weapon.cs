@@ -13,6 +13,7 @@ public class Weapon : ScriptableObject
     public float range;
     public Sprite onHitEffect;
     public bool hitscan;
+    public bool isMeleeWeapon;
     public GameObject projectile;
     public Sprite buttonSprite;
 
