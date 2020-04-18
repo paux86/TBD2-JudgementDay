@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d787e0bdaf7b0489d3859cacbb11f0, type: 3}
   m_Name: MeleeCutlass
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  sprite: {fileID: 0}
-  attackDamage: 0
-  attackCooldownTime: 0
-  range: 0
+  name: Cutlass
+  description: A steel cutlass.
+  sprite: {fileID: 21300000, guid: be69e471b9bf73c4999c602e666ebc0e, type: 3}
+  attackDamage: 100
+  attackCooldownTime: 0.333
+  range: 3
   onHitEffect: {fileID: 0}
   hitscan: 0
-  isMeleeWeapon: 0
-  projectile: {fileID: 0}
-  buttonSprite: {fileID: 0}
+  isMeleeWeapon: 1
+  projectile: {fileID: 2314926931581311705, guid: 89a9621f2100f664b9b3dc05c29f8d84,
+    type: 3}
+  buttonSprite: {fileID: 21300000, guid: 94f3899fbd73d394eba29201f7d7660c, type: 3}
