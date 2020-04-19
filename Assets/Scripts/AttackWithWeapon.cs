@@ -35,20 +35,12 @@ public class AttackWithWeapon : MonoBehaviour
 
                 if (hitInfo)
                 {
-                    //needs to be optimized
-                    Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
-                    Boss boss = hitInfo.transform.GetComponent<Boss>();
-                    PlayerStats player = hitInfo.transform.GetComponent<PlayerStats>();
+                    TakeDamageInterface enemy = hitInfo.transform.GetComponent<TakeDamageInterface>();
+                   
 
                     if (enemy != null)
                         enemy.TakeDamage(equippedWeapon.attackDamage);
-                    else if (boss != null)
-                        boss.TakeDamage(equippedWeapon.attackDamage);
-                    else if (player != null)
-                    {
-                        Debug.Log("Hit player");
-                        player.TakeDamage(equippedWeapon.attackDamage);
-                    }
+                    
 
                     lineRenderer.enabled = true;
                     lineRenderer.SetPosition(0, firePoint.position);
