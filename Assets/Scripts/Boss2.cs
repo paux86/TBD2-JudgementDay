@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour, TakeDamageInterface
+public class Boss2 : MonoBehaviour,TakeDamageInterface
 {
     [SerializeField] int maxHealth = 500;
-    public bool isEnraged;
-    public bool isInvulnerable = false;
     private int health;
     GameState gameState;
 
@@ -14,22 +12,13 @@ public class Boss : MonoBehaviour, TakeDamageInterface
     void Start()
     {
         health = maxHealth;
-        isEnraged = false;
         gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
     }
 
     public void TakeDamage(int damage)
     {
-        if (isInvulnerable)
-            return;
-
+        Debug.Log("test");
         health -= damage;
-
-        if (!isEnraged && health <= (maxHealth / 2))
-        {
-            isEnraged = true;
-            GetComponent<Animator>().SetBool("Enraged", true);
-        }
 
         if (health <= 0)
         {

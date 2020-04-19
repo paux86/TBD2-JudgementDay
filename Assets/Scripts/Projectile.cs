@@ -37,18 +37,13 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //this is ugly and should just affect a single health component attached to both bosses and enemies.
+        
 
-        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-        Boss boss = collision.gameObject.GetComponent<Boss>();
-        PlayerStats player = collision.gameObject.GetComponent<PlayerStats>();
+        TakeDamageInterface enemy = collision.gameObject.GetComponent<TakeDamageInterface>();
+       
 
         if (enemy != null)
             enemy.TakeDamage(damage);
-        else if (boss != null)
-            boss.TakeDamage(damage);
-        else if (player != null)
-            player.TakeDamage(damage);
         
             
 
