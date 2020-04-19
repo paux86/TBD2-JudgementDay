@@ -7,6 +7,7 @@ public class InventoryHandler : MonoBehaviour
 {
     [SerializeField] GameObject[] inventoryLists;
     [SerializeField] GameObject playerReference;
+    [SerializeField] GameObject tooltipPanel;
 
     private bool isOpen = false;
 
@@ -96,5 +97,11 @@ public class InventoryHandler : MonoBehaviour
             wepButtons[i].GetComponent<Image>().sprite = null;
             wepButtons[i].GetComponent<Image>().color = new Color(0f, 0f, 0f, .5f);
         }
+    }
+
+    public void ToggleTooltip()
+    {
+        bool isActive = tooltipPanel.activeSelf;
+        tooltipPanel.SetActive(!isActive);
     }
 }
