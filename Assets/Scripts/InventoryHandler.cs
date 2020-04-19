@@ -7,9 +7,12 @@ using UnityEngine.EventSystems;
 
 public class InventoryHandler : MonoBehaviour
 {
+#pragma warning disable 0649
     [SerializeField] GameObject[] inventoryLists;
     [SerializeField] GameObject playerReference;
     [SerializeField] GameObject tooltipPanel;
+#pragma warning restore 0649
+
 
     private bool isOpen = false;
     private TextMeshProUGUI tooltipName;

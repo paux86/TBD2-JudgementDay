@@ -334,9 +334,9 @@ MonoBehaviour:
   maxHealth: 2000
   healthBar: {fileID: 0}
   weaponInventory:
-  - {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
   - {fileID: 11400000, guid: a5e0ad468259b6f4ab3fbbfa505f827e, type: 2}
   - {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae, type: 2}
+  - {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
   currentWeapon: {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
   itemInventory:
   - {fileID: 11400000, guid: cb022c2cc1427448f8696f1080d20bec, type: 2}

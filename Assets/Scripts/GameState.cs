@@ -11,6 +11,7 @@ public class GameState : MonoBehaviour
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
+    int bossesDefeated = 0;
 
     
 
@@ -164,6 +165,16 @@ public class GameState : MonoBehaviour
         {
             Debug.LogError("Level grid doesn't exist in GameState");
         }
+    }
+
+    public int GetBossesDefeated()
+    {
+        return this.bossesDefeated;
+    }
+
+    public void IncrementBossesDefeated()
+    {
+        this.bossesDefeated++;
     }
 
 }
