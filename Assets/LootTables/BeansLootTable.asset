@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Drops:
   - {fileID: 11400000, guid: cb022c2cc1427448f8696f1080d20bec, type: 2}
-  - {fileID: 0}
   - {fileID: 11400000, guid: 4a9d3360228394e7fa48a858d6d40ecf, type: 2}
-  IsWeapon: 000001
-  Weights: 4e0000001400000002000000
-  Enabled: 010001
+  IsWeapon: 0001
+  Weights: 4e00000016000000
+  Enabled: 0101
   totalWeight: 100

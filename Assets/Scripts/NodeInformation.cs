@@ -6,6 +6,7 @@ public class NodeInformation : MonoBehaviour
     [SerializeField] Sprite bossLevelSprite;
     [SerializeField] Sprite shopSceneSprite;
     [SerializeField] Sprite completedLevelSprite;
+    [SerializeField] Sprite bossLevel2Sprite;
 #pragma warning restore 0649
     string nodeId;
     NodeInformation[] nextNodes = new NodeInformation[5];
@@ -31,29 +32,13 @@ public class NodeInformation : MonoBehaviour
         gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
         SetupNode();
         UpdateNode();
-       
-        
-
-        
     }
 
     private void SetupNode()
     {
         if (string.Equals(nodeId, "Boss Node"))
         {
-            sceneBuildIndex = 5;
-            if(spriteRenderer != null)
-            {
-                if(bossLevelSprite != null)
-                {
-                    spriteRenderer.sprite = bossLevelSprite;
-                }
-                else
-                {
-                    Debug.Log("boss Level Sprite not set in nodeinformation inspector (most likely button prefab)");
-                }
-                gameObject.transform.localScale = new Vector3(4, 4, 0);
-            }
+            SetupBossNodes();
         }
         else if (string.Equals(nodeId, "Shop Scene"))
         {
@@ -75,6 +60,48 @@ public class NodeInformation : MonoBehaviour
         else
         {
             sceneBuildIndex = Random.Range(2, 5);
+        }
+    }
+
+    private void SetupBossNodes()
+    {
+        if (gameState.GetBossesDefeated() == 0)
+        {
+            SetupFirstBossNode();
+            gameObject.transform.localScale = new Vector3(4, 4, 0);
+
+        }
+        else
+        {
+            SetupSecondBossNode();
+            gameObject.transform.localScale = new Vector3(1, 1, 0);
+        }
+        
+    }
+
+    private void SetupSecondBossNode()
+    {
+        sceneBuildIndex = 7;
+        if (bossLevel2Sprite != null)
+        {
+            spriteRenderer.sprite = bossLevel2Sprite;
+        }
+        else
+        {
+            Debug.Log("bossLevel2Sprite not set in nodeinformation inspector (most likely button prefab)");
+        }
+    }
+
+    private void SetupFirstBossNode()
+    {
+        sceneBuildIndex = 5;
+        if (bossLevelSprite != null)
+        {
+            spriteRenderer.sprite = bossLevelSprite;
+        }
+        else
+        {
+            Debug.Log("bossLevelSprite not set in nodeinformation inspector (most likely button prefab)");
         }
     }
 

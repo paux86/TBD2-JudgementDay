@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour, TakeDamageInterface
 {
     [SerializeField] private int moneyCount = 0;
     [SerializeField] private float armor = 0.0f;

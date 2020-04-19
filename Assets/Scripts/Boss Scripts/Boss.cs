@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, TakeDamageInterface
 {
     [SerializeField] int maxHealth = 500;
     public bool isEnraged;
@@ -51,6 +51,7 @@ public class Boss : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             itemSpawner.SpawnUsableItemOrWeapon(player.transform.position, dropType, droppedItem);
         }
+        gameState.IncrementBossesDefeated();
         StartNewMap();
     }
 
