@@ -312,9 +312,9 @@ public class MapGenerator : MonoBehaviour
 
     private void CreateShopButton()
     {
-        NodeInformation bossNode = CreatePrefabInstanceAndNodeInfo(-minX - 4, maxY + 4);
-        bossNode.SetNodeId("Shop Scene"); 
-        bossNode.SetNodePoint(new Vector2(-minX - 3, maxY + 3));
+        NodeInformation shopScene = CreatePrefabInstanceAndNodeInfo(-minX - 4, maxY + 4);
+        shopScene.SetNodeId("Shop Scene"); 
+        shopScene.SetNodePoint(new Vector2(-minX - 3, maxY + 3));
     }
 
 
