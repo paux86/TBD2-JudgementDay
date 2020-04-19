@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0608a4291c89a745ab1903923285252, type: 3}
   m_Name: ZombieBossLootTable
   m_EditorClassIdentifier: 
-  Drops: []
-  IsWeapon: 
-  Weights: 
-  Enabled: 
-  totalWeight: 0
+  Drops:
+  - {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae, type: 2}
+  IsWeapon: 01
+  Weights: 64000000
+  Enabled: 01
+  totalWeight: 100

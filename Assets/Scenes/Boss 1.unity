@@ -4595,6 +4595,7 @@ MonoBehaviour:
   maxHealth: 500
   isEnraged: 0
   isInvulnerable: 0
+  dropTable: {fileID: 11400000, guid: 4bc355e5c0d244e4d83f0ad34d238835, type: 2}
 --- !u!114 &1071497430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7232,6 +7233,21 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1692874969}
+    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
+        type: 3}
+      propertyPath: weaponInventory.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
+        type: 3}
+      propertyPath: weaponInventory.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
+        type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 7479734216084199597, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
         type: 3}
       propertyPath: m_LocalPosition.x
