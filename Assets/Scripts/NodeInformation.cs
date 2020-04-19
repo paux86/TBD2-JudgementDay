@@ -4,6 +4,7 @@ public class NodeInformation : MonoBehaviour
 {
 #pragma warning disable 0649
     [SerializeField] Sprite bossLevelSprite;
+    [SerializeField] Sprite shopSceneSprite;
     [SerializeField] Sprite completedLevelSprite;
 #pragma warning restore 0649
     string nodeId;
@@ -20,7 +21,6 @@ public class NodeInformation : MonoBehaviour
     SpriteRenderer spriteRenderer;
     int sceneBuildIndex = 2;
     GameState gameState;
-
 
 
 
@@ -53,6 +53,23 @@ public class NodeInformation : MonoBehaviour
                     Debug.Log("boss Level Sprite not set in nodeinformation inspector (most likely button prefab)");
                 }
                 gameObject.transform.localScale = new Vector3(4, 4, 0);
+            }
+        }
+        else if (string.Equals(nodeId, "Shop Scene"))
+        {
+            sceneBuildIndex = 6;
+            selectable = true;
+            if(spriteRenderer != null)
+            {
+                if(shopSceneSprite != null)
+                {
+                    spriteRenderer.sprite = shopSceneSprite;
+                }
+                else
+                {
+                    Debug.Log("shopSceneSprite not set in nodeinformation inspector (most likely button prefab)");
+                }
+                gameObject.transform.localScale = new Vector3(1, 1, 0);
             }
         }
         else
