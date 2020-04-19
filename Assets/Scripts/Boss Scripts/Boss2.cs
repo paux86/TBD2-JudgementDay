@@ -31,6 +31,7 @@ public class Boss2 : MonoBehaviour,TakeDamageInterface
         Animator animator = GetComponent<Animator>();
         animator.SetTrigger("BossDeath");
         animator.tag = "Untargetable";
+        gameState.IncrementBossesDefeated();
         StartNewMap();
     }
 

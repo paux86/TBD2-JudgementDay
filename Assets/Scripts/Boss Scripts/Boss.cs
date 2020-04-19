@@ -40,6 +40,7 @@ public class Boss : MonoBehaviour, TakeDamageInterface
     private void Die()
     {
         Destroy(gameObject);
+        gameState.IncrementBossesDefeated();
         StartNewMap();
     }
 

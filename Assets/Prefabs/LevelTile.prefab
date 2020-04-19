@@ -101,6 +101,7 @@ MonoBehaviour:
   shopSceneSprite: {fileID: 21300000, guid: 8dcc0a7fcc471cf47be8e7b78557da19, type: 3}
   completedLevelSprite: {fileID: -5748602314467815811, guid: 2856421577629834f85ae2ebe030486a,
     type: 3}
+  bossLevel2Sprite: {fileID: 21300000, guid: bc97bd15cd499cb42a0bc7f495233549, type: 3}
 --- !u!61 &-6188730561274706764
 BoxCollider2D:
   m_ObjectHideFlags: 0
