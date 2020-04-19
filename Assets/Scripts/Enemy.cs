@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     [SerializeField] int money = 1;
     [SerializeField] float moveSpeed = 10f;
-    //[SerializeField] int DropItemChance = 100;
     [SerializeField] LootTable dropTable = null;
     ItemSpawner itemSpawner;
 

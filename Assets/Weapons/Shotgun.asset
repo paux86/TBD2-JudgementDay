@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: 
   name: Shotgun
-  description: Kapow
+  description: A blunderbuss.
   cost: 0
   sprite: {fileID: 0}
-  attackDamage: 50
+  attackDamage: 100
   attackCooldownTime: 1.5
-  range: 10
+  range: 25
   onHitEffect: {fileID: 0}
   hitscan: 0
   projectile: {fileID: 8775354500243431138, guid: e3afa4b06a23fd24887789a44118a6e9,
