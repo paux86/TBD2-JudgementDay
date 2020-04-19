@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &125092098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7479734216084199599, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1080799892}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &250955417
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +144,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8872752523722936324, guid: 366a54c25026ef347adab43fae3a5669,
+        type: 3}
+      propertyPath: playerReference
+      value: 
+      objectReference: {fileID: 125092098}
     - target: {fileID: 8872752524171840013, guid: 366a54c25026ef347adab43fae3a5669,
         type: 3}
       propertyPath: m_Name
@@ -333,6 +344,8 @@ GameObject:
   - component: {fileID: 755085959}
   - component: {fileID: 755085958}
   - component: {fileID: 755085960}
+  - component: {fileID: 755085962}
+  - component: {fileID: 755085961}
   m_Layer: 12
   m_Name: Boss2
   m_TagString: Untargetable
@@ -472,7 +485,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a569f27adb32aa648b0426f5028f6499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2500
+  maxHealth: 5000
+--- !u!114 &755085961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755085954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b36f4a603020fdb4da772d5735d743fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 20
+  attackOffset: {x: 1.5, y: 0, z: 0}
+  attackRange: 3
+  attackMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &755085962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755085954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d1336d9f16d263438fb970d7ad7ef75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 3
 --- !u!1001 &934746997
 PrefabInstance:
   m_ObjectHideFlags: 0

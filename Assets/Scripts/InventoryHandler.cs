@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class InventoryHandler : MonoBehaviour
 {
+#pragma warning disable 0649
     [SerializeField] GameObject[] inventoryLists;
     [SerializeField] GameObject playerReference;
+#pragma warning restore 0649
 
     private bool isOpen = false;
 

@@ -14,13 +14,15 @@ public class Boss2_Walk : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         rigidBody = animator.GetComponent<Rigidbody2D>();
-       if(rigidBody.position.y == yAxisTop)
+       if(animator.GetBool("atTop"))
         {
             target = new Vector2(rigidBody.position.x, yAxisBottom);
+            rigidBody.rotation = 360;
         }
        else
         {
             target = new Vector2(rigidBody.position.x, yAxisTop);
+            rigidBody.rotation = 180;
         }
         rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
         rigidBody.isKinematic = true;

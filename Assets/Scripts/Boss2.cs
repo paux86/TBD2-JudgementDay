@@ -17,7 +17,7 @@ public class Boss2 : MonoBehaviour,TakeDamageInterface
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("test");
+        
         health -= damage;
 
         if (health <= 0)
@@ -28,7 +28,9 @@ public class Boss2 : MonoBehaviour,TakeDamageInterface
 
     private void Die()
     {
-        Destroy(gameObject);
+        Animator animator = GetComponent<Animator>();
+        animator.SetTrigger("BossDeath");
+        animator.tag = "Untargetable";
         StartNewMap();
     }
 
