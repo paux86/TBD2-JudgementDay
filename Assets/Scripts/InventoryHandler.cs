@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.EventSystems;
 
 public class InventoryHandler : MonoBehaviour
 {
@@ -10,7 +12,15 @@ public class InventoryHandler : MonoBehaviour
     [SerializeField] GameObject tooltipPanel;
 
     private bool isOpen = false;
+    private TextMeshProUGUI tooltipName;
+    private TextMeshProUGUI tooltipDescription;
 
+
+    private void Start()
+    {
+        tooltipName = GameObject.Find("Canvas/Inventory Button/Tooltip/Tooltip Background/Tooltip Name").GetComponent<TextMeshProUGUI>();
+        tooltipDescription = GameObject.Find("Canvas/Inventory Button/Tooltip/Tooltip Background/Tooltip Description").GetComponent<TextMeshProUGUI>();
+    }
 
     public void ToggleInventory()
     {
@@ -44,9 +54,14 @@ public class InventoryHandler : MonoBehaviour
             for (int i = 0; i < wepButtons.Length; i++)
             {
                 int b = i;
-                //wepButtons[i].GetComponentInChildren<Text>().text = "Wep" + i;
                 wepButtons[i].GetComponent<Button>().onClick.AddListener(() => swapReference.Swap(b));
                 UpdateWepButton(wepButtons, playerStatsReference, i);
+
+                EventTrigger triggerEnter = wepButtons[i].GetComponent<Button>().gameObject.AddComponent<EventTrigger>();
+                var enter = new EventTrigger.Entry();
+                enter.eventID = EventTriggerType.PointerEnter;
+                enter.callback.AddListener((e) => SetTooltipText(playerStatsReference.weaponInventory[b].name, playerStatsReference.weaponInventory[b].description));
+                triggerEnter.triggers.Add(enter);
 
             }
         }
@@ -61,9 +76,14 @@ public class InventoryHandler : MonoBehaviour
             for (int i = 0; i < itemButtons.Length; i++)
             {
                 int b = i;
-                //itemButtons[i].GetComponentInChildren<Text>().text = "Item" + i;
                 itemButtons[i].GetComponent<Button>().onClick.AddListener(() => playerStatsReference.UseItem(b));
                 UpdateItemButton(playerStatsReference, itemButtons, i);
+
+                EventTrigger triggerEnter = itemButtons[i].GetComponent<Button>().gameObject.AddComponent<EventTrigger>();
+                var enter = new EventTrigger.Entry();
+                enter.eventID = EventTriggerType.PointerEnter;
+                enter.callback.AddListener((e) => SetTooltipText(playerStatsReference.itemInventory[b].name, playerStatsReference.itemInventory[b].description));
+                triggerEnter.triggers.Add(enter);
 
             }
         }
@@ -103,5 +123,11 @@ public class InventoryHandler : MonoBehaviour
     {
         bool isActive = tooltipPanel.activeSelf;
         tooltipPanel.SetActive(!isActive);
+    }
+
+    public void SetTooltipText(string name, string description)
+    {
+        tooltipName.text = name;
+        tooltipDescription.text = description;
     }
 }
