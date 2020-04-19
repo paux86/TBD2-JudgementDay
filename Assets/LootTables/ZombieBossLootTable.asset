@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0608a4291c89a745ab1903923285252, type: 3}
-  m_Name: FrankLootTable
+  m_Name: ZombieBossLootTable
   m_EditorClassIdentifier: 
-  Drops:
-  - {fileID: 0}
-  - {fileID: 11400000, guid: a5e0ad468259b6f4ab3fbbfa505f827e, type: 2}
-  - {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae, type: 2}
-  Weights: 3c0000001400000014000000
-  Enabled: 000101
+  Drops: []
+  IsWeapon: 
+  Weights: 
+  Enabled: 
+  totalWeight: 0

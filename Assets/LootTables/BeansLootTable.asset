@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0608a4291c89a745ab1903923285252, type: 3}
   m_Name: BeansLootTable
   m_EditorClassIdentifier: 
-  Drops: []
-  Weights: 
-  Enabled: 
-  totalWeight: 0
+  Drops:
+  - {fileID: 11400000, guid: cb022c2cc1427448f8696f1080d20bec, type: 2}
+  - {fileID: 0}
+  Weights: 5000000014000000
+  Enabled: 0100

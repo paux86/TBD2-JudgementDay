@@ -34,12 +34,15 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().IncrementMoneyCount(money);
-        dropTable.DropItem();
-        /*if(Random.Range(1, 101) <= DropItemChance)
+        int dropElement = dropTable.ChooseDrop();
+        if(dropElement != -1)
         {
-            itemSpawner.SpawnUsableItemOrWeapon(transform.position, Random.Range(0, 2));
-        }*/
+            int dropType = dropTable.GetDropType(dropElement);
+            ScriptableObject droppedItem = dropTable.GetDrop(dropElement);
+            itemSpawner.SpawnUsableItemOrWeapon(transform.position, dropType, droppedItem);
+        }
         Destroy(gameObject);
+        
     }
 
     public float GetMoveSpeed()
