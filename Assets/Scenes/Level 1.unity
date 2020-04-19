@@ -237,29 +237,6 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1814829729}
-    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
-        type: 3}
-      propertyPath: weaponInventory.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe,
-        type: 2}
-    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
-        type: 3}
-      propertyPath: weaponInventory.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: a5e0ad468259b6f4ab3fbbfa505f827e,
-        type: 2}
-    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
-        type: 3}
-      propertyPath: weaponInventory.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae,
-        type: 2}
-    - target: {fileID: -8495037631226691877, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
-        type: 3}
-      propertyPath: maxHealth
-      value: 150
-      objectReference: {fileID: 0}
     - target: {fileID: 7479734216084199597, guid: 5b29fa5acc6c9b24e93d67345d50a9c8,
         type: 3}
       propertyPath: m_LocalPosition.x

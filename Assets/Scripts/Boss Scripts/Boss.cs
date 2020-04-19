@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour, TakeDamageInterface
 {
     [SerializeField] int maxHealth = 500;
     public bool isEnraged;
@@ -40,6 +40,7 @@ public class Boss : MonoBehaviour
     private void Die()
     {
         Destroy(gameObject);
+        gameState.IncrementBossesDefeated();
         StartNewMap();
     }
 
