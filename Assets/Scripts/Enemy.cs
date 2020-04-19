@@ -8,7 +8,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     [SerializeField] int money = 1;
     [SerializeField] float moveSpeed = 10f;
-    [SerializeField] int DropItemChance = 100;
+    //[SerializeField] int DropItemChance = 100;
+    [SerializeField] LootTable dropTable = null;
     ItemSpawner itemSpawner;
 
     private int health;
@@ -33,10 +34,11 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().IncrementMoneyCount(money);
-        if(Random.Range(1, 101) <= DropItemChance)
+        dropTable.DropItem();
+        /*if(Random.Range(1, 101) <= DropItemChance)
         {
             itemSpawner.SpawnUsableItemOrWeapon(transform.position, Random.Range(0, 2));
-        }
+        }*/
         Destroy(gameObject);
     }
 
@@ -44,6 +46,4 @@ public class Enemy : MonoBehaviour
     {
         return this.moveSpeed;
     }
-
-   
 }

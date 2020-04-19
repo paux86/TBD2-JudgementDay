@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0608a4291c89a745ab1903923285252, type: 3}
-  m_Name: New Loot Table
+  m_Name: FrankLootTable
   m_EditorClassIdentifier: 
   Drops: []
   Weights: 

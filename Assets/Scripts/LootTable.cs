@@ -5,41 +5,43 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="New Loot Table", menuName = "Loot Table")]
 public class LootTable : ScriptableObject
 {
-    public List<GameObject> Drops;
+    public List<ScriptableObject> Drops;
     public List<int> Weights;
     public List<bool> Enabled;
-    public int totalWeight = 0;
-    private int rolledValue = 0;
-
-    public int CalculateTotalWeight()
-    {
-        foreach(int weight in Weights)
-        {
-            totalWeight += weight;
-        }
-
-        return totalWeight;
-    }
-
-    public int RollTable()
-    {
-        return UnityEngine.Random.Range(0, CalculateTotalWeight());
-    }
+    ItemSpawner itemSpawner;
+    private int totalWeight = 0;
+    private int rolledValue = -1;
 
     public void DropItem()
     {
-        rolledValue = RollTable();
-        Debug.Log("Rolled Value: " + rolledValue);
+        rolledValue = UnityEngine.Random.Range(0, totalWeight);
+        Debug.Log("Rolled Random Value: " + rolledValue);
         for(int i=0;i<Weights.Count;i++)
         {
-            if(Enabled[i])
+            Debug.Log("Loop #: " + (i + 1) + " First Check - Comparing " + rolledValue + " to " + Weights[i]);
+            if(rolledValue <= Weights[i])
             {
-                if(rolledValue < Weights[i])
+                Debug.Log("Loop #: " + (i + 1) + " Second Check - Is Element " + i + " enabled?");
+                if(Enabled[i] && rolledValue > -1)
                 {
-                    Debug.Log("Dropping: " + rolledValue);
+                    //////////////////////////////////////////////////////////
+                    Debug.Log("Loop #: " + (i + 1) + " Dropping: " + i);
+
+                    
+
+                    //////////////////////////////////////////////////////////
                 }
                 else
-                    rolledValue -= Weights[i];
+                    Debug.Log("Loop #: " + (i + 1) + " Element " + i + " is not enabled or " + rolledValue + " <= -1");
+                rolledValue = -1;
+                Debug.Log("Loop #: " + (i + 1) + " Setting rolled value to -1");
+            }
+            else if(rolledValue != -1)
+            {
+                Debug.Log("Loop #: " + (i + 1) + " Else - Rolled Value: " + rolledValue);
+                Debug.Log("Loop #: " + (i + 1) + " Else - Subtracting " + rolledValue + " by " + Weights[i]);
+                rolledValue -= Weights[i];
+                Debug.Log("Loop #: " + (i + 1) + " Else - New Rolled Value: " + rolledValue);
             }
         }
     }

@@ -102,7 +102,7 @@ MonoBehaviour:
   maxHealth: 100
   money: 1
   moveSpeed: 10
-  DropItemChance: 100
+  dropTable: {fileID: 11400000, guid: a3bbfe5fc9cd8924581740fde028417f, type: 2}
 --- !u!50 &-6836263537827121752
 Rigidbody2D:
   serializedVersion: 4
