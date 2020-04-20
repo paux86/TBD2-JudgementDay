@@ -1871,6 +1871,26 @@ PrefabInstance:
       propertyPath: m_isTextTruncated
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8676177056871144224, guid: 038fe71a3bf0fcaff90b25f1ad6c62b9,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -183.01286
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676177056871144224, guid: 038fe71a3bf0fcaff90b25f1ad6c62b9,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -180.28499
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676177056871144224, guid: 038fe71a3bf0fcaff90b25f1ad6c62b9,
+        type: 3}
+      propertyPath: m_margin.y
+      value: 21.444973
+      objectReference: {fileID: 0}
+    - target: {fileID: 8676177056871144224, guid: 038fe71a3bf0fcaff90b25f1ad6c62b9,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -198.1706
+      objectReference: {fileID: 0}
     - target: {fileID: 8676177056871144225, guid: 038fe71a3bf0fcaff90b25f1ad6c62b9,
         type: 3}
       propertyPath: m_LocalPosition.x
