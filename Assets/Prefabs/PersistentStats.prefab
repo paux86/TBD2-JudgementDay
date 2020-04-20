@@ -46,7 +46,7 @@ MonoBehaviour:
   moneyCount: 0
   weaponInventory:
   - {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
-  - {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   itemInventory:
   - {fileID: 11400000, guid: cb022c2cc1427448f8696f1080d20bec, type: 2}
