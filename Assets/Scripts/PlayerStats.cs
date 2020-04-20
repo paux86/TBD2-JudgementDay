@@ -171,9 +171,11 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         GameObject inventoryList = GameObject.Find("Item Inventory Buttons");
         Component[] invButtons;
         invButtons = inventoryList.GetComponentsInChildren(typeof(Button));
+        InventoryHandler inventoryHandler = GameObject.Find("Inventory Button").GetComponent<InventoryHandler>();
 
 
         InventoryHandler.UpdateItemButton(this,invButtons,slotNum);
+        inventoryHandler.CreateOrUpdateItemToolTipTrigger(this, invButtons, slotNum, slotNum);
     }
 
    
