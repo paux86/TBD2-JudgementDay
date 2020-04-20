@@ -12,14 +12,14 @@ public class ItemSpawner : MonoBehaviour
     const int WEAPON_TYPE = 0;
     const int ITEM_TYPE = 1;
 #pragma warning restore 0649
-    public void SpawnUsableItemOrWeapon(Vector2 position,int type)
+    public void SpawnUsableItemOrWeapon(Vector2 position, int type, ScriptableObject lootDrop)
     {
         GameObject itemObject = CreateDropObject();
         CircleCollider2D collider = itemObject.GetComponent<CircleCollider2D>();
         collider.isTrigger = true;
         SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sortingOrder = 0;
-        GenerateDropContainer(type, itemObject);
+        GenerateDropContainer(type, lootDrop, itemObject);
 
         if (itemObject != null && spriteRenderer != null)
         {
@@ -27,23 +27,25 @@ public class ItemSpawner : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Sprite for item in itemspawner is null");
+            Debug.LogError("Sprite for loot drop is null");
         }
 
         itemObject.transform.position = position;
 
     }
 
-    private void GenerateDropContainer(int type, GameObject itemObject)
+    private void GenerateDropContainer(int type, ScriptableObject lootDrop, GameObject itemObject)
     {
         if (type == WEAPON_TYPE)
         {
+            this.weapon = (Weapon)lootDrop;
             DropContainer dropContainer = itemObject.GetComponent<DropContainer>();
             dropContainer.UpdateType(WEAPON_TYPE);
             dropContainer.SetWeapon(weapon);
         }
         else if (type == ITEM_TYPE)
         {
+            this.item = (UsableItem)lootDrop;
             DropContainer dropContainer = itemObject.GetComponent<DropContainer>();
             dropContainer.UpdateType(ITEM_TYPE);
             dropContainer.SetItem(item);

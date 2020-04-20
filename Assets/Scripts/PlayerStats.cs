@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
     private int currentWeaponSlot;
     private int weaponInventorySize;
 
-    private PersistentStats persistentStats;
+    public PersistentStats persistentStats;
 
 
     private void Start()

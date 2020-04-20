@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, TakeDamageInterface
     [SerializeField] int maxHealth = 100;
     [SerializeField] int money = 1;
     [SerializeField] float moveSpeed = 10f;
-    [SerializeField] int DropItemChance = 100;
+    [SerializeField] LootTable dropTable = null;
     ItemSpawner itemSpawner;
 
     private int health;
@@ -43,14 +43,18 @@ public class Enemy : MonoBehaviour, TakeDamageInterface
     private void Die()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().IncrementMoneyCount(money);
-        if(Random.Range(1, 101) <= DropItemChance)
+        int dropElement = dropTable.ChooseDrop();
+        if(dropElement != -1)
         {
-            itemSpawner.SpawnUsableItemOrWeapon(transform.position, Random.Range(0, 2));
+            int dropType = dropTable.GetDropType(dropElement);
+            ScriptableObject droppedItem = dropTable.GetDrop(dropElement);
+            itemSpawner.SpawnUsableItemOrWeapon(transform.position, dropType, droppedItem);
         }
 
         GameObject onDeathEffect = (GameObject)Instantiate(deathSpatter);
         onDeathEffect.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         Destroy(gameObject);
+        
     }
 
     public float GetMoveSpeed()
