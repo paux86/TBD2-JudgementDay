@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour, TakeDamageInterface
@@ -171,9 +172,13 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         GameObject inventoryList = GameObject.Find("Item Inventory Buttons");
         Component[] invButtons;
         invButtons = inventoryList.GetComponentsInChildren(typeof(Button));
+        InventoryHandler inventoryHandler = GameObject.Find("Inventory Button").GetComponent<InventoryHandler>();
+        EventTrigger eventTrigger = invButtons[slotNum].GetComponent<EventTrigger>();
+        eventTrigger.triggers.RemoveAt(2);
 
-
+        
         InventoryHandler.UpdateItemButton(this,invButtons,slotNum);
+        inventoryHandler.CreateOrUpdateItemToolTipTrigger(this, invButtons, slotNum, slotNum);
     }
 
    
