@@ -60,7 +60,7 @@ public class InventoryHandler : MonoBehaviour
                 wepButtons[i].GetComponent<Button>().onClick.AddListener(() => swapReference.Swap(b));
                 UpdateWepButton(wepButtons, playerStatsReference, i);
 
-                EventTrigger triggerEnter = wepButtons[i].GetComponent<Button>().gameObject.AddComponent<EventTrigger>();
+                EventTrigger triggerEnter = wepButtons[i].GetComponent<Button>().gameObject.GetComponent<EventTrigger>();
                 var enter = new EventTrigger.Entry();
                 enter.eventID = EventTriggerType.PointerEnter;
                 if(playerStatsReference.weaponInventory[b] != null)
@@ -97,7 +97,7 @@ public class InventoryHandler : MonoBehaviour
 
     public void CreateOrUpdateItemToolTipTrigger(PlayerStats playerStatsReference, Component[] itemButtons, int i, int b)
     {
-        EventTrigger triggerEnter = itemButtons[i].GetComponent<Button>().gameObject.AddComponent<EventTrigger>();
+        EventTrigger triggerEnter = itemButtons[i].GetComponent<Button>().gameObject.GetComponent<EventTrigger>();
         var enter = new EventTrigger.Entry();
         enter.eventID = EventTriggerType.PointerEnter;
         if (playerStatsReference.itemInventory[b] != null)
