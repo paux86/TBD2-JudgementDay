@@ -63,7 +63,14 @@ public class InventoryHandler : MonoBehaviour
                 EventTrigger triggerEnter = wepButtons[i].GetComponent<Button>().gameObject.AddComponent<EventTrigger>();
                 var enter = new EventTrigger.Entry();
                 enter.eventID = EventTriggerType.PointerEnter;
-                enter.callback.AddListener((e) => SetTooltipText(playerStatsReference.weaponInventory[b].name, playerStatsReference.weaponInventory[b].description));
+                if(playerStatsReference.weaponInventory[b] != null)
+                {
+                    enter.callback.AddListener((e) => SetTooltipText(playerStatsReference.weaponInventory[b].name, playerStatsReference.weaponInventory[b].description));
+                }
+                else
+                {
+                    enter.callback.AddListener((e) => SetTooltipText("Empty", "This weapon slot is empty"));
+                }
                 triggerEnter.triggers.Add(enter);
 
             }
@@ -85,7 +92,14 @@ public class InventoryHandler : MonoBehaviour
                 EventTrigger triggerEnter = itemButtons[i].GetComponent<Button>().gameObject.AddComponent<EventTrigger>();
                 var enter = new EventTrigger.Entry();
                 enter.eventID = EventTriggerType.PointerEnter;
-                enter.callback.AddListener((e) => SetTooltipText(playerStatsReference.itemInventory[b].name, playerStatsReference.itemInventory[b].description));
+               if(playerStatsReference.itemInventory[b] != null)
+                {
+                    enter.callback.AddListener((e) => SetTooltipText(playerStatsReference.itemInventory[b].name, playerStatsReference.itemInventory[b].description));
+                }
+               else
+                {
+                    enter.callback.AddListener((e) => SetTooltipText("Empty", "This item slot is empty"));
+                }
                 triggerEnter.triggers.Add(enter);
 
             }
