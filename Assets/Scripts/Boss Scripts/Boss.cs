@@ -49,7 +49,7 @@ public class Boss : MonoBehaviour, TakeDamageInterface
             int dropType = dropTable.GetDropType(dropElement);
             ScriptableObject droppedItem = dropTable.GetDrop(dropElement);
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            itemSpawner.SpawnUsableItemOrWeapon(player.transform.position, dropType, droppedItem);
+            player.GetComponent<PlayerStats>().UpdateWeaponSlot((Weapon)droppedItem);
         }
         gameState.IncrementBossesDefeated();
         StartNewMap();
