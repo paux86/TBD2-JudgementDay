@@ -7,6 +7,7 @@ public class AttackWithWeapon : MonoBehaviour
     public Transform firePoint;
     public Weapon equippedWeapon;
     public LineRenderer lineRenderer;
+    public bool inMeleeRange;
 
     //object references
     private FindNearestTarget nearestEnemy;
@@ -35,20 +36,12 @@ public class AttackWithWeapon : MonoBehaviour
 
                 if (hitInfo)
                 {
-                    //needs to be optimized
-                    Enemy enemy = hitInfo.transform.GetComponent<Enemy>();
-                    Boss boss = hitInfo.transform.GetComponent<Boss>();
-                    PlayerStats player = hitInfo.transform.GetComponent<PlayerStats>();
+                    TakeDamageInterface enemy = hitInfo.transform.GetComponent<TakeDamageInterface>();
+                   
 
                     if (enemy != null)
                         enemy.TakeDamage(equippedWeapon.attackDamage);
-                    else if (boss != null)
-                        boss.TakeDamage(equippedWeapon.attackDamage);
-                    else if (player != null)
-                    {
-                        Debug.Log("Hit player");
-                        player.TakeDamage(equippedWeapon.attackDamage);
-                    }
+                    
 
                     lineRenderer.enabled = true;
                     lineRenderer.SetPosition(0, firePoint.position);
@@ -57,13 +50,27 @@ public class AttackWithWeapon : MonoBehaviour
             }
             else
             {
-                
+                if(lineRenderer != null)
+                    lineRenderer.enabled = false;
+                if(equippedWeapon.isMeleeWeapon && (gameObject.GetComponent<Animator>() != null))
+                {
+                    inMeleeRange = true;
+                    gameObject.GetComponent<Animator>().SetBool("inMeleeRange", inMeleeRange);
+                }
                 GameObject projectileObject = Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
                 Projectile projectile =  projectileObject.GetComponent<Projectile>();
                 projectile.SetDamage(equippedWeapon.attackDamage);
             }
 
             nextFireTime = Time.time + equippedWeapon.attackCooldownTime;
+        }
+        else
+        {
+            if (equippedWeapon.isMeleeWeapon && (gameObject.GetComponent<Animator>() != null))
+            {
+                inMeleeRange = false;
+                gameObject.GetComponent<Animator>().SetBool("inMeleeRange", inMeleeRange);
+            }
         }
     }
 }
