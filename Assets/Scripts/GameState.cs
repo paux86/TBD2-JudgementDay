@@ -6,9 +6,12 @@ public class GameState : MonoBehaviour
 {
     private EnemySpawner enemySpawner;
     private SceneLoader sceneLoader;
+
+    private PersistentStats persistentStats;
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
+    int bossesDefeated = 0;
 
     
 
@@ -31,6 +34,7 @@ public class GameState : MonoBehaviour
             {
                 enemySpawner.SetWaveComplete(false);
                 currentSelectedNode.SetIsComplete(true);
+                persistentStats.updateStats();
                 sceneLoader.ChangeToLevelSelect();
 
             }
@@ -64,6 +68,7 @@ public class GameState : MonoBehaviour
         {
             enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
             sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
+            persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
 
         }
     }
@@ -144,6 +149,32 @@ public class GameState : MonoBehaviour
         {
             Debug.LogError("NodeTierMatrix in GameState is null");
         }
+    }
+
+    public void StartNewMap()
+    {
+        if (levelGrid != null)
+        {
+            nodeTierMatrix = null;
+            currentSelectedNode = null;
+            GridKeeper gridObj = levelGrid.GetComponent<GridKeeper>();
+            gridObj.DestroyGrid();
+            sceneLoader.ChangeToLevelSelect();
+        }
+        else
+        {
+            Debug.LogError("Level grid doesn't exist in GameState");
+        }
+    }
+
+    public int GetBossesDefeated()
+    {
+        return this.bossesDefeated;
+    }
+
+    public void IncrementBossesDefeated()
+    {
+        this.bossesDefeated++;
     }
 
 }

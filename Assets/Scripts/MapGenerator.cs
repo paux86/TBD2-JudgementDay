@@ -39,6 +39,7 @@ public class MapGenerator : MonoBehaviour
                 GenerateLevelButtonsAndNodeMatrix(GenerateTierMatrix(tiers, maxLevelsPerTier));
                 CreateNodeConnections();
                 CreateAndConnectBossTier();
+                CreateShopButton();
             }
         }
        else
@@ -309,6 +310,12 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
+    private void CreateShopButton()
+    {
+        NodeInformation shopScene = CreatePrefabInstanceAndNodeInfo(-minX - 4, maxY + 4);
+        shopScene.SetNodeId("Shop Scene"); 
+        shopScene.SetNodePoint(new Vector2(-minX - 3, maxY + 3));
+    }
 
 
 }

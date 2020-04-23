@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Pistol (Hitscan)
   m_EditorClassIdentifier: 
   name: Pistol
-  description: Pew pew
+  description: A hand crossbow.
   sprite: {fileID: 0}
-  attackDamage: 50
+  attackDamage: 200
   attackCooldownTime: 0.5
   range: 200
   onHitEffect: {fileID: 0}

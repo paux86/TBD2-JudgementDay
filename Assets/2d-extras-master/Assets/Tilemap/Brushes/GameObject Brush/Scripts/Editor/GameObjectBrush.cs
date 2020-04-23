@@ -179,7 +179,9 @@ namespace UnityEditor
 
 				if (go != null)
 				{
+#pragma warning disable 0618
 					Object prefab = PrefabUtility.GetPrefabParent(go);
+#pragma warning restore 0618
 
 					if (prefab)
 					{
@@ -391,8 +393,10 @@ namespace UnityEditor
 				return;
 
 			GameObject instance = null;
+#pragma warning disable 0618
 			if (PrefabUtility.GetPrefabType(go) == PrefabType.Prefab)
 			{
+#pragma warning restore 0618
 				instance = (GameObject) PrefabUtility.InstantiatePrefab(go);
 			}
 			else
