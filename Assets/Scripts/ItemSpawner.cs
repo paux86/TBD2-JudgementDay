@@ -8,6 +8,7 @@ public class ItemSpawner : MonoBehaviour
     //these are placeholders for whatever a loot table will contain
     [SerializeField] Weapon weapon;
     [SerializeField] UsableItem item;
+    [SerializeField] ExitToMapObject mapObject;
 
     const int WEAPON_TYPE = 0;
     const int ITEM_TYPE = 1;
@@ -61,6 +62,12 @@ public class ItemSpawner : MonoBehaviour
         itemObject.layer = LayerMask.NameToLayer("Item");
 
         return itemObject;
+    }
+
+    public void SpawnExitToMapObject(bool isBoss)
+    {
+        ExitToMapObject mapObj = Instantiate(mapObject,Vector3.zero,Quaternion.identity );
+        mapObj.SetIsBoss(isBoss);
     }
 
     

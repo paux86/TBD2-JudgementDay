@@ -43,11 +43,11 @@ public class Boss2 : MonoBehaviour,TakeDamageInterface
             itemSpawner.SpawnUsableItemOrWeapon(player.transform.position, dropType, droppedItem);
         }
         gameState.IncrementBossesDefeated();
-        StartNewMap();
+        SpawnNewMapItem();
     }
 
-    private void StartNewMap()
+    private void SpawnNewMapItem()
     {
-        gameState.StartNewMap();
+        itemSpawner.SpawnExitToMapObject(true);
     }
 }

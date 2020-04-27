@@ -342,6 +342,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb022c2cc1427448f8696f1080d20bec, type: 2}
   - {fileID: 0}
   - {fileID: 0}
+  persistentStats: {fileID: 0}
 --- !u!114 &393917524174957352
 MonoBehaviour:
   m_ObjectHideFlags: 0
