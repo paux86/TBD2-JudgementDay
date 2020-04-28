@@ -1159,6 +1159,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory Button
       objectReference: {fileID: 0}
+    - target: {fileID: 516503989097712224, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 516503989097712227, guid: 0192769dd2a2de447a5e84ae2a264591,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1279,10 +1284,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item Inventory Buttons
       objectReference: {fileID: 0}
+    - target: {fileID: 8937574660903550516, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8937574661258985963, guid: 0192769dd2a2de447a5e84ae2a264591,
         type: 3}
       propertyPath: m_Name
       value: Weapon Inventory Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937574661258985963, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8937574661623999351, guid: 0192769dd2a2de447a5e84ae2a264591,
         type: 3}

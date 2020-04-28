@@ -17,6 +17,8 @@ public class InventoryHandler : MonoBehaviour
     private bool isOpen = false;
     private TextMeshProUGUI tooltipName;
     private TextMeshProUGUI tooltipDescription;
+    private PlayerStats playerStatsReference;
+    private SwapWeapon swapReference;
 
 
     private void Start()
@@ -28,6 +30,7 @@ public class InventoryHandler : MonoBehaviour
     public void ToggleInventory()
     {
         LoadButtons();
+        SetSelectedButton();
         isOpen = !isOpen;
 
         if (inventoryLists.Length > 0)
@@ -47,17 +50,16 @@ public class InventoryHandler : MonoBehaviour
     private void LoadButtons()
     {
         //init weapons
-        Component[] wepButtons;
-        wepButtons = inventoryLists[0].GetComponentsInChildren(typeof(Button));
-        SwapWeapon swapReference = playerReference.GetComponent<SwapWeapon>();
-        PlayerStats playerStatsReference = playerReference.GetComponent<PlayerStats>();
+        Component[] wepButtons = inventoryLists[0].GetComponentsInChildren(typeof(Button));
+        swapReference = playerReference.GetComponent<SwapWeapon>();
+        playerStatsReference = playerReference.GetComponent<PlayerStats>();
 
         if (wepButtons != null)
         {
             for (int i = 0; i < wepButtons.Length; i++)
             {
                 int b = i;
-                wepButtons[i].GetComponent<Button>().onClick.AddListener(() => swapReference.Swap(b));
+                wepButtons[i].GetComponent<Button>().onClick.AddListener(() => SwapAndUpdateSelectedButtons(b));
                 UpdateWepButton(wepButtons, playerStatsReference, i);
 
                 EventTrigger triggerEnter = wepButtons[i].GetComponent<Button>().gameObject.GetComponent<EventTrigger>();
@@ -151,5 +153,32 @@ public class InventoryHandler : MonoBehaviour
     {
         tooltipName.text = name;
         tooltipDescription.text = description;
+    }
+
+    private void SetSelectedButton()
+    {
+        int selectedButton = playerStatsReference.GetCurrentWeaponSlot();
+        int buttonNumber = 0;
+        foreach (Transform child in inventoryLists[0].transform)
+        {
+            if (child.tag == "ActiveButton")
+            {
+                if (buttonNumber == selectedButton)
+                {
+                    child.gameObject.SetActive(true);
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);
+                }
+                buttonNumber++;
+            }
+        }
+    }
+
+    private void SwapAndUpdateSelectedButtons(int buttonIndex)
+    {
+        swapReference.Swap(buttonIndex);
+        SetSelectedButton();
     }
 }

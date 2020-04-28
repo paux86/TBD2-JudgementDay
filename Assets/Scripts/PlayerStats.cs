@@ -259,5 +259,8 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         return weaponButtonSprite;
     }
 
-
+    public int GetCurrentWeaponSlot()
+    {
+        return currentWeaponSlot;
+    }
 }
