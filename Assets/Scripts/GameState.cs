@@ -23,6 +23,7 @@ public class GameState : MonoBehaviour
         {
             UpdateObjects();
         }
+        persistentStats = new PersistentStats();
     }
 
     private void Update()
@@ -68,7 +69,6 @@ public class GameState : MonoBehaviour
         {
             enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
             sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
-            persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
             itemSpawner = FindObjectOfType<ItemSpawner>().GetComponent<ItemSpawner>();
 
         }
@@ -181,6 +181,11 @@ public class GameState : MonoBehaviour
     public PersistentStats GetPersistantStats()
     {
         return this.persistentStats;
+    }
+
+    public NodeInformation GetCurrentSelectedNode()
+    {
+        return this.currentSelectedNode;
     }
 
 }

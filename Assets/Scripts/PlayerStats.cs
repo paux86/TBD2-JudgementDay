@@ -20,11 +20,13 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
 
     public PersistentStats persistentStats;
 
+    const int DEFAULT_WEP_SLOT = 2;
+
 
     private void Start()
     {
 
-        persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
+        persistentStats = FindObjectOfType<GameState>().GetComponent<GameState>().GetPersistantStats();
         this.moneyCount = persistentStats.moneyCount;
         this.weaponInventory = persistentStats.GetWeaponInventory();
         this.itemInventory = persistentStats.GetItemInventory();
@@ -36,9 +38,8 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
             healthBar.SetMaxHealth(maxHealth);
         }
 
-        //weaponInventory = new Weapon[weaponInventorySize];
-        currentWeapon = weaponInventory[0];
-        currentWeaponSlot = 0;
+        currentWeapon = weaponInventory[DEFAULT_WEP_SLOT];
+        currentWeaponSlot = DEFAULT_WEP_SLOT;
         weaponInventorySize = weaponInventory.Length;
 
         armor = GetArmor();

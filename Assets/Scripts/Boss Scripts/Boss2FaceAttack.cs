@@ -26,7 +26,7 @@ public class Boss2FaceAttack : MonoBehaviour
     void Update()
     {
         aInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (Vector2.Distance(player.transform.position, rigidBody.position) <= attackRange && !aInfo.IsName("boss2death"))
+        if (player != null && Vector2.Distance(player.transform.position, rigidBody.position) <= attackRange && !aInfo.IsName("boss2death"))
         {
             animator.SetBool("Attack", true);
            if(!aInfo.IsName("boss2attack2") && !aInfo.IsName("boss2attack2 0"))
