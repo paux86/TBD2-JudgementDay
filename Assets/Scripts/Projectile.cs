@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     private int damage = 100;
     private Vector2 startingPos;
+    [SerializeField] int longRangeMin = 50;
     
     // Start is called before the first frame update
     void Start()
@@ -43,7 +44,21 @@ public class Projectile : MonoBehaviour
        
 
         if (enemy != null)
-            enemy.TakeDamage(damage);
+        {
+            Vector2 currentPos = transform.position;
+            float currentTravelDistance = (currentPos - startingPos).sqrMagnitude;
+            if (travelDistance < longRangeMin)
+            {
+                enemy.TakeDamage(damage);
+            }
+            else
+            {
+                float longRangeDamage = damage * (currentTravelDistance/longRangeMin);
+                enemy.TakeDamage((int)longRangeDamage);
+                Debug.Log(longRangeDamage + " of " + damage);
+            }
+        }
+           
         
             
 
