@@ -52,11 +52,12 @@ public class Boss : MonoBehaviour, TakeDamageInterface
             player.GetComponent<PlayerStats>().UpdateWeaponSlot((Weapon)droppedItem);
         }
         gameState.IncrementBossesDefeated();
-        StartNewMap();
+        SpawnNewMapItem();
     }
 
-    private void StartNewMap()
+    private void SpawnNewMapItem()
     {
-        gameState.StartNewMap();
+        
+        itemSpawner.SpawnExitToMapObject(true);
     }
 }

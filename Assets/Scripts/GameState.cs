@@ -12,6 +12,7 @@ public class GameState : MonoBehaviour
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
     int bossesDefeated = 0;
+    ItemSpawner itemSpawner;
 
     
 
@@ -34,8 +35,7 @@ public class GameState : MonoBehaviour
             {
                 enemySpawner.SetWaveComplete(false);
                 currentSelectedNode.SetIsComplete(true);
-                persistentStats.updateStats();
-                sceneLoader.ChangeToLevelSelect();
+                itemSpawner.SpawnExitToMapObject(false);
 
             }
             else if(GameObject.FindGameObjectsWithTag("Player").Length <= 0)
@@ -69,6 +69,7 @@ public class GameState : MonoBehaviour
             enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
             sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
             persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
+            itemSpawner = FindObjectOfType<ItemSpawner>().GetComponent<ItemSpawner>();
 
         }
     }
@@ -175,6 +176,11 @@ public class GameState : MonoBehaviour
     public void IncrementBossesDefeated()
     {
         this.bossesDefeated++;
+    }
+
+    public PersistentStats GetPersistantStats()
+    {
+        return this.persistentStats;
     }
 
 }
