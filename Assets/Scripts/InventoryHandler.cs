@@ -27,10 +27,21 @@ public class InventoryHandler : MonoBehaviour
         tooltipDescription = GameObject.Find("Canvas/Inventory Button/Tooltip/Tooltip Background/Tooltip Description").GetComponent<TextMeshProUGUI>();
     }
 
+    private void Update()
+    {
+        if(isOpen)
+        {
+            if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                ToggleInventory();
+            }
+        }
+    }
+
     public void ToggleInventory()
     {
         LoadButtons();
-        SetSelectedButton();
+        //SetSelectedButton();
         isOpen = !isOpen;
 
         if (inventoryLists.Length > 0)
