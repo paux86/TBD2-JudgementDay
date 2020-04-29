@@ -24,7 +24,13 @@ public class ExitToMapObject : MonoBehaviour
         gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
         mapNotty = Instantiate(mapNotification, GameObject.FindGameObjectWithTag("Canvas").transform);
         notification = mapNotty.GetComponentInChildren<TextMeshProUGUI>();
-        if(notification != null)
+        mapNotty.transform.position = new Vector3(280, 50, 0);
+        RectTransform rect = mapNotty.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0.5f, 0);
+        rect.anchorMax = new Vector2(0.5f, 0);
+        mapNotty.transform.localScale = new Vector3(4.5f, 1, 0);
+        rect.anchoredPosition = new Vector2(-90, 53);
+        if (notification != null)
         {
             notification.text = defaultMessage;
             
@@ -75,7 +81,7 @@ public class ExitToMapObject : MonoBehaviour
         }
         else
         {
-            mapNotty.transform.localScale = new Vector3(5.5f, 1, 0);
+            mapNotty.transform.localScale = new Vector3(4.5f, 1, 0);
             mapNotty.transform.position = oldPosition;
             this.notification.text = defaultMessage;
         }
