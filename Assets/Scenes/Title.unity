@@ -559,6 +559,22 @@ PrefabInstance:
       propertyPath: weaponInventory.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6010546250221904256, guid: fc2b64a179dd3b3698d4f22b47610952,
+        type: 3}
+      propertyPath: currentWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe,
+        type: 2}
+    - target: {fileID: 6010546250221904256, guid: fc2b64a179dd3b3698d4f22b47610952,
+        type: 3}
+      propertyPath: currentWeaponSlot
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6010546250221904256, guid: fc2b64a179dd3b3698d4f22b47610952,
+        type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc2b64a179dd3b3698d4f22b47610952, type: 3}
 --- !u!1 &994204172
