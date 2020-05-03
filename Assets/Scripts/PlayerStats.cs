@@ -264,6 +264,4 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         }
         return weaponButtonSprite;
     }
-
-
 }
