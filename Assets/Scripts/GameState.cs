@@ -7,7 +7,6 @@ public class GameState : MonoBehaviour
     private EnemySpawner enemySpawner;
     private SceneLoader sceneLoader;
 
-    private PersistentStats persistentStats;
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
@@ -23,7 +22,6 @@ public class GameState : MonoBehaviour
         {
             UpdateObjects();
         }
-        persistentStats = new PersistentStats();
     }
 
     private void Update()
@@ -176,11 +174,6 @@ public class GameState : MonoBehaviour
     public void IncrementBossesDefeated()
     {
         this.bossesDefeated++;
-    }
-
-    public PersistentStats GetPersistantStats()
-    {
-        return this.persistentStats;
     }
 
     public NodeInformation GetCurrentSelectedNode()
