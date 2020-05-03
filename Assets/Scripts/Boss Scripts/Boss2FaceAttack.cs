@@ -25,10 +25,10 @@ public class Boss2FaceAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector2.Distance(player.transform.position, rigidBody.position) <= attackRange)
+        aInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (Vector2.Distance(player.transform.position, rigidBody.position) <= attackRange && !aInfo.IsName("boss2death"))
         {
             animator.SetBool("Attack", true);
-            aInfo = animator.GetCurrentAnimatorStateInfo(0);
            if(!aInfo.IsName("boss2attack2") && !aInfo.IsName("boss2attack2 0"))
             {
                 if (animator != null)
