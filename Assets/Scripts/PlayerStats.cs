@@ -26,7 +26,10 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
 
         persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
         this.moneyCount = persistentStats.moneyCount;
+        this.maxHealth = persistentStats.maxHealth;
         this.weaponInventory = persistentStats.GetWeaponInventory();
+        this.currentWeaponSlot = persistentStats.currentWeaponSlot;
+        currentWeapon = weaponInventory[currentWeaponSlot];
         this.itemInventory = persistentStats.GetItemInventory();
 
 
@@ -37,8 +40,6 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         }
 
         //weaponInventory = new Weapon[weaponInventorySize];
-        currentWeapon = weaponInventory[0];
-        currentWeaponSlot = 0;
         weaponInventorySize = weaponInventory.Length;
 
         armor = GetArmor();
@@ -82,6 +83,11 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
     public Weapon GetCurrentWeapon()
     {
         return currentWeapon;
+    }
+
+    public int GetCurrentWeaponSlot()
+    {
+        return currentWeaponSlot;
     }
 
     public void SwapToNextWeapon()
