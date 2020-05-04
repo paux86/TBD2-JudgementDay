@@ -12,6 +12,7 @@ public class GameState : MonoBehaviour
     NodeInformation currentSelectedNode;
     int bossesDefeated = 0;
     ItemSpawner itemSpawner;
+    DeathTransition deathTransition;
 
     
 
@@ -37,9 +38,9 @@ public class GameState : MonoBehaviour
                 itemSpawner.SpawnExitToMapObject(false);
 
             }
-            else if(GameObject.FindGameObjectsWithTag("Player").Length <= 0)
+            else if (GameObject.FindGameObjectsWithTag("Player").Length < 1)
             {
-                SceneManager.LoadScene(0);
+                deathTransition.ActivateDeathTransition();
             }
         }
 
@@ -68,7 +69,6 @@ public class GameState : MonoBehaviour
             enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
             sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
             itemSpawner = FindObjectOfType<ItemSpawner>().GetComponent<ItemSpawner>();
-
         }
     }
 
@@ -179,6 +179,11 @@ public class GameState : MonoBehaviour
     public NodeInformation GetCurrentSelectedNode()
     {
         return this.currentSelectedNode;
+    }
+
+    public void SetDeathTransition(DeathTransition deathTransition)
+    {
+        this.deathTransition = deathTransition;
     }
 
 }
