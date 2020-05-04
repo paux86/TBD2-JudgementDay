@@ -53,7 +53,10 @@ public class Projectile : MonoBehaviour
             }
             else
             {
-                float longRangeDamage = damage * (currentTravelDistance/longRangeMin);
+                float halfDamage = damage / 2;
+                float scaledDamage = (damage * (currentTravelDistance / longRangeMin));
+                float longRangeDamage = halfDamage + scaledDamage;
+                Debug.Log(longRangeDamage);
                 enemy.TakeDamage((int)longRangeDamage);
             }
         }
