@@ -22,6 +22,7 @@ public class NodeInformation : MonoBehaviour
     SpriteRenderer spriteRenderer;
     int sceneBuildIndex = 2;
     GameState gameState;
+    [SerializeField] int shopChance = 15;
 
 
 
@@ -40,10 +41,10 @@ public class NodeInformation : MonoBehaviour
         {
             SetupBossNodes();
         }
-        else if (string.Equals(nodeId, "Shop Scene"))
+        else if (Random.Range(1,101) <= shopChance )
         {
             sceneBuildIndex = 6;
-            selectable = true;
+            nodeId = "Shop Scene";
             if(spriteRenderer != null)
             {
                 if(shopSceneSprite != null)
@@ -54,7 +55,7 @@ public class NodeInformation : MonoBehaviour
                 {
                     Debug.Log("shopSceneSprite not set in nodeinformation inspector (most likely button prefab)");
                 }
-                gameObject.transform.localScale = new Vector3(1, 1, 0);
+                gameObject.transform.localScale = new Vector3(1,1, 0);
             }
         }
         else

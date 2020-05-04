@@ -18,19 +18,14 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
     private int currentWeaponSlot;
     private int weaponInventorySize;
 
-    public PersistentStats persistentStats;
+    PersistentStats persistentStats;
 
 
     private void Start()
     {
 
-        persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
-        this.moneyCount = persistentStats.moneyCount;
-        this.maxHealth = persistentStats.maxHealth;
-        this.weaponInventory = persistentStats.GetWeaponInventory();
-        this.currentWeaponSlot = persistentStats.currentWeaponSlot;
-        currentWeapon = weaponInventory[currentWeaponSlot];
-        this.itemInventory = persistentStats.GetItemInventory();
+
+        StartCoroutine(WaitAndUpdate()); 
 
 
         health = maxHealth;
@@ -43,6 +38,19 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         weaponInventorySize = weaponInventory.Length;
 
         armor = GetArmor();
+    }
+
+    IEnumerator WaitAndUpdate()
+    {
+        yield return new WaitForSecondsRealtime(.2f);
+        persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
+        this.moneyCount = persistentStats.moneyCount;
+        this.maxHealth = persistentStats.maxHealth;
+        this.weaponInventory = persistentStats.GetWeaponInventory();
+        this.currentWeaponSlot = persistentStats.currentWeaponSlot;
+        currentWeapon = weaponInventory[currentWeaponSlot];
+        this.itemInventory = persistentStats.GetItemInventory();
+
     }
 
     public int GetMoneyCount()
