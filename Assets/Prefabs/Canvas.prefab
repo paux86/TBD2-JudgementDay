@@ -1159,6 +1159,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory Button
       objectReference: {fileID: 0}
+    - target: {fileID: 516503989097712224, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 516503989097712227, guid: 0192769dd2a2de447a5e84ae2a264591,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1274,15 +1279,80 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3727353588709153789, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727353588709153789, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 27.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727353588709153789, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 49.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 3727353588709153789, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 49.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779615416007597216, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.20754719
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779615416007597216, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.20754719
+      objectReference: {fileID: 0}
+    - target: {fileID: 7779615416007597216, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.20754719
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794407069296130692, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794407069296130692, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 28.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794407069296130692, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 49.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 7794407069296130692, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 49.73
+      objectReference: {fileID: 0}
     - target: {fileID: 8937574660903550516, guid: 0192769dd2a2de447a5e84ae2a264591,
         type: 3}
       propertyPath: m_Name
       value: Item Inventory Buttons
       objectReference: {fileID: 0}
+    - target: {fileID: 8937574660903550516, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8937574661258985963, guid: 0192769dd2a2de447a5e84ae2a264591,
         type: 3}
       propertyPath: m_Name
       value: Weapon Inventory Buttons
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937574661258985963, guid: 0192769dd2a2de447a5e84ae2a264591,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8937574661623999351, guid: 0192769dd2a2de447a5e84ae2a264591,
         type: 3}
