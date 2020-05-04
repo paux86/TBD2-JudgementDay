@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d787e0bdaf7b0489d3859cacbb11f0, type: 3}
   m_Name: EnemyShotgun
   m_EditorClassIdentifier: 
-  name: 
-  description: 
+  name: Blunderbuss
+  description: A waterlogged blunderbuss.
   cost: 0
   sprite: {fileID: 0}
-  attackDamage: 0
-  attackCooldownTime: 0
-  range: 0
+  attackDamage: 20
+  attackCooldownTime: 1.75
+  range: 40
   onHitEffect: {fileID: 0}
   hitscan: 0
   isMeleeWeapon: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 272312983211670264, guid: 751113fced347fc40a0a167b0498bde4,
+    type: 3}
   buttonSprite: {fileID: 0}

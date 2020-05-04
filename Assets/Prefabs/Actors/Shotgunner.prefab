@@ -103,6 +103,8 @@ MonoBehaviour:
   money: 5
   moveSpeed: 10
   dropTable: {fileID: 11400000, guid: 7e07cb29ff10f0f44b2bb7455607626a, type: 2}
+  coinsPrefab: {fileID: 2734768024339917650, guid: ebda39b5721f2f144851978f9b4d85ac,
+    type: 3}
 --- !u!50 &8942489933629219991
 Rigidbody2D:
   serializedVersion: 4
