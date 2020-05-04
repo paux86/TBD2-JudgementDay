@@ -60,6 +60,7 @@ public class ItemSpawner : MonoBehaviour
         itemObject.AddComponent(typeof(CircleCollider2D));
         itemObject.AddComponent(typeof(DropContainer));
         itemObject.layer = LayerMask.NameToLayer("Item");
+        itemObject.GetComponent<SpriteRenderer>().sortingLayerName = "Item";
 
         return itemObject;
     }
