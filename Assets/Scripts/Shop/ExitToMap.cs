@@ -8,7 +8,11 @@ public class ExitToMap : MonoBehaviour
     {
         ShopKeeper shopKeeper = FindObjectOfType<ShopKeeper>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerStats>().persistentStats.updateStats();
+        GameState gameState = FindObjectOfType<GameState>().GetComponent<GameState>();
+        NodeInformation currentNode = gameState.GetCurrentSelectedNode();
+        PersistentStats persistent = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
+        persistent.updateStats();
+        currentNode.SetIsComplete(true);
         StartCoroutine(shopKeeper.ConfirmExitToMap());
     }
 }
