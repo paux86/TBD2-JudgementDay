@@ -53,7 +53,7 @@ public class Projectile : MonoBehaviour
             }
             else
             {
-                float longRangeDamage = damage * (currentTravelDistance/longRangeMin);
+                float longRangeDamage = CalculateLongRangeDamage(currentTravelDistance);
                 enemy.TakeDamage((int)longRangeDamage);
             }
         }
@@ -62,6 +62,25 @@ public class Projectile : MonoBehaviour
             
 
         Destroy(gameObject);
+    }
+
+    private float CalculateLongRangeDamage(float currentTravelDistance)
+    {
+        float longRangeDamage;
+        if (currentTravelDistance < 50f)
+        {
+            float halfDamage = damage / 2;
+            longRangeDamage = halfDamage;
+
+        }
+        else
+        {
+            float scaledDamage = (damage * (currentTravelDistance / longRangeMin));
+            longRangeDamage = scaledDamage;
+
+        }
+
+        return longRangeDamage;
     }
 
     public void SetDamage(int damage)
