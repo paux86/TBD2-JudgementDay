@@ -272,4 +272,40 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         }
         return weaponButtonSprite;
     }
+
+    public Weapon GetWeaponAtInventorySlot(int slotIndex)
+    {
+        if (slotIndex < weaponInventory.Length)
+        {
+            return weaponInventory[slotIndex];
+        }
+        else
+            return null;
+    }
+
+    public UsableItem GetItemAtInventorySlot(int slotIndex)
+    {
+        if (slotIndex < itemInventory.Length)
+        {
+            return itemInventory[slotIndex];
+        }
+        else
+            return null;
+    }
+
+    public void RemoveItemFromInventorySlot(int slotIndex)
+    {
+        if(slotIndex < itemInventory.Length && itemInventory[slotIndex] != null)
+        {
+            itemInventory[slotIndex] = null;
+        }
+    }
+
+    public void RemoveWeaponFromInventorySlot(int slotIndex)
+    {
+        if (slotIndex < weaponInventory.Length && weaponInventory[slotIndex] != null)
+        {
+            weaponInventory[slotIndex] = null;
+        }
+    }
 }
