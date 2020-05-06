@@ -19,6 +19,15 @@ public class AttackWithWeapon : MonoBehaviour
         nearestEnemy = gameObject.GetComponent<FindNearestTarget>();
         nextFireTime = Time.time;
         damageScale = levelsCompleted + 1;
+
+        if(equippedWeapon == null)
+        {
+            Debug.Log("equipped weapon was null, reverting to default weapon on player");
+             equippedWeapon = gameObject.GetComponent<PlayerStats>().weaponInventory[2];
+
+            
+
+        }
     }
 
     // Update is called once per frame
@@ -29,7 +38,7 @@ public class AttackWithWeapon : MonoBehaviour
 
     void Attack()
     {
-        if(nearestEnemy.nearestTarget && nearestEnemy.distanceToNearestEnemy <= equippedWeapon.range && Time.time >= nextFireTime)
+        if (nearestEnemy.nearestTarget && nearestEnemy.distanceToNearestEnemy <= equippedWeapon.range && Time.time >= nextFireTime)
         {
             if (equippedWeapon.hitscan)
             {
@@ -39,11 +48,16 @@ public class AttackWithWeapon : MonoBehaviour
                 if (hitInfo)
                 {
                     TakeDamageInterface enemy = hitInfo.transform.GetComponent<TakeDamageInterface>();
-                   
+
 
                     if (enemy != null)
+<<<<<<< HEAD
                         enemy.TakeDamage(equippedWeapon.attackDamage * damageScale);
                     
+=======
+                        enemy.TakeDamage(equippedWeapon.attackDamage);
+
+>>>>>>> fef5da3208b79cfe6bf25c0b55fd99e4763d309c
 
                     lineRenderer.enabled = true;
                     lineRenderer.SetPosition(0, firePoint.position);
@@ -52,16 +66,21 @@ public class AttackWithWeapon : MonoBehaviour
             }
             else
             {
-                if(lineRenderer != null)
+                if (lineRenderer != null)
                     lineRenderer.enabled = false;
-                if(equippedWeapon.isMeleeWeapon && (gameObject.GetComponent<Animator>() != null))
+                if (equippedWeapon.isMeleeWeapon && (gameObject.GetComponent<Animator>() != null))
                 {
                     inMeleeRange = true;
                     gameObject.GetComponent<Animator>().SetBool("inMeleeRange", inMeleeRange);
                 }
                 GameObject projectileObject = Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
+<<<<<<< HEAD
                 Projectile projectile =  projectileObject.GetComponent<Projectile>();
                 projectile.SetDamage(equippedWeapon.attackDamage * damageScale);
+=======
+                Projectile projectile = projectileObject.GetComponent<Projectile>();
+                projectile.SetDamage(equippedWeapon.attackDamage);
+>>>>>>> fef5da3208b79cfe6bf25c0b55fd99e4763d309c
             }
 
             nextFireTime = Time.time + equippedWeapon.attackCooldownTime;

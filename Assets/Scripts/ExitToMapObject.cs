@@ -68,7 +68,7 @@ public class ExitToMapObject : MonoBehaviour
         if (response)
         {
             SceneLoader sceneLoader = FindObjectOfType<SceneLoader>();
-            PersistentStats persistentStats = FindObjectOfType<GameState>().GetComponent<GameState>().GetPersistantStats();
+            PersistentStats persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
             persistentStats.updateStats();
             if(!isBoss)
             {
