@@ -295,9 +295,10 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
 
     public void RemoveItemFromInventorySlot(int slotIndex)
     {
-        if(slotIndex < itemInventory.Length && itemInventory[slotIndex] != null)
+        if(slotIndex < itemInventory.Length)
         {
             itemInventory[slotIndex] = null;
+            UpdateItemButton(slotIndex);
         }
     }
 

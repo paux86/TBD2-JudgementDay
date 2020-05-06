@@ -10,6 +10,7 @@ public class DropContainer : MonoBehaviour
     int type;
     const int WEAPON_TYPE = 0;
     const int ITEM_TYPE = 1;
+    const int POWERUP_TYPE = 2;
 
     public void UpdateType(int type)
     {
@@ -17,6 +18,7 @@ public class DropContainer : MonoBehaviour
         {
             case WEAPON_TYPE:
             case ITEM_TYPE:
+            case POWERUP_TYPE:
                 this.type = type;
                 break;
             default:
@@ -88,6 +90,11 @@ public class DropContainer : MonoBehaviour
             {
                 Destroy(gameObject);
             }
+        }
+        else if(this.type == POWERUP_TYPE)
+        {
+            PlayerStats playerStatsRef = collision.gameObject.GetComponent<PlayerStats>();
+            this.item.Use(playerStatsRef);
         }
 
     }

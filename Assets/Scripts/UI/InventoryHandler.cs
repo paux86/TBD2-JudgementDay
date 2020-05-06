@@ -72,6 +72,7 @@ public class InventoryHandler : MonoBehaviour
         Component[] wepButtons = inventoryLists[0].GetComponentsInChildren(typeof(Button));
         swapReference = playerReference.GetComponent<SwapWeapon>();
         playerStatsReference = playerReference.GetComponent<PlayerStats>();
+        dropItemReference = playerReference.GetComponent<DropItem>();
 
         if (wepButtons != null)
         {
@@ -208,6 +209,8 @@ public class InventoryHandler : MonoBehaviour
         SetUseButtonsActive(true);
         useItemButton.GetComponent<Button>().onClick.AddListener(() => playerStatsReference.UseItem(itemIndex));
         useItemButton.GetComponent<Button>().onClick.AddListener(() => SetUseButtonsActive(false));
+        dropItemButton.GetComponent<Button>().onClick.AddListener(() => dropItemReference.DropInventoryItem(itemIndex));
+        dropItemButton.GetComponent<Button>().onClick.AddListener(() => SetUseButtonsActive(false));
     }
 
     private void SetUseButtonsActive(bool enabled)
