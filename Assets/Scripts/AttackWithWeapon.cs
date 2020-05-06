@@ -6,6 +6,7 @@ public class AttackWithWeapon : MonoBehaviour
 {
     public Transform firePoint;
     public Weapon equippedWeapon;
+    int damageScale;
     public LineRenderer lineRenderer;
     public bool inMeleeRange;
 
@@ -17,6 +18,7 @@ public class AttackWithWeapon : MonoBehaviour
     {
         nearestEnemy = gameObject.GetComponent<FindNearestTarget>();
         nextFireTime = Time.time;
+        damageScale = levelsCompleted + 1;
     }
 
     // Update is called once per frame
@@ -40,7 +42,7 @@ public class AttackWithWeapon : MonoBehaviour
                    
 
                     if (enemy != null)
-                        enemy.TakeDamage(equippedWeapon.attackDamage);
+                        enemy.TakeDamage(equippedWeapon.attackDamage * damageScale);
                     
 
                     lineRenderer.enabled = true;
@@ -59,7 +61,7 @@ public class AttackWithWeapon : MonoBehaviour
                 }
                 GameObject projectileObject = Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
                 Projectile projectile =  projectileObject.GetComponent<Projectile>();
-                projectile.SetDamage(equippedWeapon.attackDamage);
+                projectile.SetDamage(equippedWeapon.attackDamage * damageScale);
             }
 
             nextFireTime = Time.time + equippedWeapon.attackCooldownTime;
