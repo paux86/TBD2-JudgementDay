@@ -18,7 +18,8 @@ public class AttackWithWeapon : MonoBehaviour
     {
         nearestEnemy = gameObject.GetComponent<FindNearestTarget>();
         nextFireTime = Time.time;
-        damageScale = levelsCompleted + 1;
+        GameState gameState = FindObjectOfType<GameState>();
+        damageScale = gameState.bossesDefeated + 1;
 
         if(equippedWeapon == null)
         {
@@ -51,13 +52,8 @@ public class AttackWithWeapon : MonoBehaviour
 
 
                     if (enemy != null)
-<<<<<<< HEAD
                         enemy.TakeDamage(equippedWeapon.attackDamage * damageScale);
                     
-=======
-                        enemy.TakeDamage(equippedWeapon.attackDamage);
-
->>>>>>> fef5da3208b79cfe6bf25c0b55fd99e4763d309c
 
                     lineRenderer.enabled = true;
                     lineRenderer.SetPosition(0, firePoint.position);
@@ -74,13 +70,8 @@ public class AttackWithWeapon : MonoBehaviour
                     gameObject.GetComponent<Animator>().SetBool("inMeleeRange", inMeleeRange);
                 }
                 GameObject projectileObject = Instantiate(equippedWeapon.projectile, firePoint.position, firePoint.rotation);
-<<<<<<< HEAD
                 Projectile projectile =  projectileObject.GetComponent<Projectile>();
                 projectile.SetDamage(equippedWeapon.attackDamage * damageScale);
-=======
-                Projectile projectile = projectileObject.GetComponent<Projectile>();
-                projectile.SetDamage(equippedWeapon.attackDamage);
->>>>>>> fef5da3208b79cfe6bf25c0b55fd99e4763d309c
             }
 
             nextFireTime = Time.time + equippedWeapon.attackCooldownTime;
