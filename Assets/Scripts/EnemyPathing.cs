@@ -7,7 +7,7 @@ public class EnemyPathing : MonoBehaviour
     [SerializeField] List<Transform> waypoints;
     [SerializeField] WaveConfig waveConfig;
     [SerializeField] bool isDoneSpawning = false;
-    [SerializeField] float minDistance = 10;
+    float minDistance = 10;
     float moveSpeed;
     int waypointIndex = 0;
     Rigidbody2D rigidBody;
@@ -20,12 +20,9 @@ public class EnemyPathing : MonoBehaviour
     {
 
         float wepDistance = gameObject.GetComponent<AttackWithWeapon>().equippedWeapon.range;
-        if (minDistance > wepDistance)
-        {
-            minDistance = wepDistance;
-        }
+        minDistance = wepDistance;
 
-        if(moveSpeed <= 0)
+        if (moveSpeed <= 0)
         {
             moveSpeed = GetComponent<Enemy>().GetMoveSpeed();
         }

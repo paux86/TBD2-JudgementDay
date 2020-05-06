@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyCount: 0
+  maxHealth: 150
+  currentWeaponSlot: 0
   weaponInventory:
   - {fileID: 0}
   - {fileID: 0}

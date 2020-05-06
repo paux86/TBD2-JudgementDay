@@ -7,12 +7,12 @@ public class GameState : MonoBehaviour
     private EnemySpawner enemySpawner;
     private SceneLoader sceneLoader;
 
-    private PersistentStats persistentStats;
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
     int bossesDefeated = 0;
     ItemSpawner itemSpawner;
+    DeathTransition deathTransition;
 
     
 
@@ -38,9 +38,9 @@ public class GameState : MonoBehaviour
                 itemSpawner.SpawnExitToMapObject(false);
 
             }
-            else if(GameObject.FindGameObjectsWithTag("Player").Length <= 0)
+            else if (GameObject.FindGameObjectsWithTag("Player").Length < 1)
             {
-                SceneManager.LoadScene(0);
+                deathTransition.ActivateDeathTransition();
             }
         }
 
@@ -68,9 +68,7 @@ public class GameState : MonoBehaviour
         {
             enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
             sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
-            persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
             itemSpawner = FindObjectOfType<ItemSpawner>().GetComponent<ItemSpawner>();
-
         }
     }
 
@@ -178,9 +176,14 @@ public class GameState : MonoBehaviour
         this.bossesDefeated++;
     }
 
-    public PersistentStats GetPersistantStats()
+    public NodeInformation GetCurrentSelectedNode()
     {
-        return this.persistentStats;
+        return this.currentSelectedNode;
+    }
+
+    public void SetDeathTransition(DeathTransition deathTransition)
+    {
+        this.deathTransition = deathTransition;
     }
 
 }

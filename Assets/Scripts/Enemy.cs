@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, TakeDamageInterface
     [SerializeField] int money = 1;
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] LootTable dropTable = null;
+    [SerializeField] GameObject coinsPrefab;
     ItemSpawner itemSpawner;
 
     private int health;
@@ -53,8 +54,10 @@ public class Enemy : MonoBehaviour, TakeDamageInterface
 
         GameObject onDeathEffect = (GameObject)Instantiate(deathSpatter);
         onDeathEffect.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        Instantiate(coinsPrefab, transform.position, transform.rotation);
+
         Destroy(gameObject);
-        
     }
 
     public float GetMoveSpeed()

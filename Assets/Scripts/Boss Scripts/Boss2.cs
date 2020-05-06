@@ -42,6 +42,10 @@ public class Boss2 : MonoBehaviour,TakeDamageInterface
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             itemSpawner.SpawnUsableItemOrWeapon(player.transform.position, dropType, droppedItem);
         }
+        Rigidbody2D bossBody = gameObject.GetComponent<Rigidbody2D>();
+        Destroy(bossBody);
+        CircleCollider2D bossColl = gameObject.GetComponent<CircleCollider2D>();
+        bossColl.enabled = false;
         gameState.IncrementBossesDefeated();
         SpawnNewMapItem();
     }
