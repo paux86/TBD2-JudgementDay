@@ -86,6 +86,7 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
     public void IncrementHealth(int number)
     {
         health += number;
+        healthBar.SetHealth(health);
     }
 
     public Weapon GetCurrentWeapon()
