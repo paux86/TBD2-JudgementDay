@@ -10,7 +10,7 @@ public class GameState : MonoBehaviour
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
-    int bossesDefeated = 0;
+    public int bossesDefeated = 0;
     ItemSpawner itemSpawner;
     DeathTransition deathTransition;
 
