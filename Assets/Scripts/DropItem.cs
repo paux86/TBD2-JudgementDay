@@ -23,7 +23,7 @@ public class DropItem : MonoBehaviour
         if(itemToBeDropped != null)
         {
             //need to add a way to get this const from itemspawner
-            int type = 1;
+            int type = 2;
             Vector2 dropPos = new Vector2();
             dropPos.x = playerStatsRef.transform.position.x + offset.x;
             dropPos.y = playerStatsRef.transform.position.y + offset.y;

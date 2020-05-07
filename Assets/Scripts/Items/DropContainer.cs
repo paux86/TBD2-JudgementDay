@@ -95,6 +95,7 @@ public class DropContainer : MonoBehaviour
         {
             PlayerStats playerStatsRef = collision.gameObject.GetComponent<PlayerStats>();
             this.item.Use(playerStatsRef);
+            Destroy(gameObject);
         }
 
     }

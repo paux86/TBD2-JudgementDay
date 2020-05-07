@@ -12,6 +12,7 @@ public class ItemSpawner : MonoBehaviour
 
     const int WEAPON_TYPE = 0;
     const int ITEM_TYPE = 1;
+    const int POWERUP_TYPE = 2;
 #pragma warning restore 0649
     public void SpawnUsableItemOrWeapon(Vector2 position, int type, ScriptableObject lootDrop)
     {
@@ -49,6 +50,13 @@ public class ItemSpawner : MonoBehaviour
             this.item = (UsableItem)lootDrop;
             DropContainer dropContainer = itemObject.GetComponent<DropContainer>();
             dropContainer.UpdateType(ITEM_TYPE);
+            dropContainer.SetItem(item);
+        }
+        else if (type == POWERUP_TYPE)
+        {
+            this.item = (UsableItem)lootDrop;
+            DropContainer dropContainer = itemObject.GetComponent<DropContainer>();
+            dropContainer.UpdateType(POWERUP_TYPE);
             dropContainer.SetItem(item);
         }
     }
