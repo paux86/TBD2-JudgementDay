@@ -9,6 +9,8 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     private int damage = 100;
     private Vector2 startingPos;
+    Weapon equippedWeapon = null;
+    float weaponRange;
     [SerializeField] int longRangeMin = 50;
     
     // Start is called before the first frame update
@@ -38,54 +40,65 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-
         TakeDamageInterface enemy = collision.gameObject.GetComponent<TakeDamageInterface>();
        
-
         if (enemy != null)
         {
             Vector2 currentPos = transform.position;
             float currentTravelDistance = (currentPos - startingPos).sqrMagnitude;
-            if(collision.gameObject.CompareTag("Player"))
-            {
-                //collision.gameObject.GetComponent<PlayerMovement>().StartCoroutine("Knockback");
-            }
-            else if(collision.gameObject.CompareTag("Enemy"))
-            {
-                collision.gameObject.GetComponent<EnemyPathing>().StartCoroutine("Knockback");
-            }
-            if (travelDistance < longRangeMin)
+            if(weaponRange <= 5)
             {
                 enemy.TakeDamage(damage);
             }
-            else
+            else if(weaponRange > 5 && weaponRange <= 50)
             {
-                float longRangeDamage = CalculateLongRangeDamage(currentTravelDistance);
-                enemy.TakeDamage((int)longRangeDamage);
+                enemy.TakeDamage(damage);
+                if(collision.gameObject.CompareTag("Player"))
+                {
+                    //collision.gameObject.GetComponent<PlayerMovement>().StartCoroutine("Knockback"); // Unsure if we want to apply knockback to the player
+                }
+                else if(collision.gameObject.CompareTag("Enemy"))
+                {
+                    collision.gameObject.GetComponent<EnemyPathing>().StartCoroutine("Knockback");
+                }
+            }
+            else if(weaponRange > 50)
+            {
+                if (travelDistance < longRangeMin)
+                {
+                    enemy.TakeDamage(damage);
+                }
+                else
+                {
+                    float longRangeDamage = CalculateLongRangeDamage(currentTravelDistance);
+                    enemy.TakeDamage((int)longRangeDamage);
+                }
             }
         }
-
         Destroy(gameObject);
     }
 
     private float CalculateLongRangeDamage(float currentTravelDistance)
     {
         float longRangeDamage;
-        if (currentTravelDistance < 50f)
+        if(weaponRange > 50)
         {
-            float halfDamage = damage / 2;
-            longRangeDamage = halfDamage;
-
+            if (currentTravelDistance < 50f)
+            {
+                float halfDamage = damage / 2;
+                longRangeDamage = halfDamage;
+            }
+            else
+            {
+                float scaledDamage = (damage * (currentTravelDistance / longRangeMin));
+                longRangeDamage = scaledDamage;
+            }
+            return longRangeDamage;
         }
         else
         {
-            float scaledDamage = (damage * (currentTravelDistance / longRangeMin));
-            longRangeDamage = scaledDamage;
-
+            return GetDamage();
         }
-
-        return longRangeDamage;
     }
 
     public void SetDamage(int damage)
@@ -96,5 +109,11 @@ public class Projectile : MonoBehaviour
     public int GetDamage()
     {
         return this.damage;
+    }
+
+    public void SetWeapon(Weapon weapon)
+    {
+        this.equippedWeapon = weapon;
+        this.weaponRange = weapon.range;
     }
 }

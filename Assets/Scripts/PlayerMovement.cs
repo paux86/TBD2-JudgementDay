@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public float playerSpeed = 9f;
     private bool isBeingKnockedBack = true;
-    private float thrust = 1000f;
+    private float thrust = 2000f;
     private Vector3 destination;
     private Rigidbody2D rigidBody;
 
@@ -38,16 +38,12 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator Knockback()
     {
-        Debug.Log("Knockback test - Player");
         if (isBeingKnockedBack)
             yield break;
 
         isBeingKnockedBack = true;
-        Vector2 knockback = new Vector2(2f, 1f);
-        rigidBody.velocity = transform.right * thrust;
-        //rigidBody.AddForce(knockback * thrust * Time.deltaTime, ForceMode2D.Impulse);
-        //rigidBody.AddForce(knockback * thrust * Time.deltaTime);
-        //yield return new WaitForSeconds(1.0f);
+        rigidBody.AddForce(Vector3.forward * -thrust, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.4f);
         isBeingKnockedBack = false;
     }
 }

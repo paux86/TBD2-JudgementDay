@@ -30,7 +30,7 @@ PrefabInstance:
     - target: {fileID: 3169562926225506581, guid: 658c933cf41e6f44dba601e0245981d1,
         type: 3}
       propertyPath: travelDistance
-      value: 15
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 4967690300316593615, guid: 658c933cf41e6f44dba601e0245981d1,
         type: 3}

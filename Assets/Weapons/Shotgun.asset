@@ -16,7 +16,7 @@ MonoBehaviour:
   description: A blunderbuss.
   cost: 30
   sprite: {fileID: 21300000, guid: 8b690eab8048c244aade93520f12f539, type: 3}
-  attackDamage: 100
+  attackDamage: 75
   attackCooldownTime: 1.5
   range: 50
   onHitEffect: {fileID: 0}

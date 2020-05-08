@@ -8,7 +8,7 @@ public class EnemyPathing : MonoBehaviour
     [SerializeField] WaveConfig waveConfig;
     [SerializeField] bool isDoneSpawning = false;
     private bool isBeingKnockedBack = false;
-    private float thrust = 100f;
+    private float thrust = 2000f;
     float minDistance = 10;
     float moveSpeed;
     int waypointIndex = 0;
@@ -16,11 +16,9 @@ public class EnemyPathing : MonoBehaviour
     private float totalDeltaTime;
     [SerializeField] float maxPathingTime = 3;
 
-
     // Start is called before the first frame update
     void Start()
     {
-
         float wepDistance = gameObject.GetComponent<AttackWithWeapon>().equippedWeapon.range;
         minDistance = wepDistance;
 
@@ -38,23 +36,23 @@ public class EnemyPathing : MonoBehaviour
         else
         {
             isDoneSpawning = true;
-            
         }
-
         rigidBody =  gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
        if(!isDoneSpawning)
         {
             Move();
         }
        else
         {
-            MoveTowardsPlayer();
+            if(!isBeingKnockedBack)
+            {
+                MoveTowardsPlayer();
+            }
         }
     }
 
@@ -81,14 +79,11 @@ public class EnemyPathing : MonoBehaviour
             {
                 waypointIndex++;
             }
-
         }
         else
         {
             isDoneSpawning = true;
         }
-
-
     }
 
     private void MoveTowardsPlayer()
@@ -96,8 +91,8 @@ public class EnemyPathing : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player)
         {
-            //rigidBody.velocity = Vector3.zero;
-            //rigidBody.angularVelocity = 0f;
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.angularVelocity = 0f;
             Vector2 targetPosition = player.transform.position;
             if ((targetPosition - (Vector2)gameObject.transform.position).sqrMagnitude > minDistance)
             {
@@ -109,7 +104,6 @@ public class EnemyPathing : MonoBehaviour
             Vector2 lookDir = targetPosition - rigidBody.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
             rigidBody.rotation = angle;
-
         }
         else
         {
@@ -117,29 +111,14 @@ public class EnemyPathing : MonoBehaviour
         }
     }
 
-
     public IEnumerator Knockback()
     {
-        //Debug.Log("Enemy Knockback test");
         if (isBeingKnockedBack)
             yield break;
 
         isBeingKnockedBack = true;
-        //var knockbackThisFrame = thrust * Time.fixedDeltaTime;
-        //Vector2 knockbackTarget = new Vector2(gameObject.transform.position.x + 40, gameObject.transform.position.y + 40);
-        //Vector2 knockback;
-        //knockback = Vector2.MoveTowards(transform.position, knockbackTarget, knockbackThisFrame);
-        //rigidBody.MovePosition(knockback);
-
-        /////////////////////////////////
-
-        //rigidBody.AddForce(new Vector2(gameObject.transform.position.x + 40, gameObject.transform.position.y + 40), ForceMode2D.Impulse);
-        rigidBody.AddForce(Vector3.forward * -2000f, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.3f);
-        //rigidBody.velocity = transform.forward * -200f;
-        rigidBody.velocity = Vector3.zero;
-
+        rigidBody.AddForce(Vector3.forward * -thrust, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.4f);
         isBeingKnockedBack = false;
     }
-
 }

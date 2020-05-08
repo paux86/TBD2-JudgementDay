@@ -342,8 +342,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb022c2cc1427448f8696f1080d20bec, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  deathGrey: {fileID: 8476881301875619682, guid: 2a0efd28b076afb42b0f09057005ec6d,
-    type: 3}
 --- !u!114 &393917524174957352
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: EnemyPistol
   description: Enemy Pew Pew
+  cost: 0
   sprite: {fileID: 0}
   attackDamage: 10
   attackCooldownTime: 0.5
   range: 200
   onHitEffect: {fileID: 0}
   hitscan: 0
+  isMeleeWeapon: 0
   projectile: {fileID: 2582306745390608468, guid: b4edf4d31a8729c9d96fe9fac7c39e77,
     type: 3}
+  buttonSprite: {fileID: 0}
