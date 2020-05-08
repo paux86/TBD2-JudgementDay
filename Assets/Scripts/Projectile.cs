@@ -11,6 +11,7 @@ public class Projectile : MonoBehaviour
     private Vector2 startingPos;
     Weapon equippedWeapon = null;
     float weaponRange;
+    int midRangeMin = 5;
     [SerializeField] int longRangeMin = 50;
     
     // Start is called before the first frame update
@@ -46,11 +47,11 @@ public class Projectile : MonoBehaviour
         {
             Vector2 currentPos = transform.position;
             float currentTravelDistance = (currentPos - startingPos).sqrMagnitude;
-            if(weaponRange <= 5)
+            if(weaponRange <= midRangeMin)
             {
                 enemy.TakeDamage(damage);
             }
-            else if(weaponRange > 5 && weaponRange <= 50)
+            else if(weaponRange > midRangeMin && weaponRange <= longRangeMin)
             {
                 enemy.TakeDamage(damage);
                 if(collision.gameObject.CompareTag("Player"))
@@ -62,17 +63,10 @@ public class Projectile : MonoBehaviour
                     collision.gameObject.GetComponent<EnemyPathing>().StartCoroutine("Knockback");
                 }
             }
-            else if(weaponRange > 50)
+            else if(weaponRange > longRangeMin)
             {
-                if (travelDistance < longRangeMin)
-                {
-                    enemy.TakeDamage(damage);
-                }
-                else
-                {
-                    float longRangeDamage = CalculateLongRangeDamage(currentTravelDistance);
-                    enemy.TakeDamage((int)longRangeDamage);
-                }
+                float longRangeDamage = CalculateLongRangeDamage(currentTravelDistance);
+                enemy.TakeDamage((int)longRangeDamage);
             }
         }
         Destroy(gameObject);
@@ -81,24 +75,17 @@ public class Projectile : MonoBehaviour
     private float CalculateLongRangeDamage(float currentTravelDistance)
     {
         float longRangeDamage;
-        if(weaponRange > 50)
+        if (currentTravelDistance < 50f)
         {
-            if (currentTravelDistance < 50f)
-            {
-                float halfDamage = damage / 2;
-                longRangeDamage = halfDamage;
-            }
-            else
-            {
-                float scaledDamage = (damage * (currentTravelDistance / longRangeMin));
-                longRangeDamage = scaledDamage;
-            }
-            return longRangeDamage;
+            float halfDamage = damage / 2;
+            longRangeDamage = halfDamage;
         }
         else
         {
-            return GetDamage();
+            float scaledDamage = (damage * (currentTravelDistance / longRangeMin));
+            longRangeDamage = scaledDamage;
         }
+        return longRangeDamage;
     }
 
     public void SetDamage(int damage)
