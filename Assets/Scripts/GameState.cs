@@ -10,12 +10,11 @@ public class GameState : MonoBehaviour
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
+    GameObject player;
+    PlayerStats playerStats;
     public int bossesDefeated = 0;
     ItemSpawner itemSpawner;
     DeathTransition deathTransition;
-
-    
-
 
     private void Start()
     {
@@ -27,8 +26,6 @@ public class GameState : MonoBehaviour
 
     private void Update()
     {
-       
-
        if(SceneManager.GetActiveScene().buildIndex > 1)
         {
             if (enemySpawner != null && (GameObject.FindGameObjectsWithTag("Enemy").Length <= 0) && (enemySpawner.isWavesComplete()))
@@ -36,15 +33,12 @@ public class GameState : MonoBehaviour
                 enemySpawner.SetWaveComplete(false);
                 currentSelectedNode.SetIsComplete(true);
                 itemSpawner.SpawnExitToMapObject(false);
-
             }
             else if (GameObject.FindGameObjectsWithTag("Player").Length < 1)
             {
                 deathTransition.ActivateDeathTransition();
             }
         }
-
-   
     }
 
     private void Awake()
@@ -63,7 +57,6 @@ public class GameState : MonoBehaviour
 
     private void UpdateObjects()
     {
-        
         if(FindObjectOfType<EnemySpawner>() != null)
         {
             enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
@@ -76,7 +69,6 @@ public class GameState : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(8);
         UpdateObjects();
-
     }
 
 
@@ -123,7 +115,6 @@ public class GameState : MonoBehaviour
         if(selection != null)
         {
             this.currentSelectedNode = selection;
-
             UpdateTier(selection);
         }
         else
@@ -173,7 +164,18 @@ public class GameState : MonoBehaviour
 
     public void IncrementBossesDefeated()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if(player != null)
+        {
+            playerStats = player.GetComponent<PlayerStats>();
+        }
+
         this.bossesDefeated++;
+
+        if(playerStats != null)
+        {
+            playerStats.maxHealth += 100;
+        }
     }
 
     public NodeInformation GetCurrentSelectedNode()
@@ -185,5 +187,4 @@ public class GameState : MonoBehaviour
     {
         this.deathTransition = deathTransition;
     }
-
 }
