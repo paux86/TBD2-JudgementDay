@@ -47,6 +47,14 @@ public class Projectile : MonoBehaviour
         {
             Vector2 currentPos = transform.position;
             float currentTravelDistance = (currentPos - startingPos).sqrMagnitude;
+            if(collision.gameObject.CompareTag("Player"))
+            {
+                //collision.gameObject.GetComponent<PlayerMovement>().StartCoroutine("Knockback");
+            }
+            else if(collision.gameObject.CompareTag("Enemy"))
+            {
+                collision.gameObject.GetComponent<EnemyPathing>().StartCoroutine("Knockback");
+            }
             if (travelDistance < longRangeMin)
             {
                 enemy.TakeDamage(damage);
@@ -57,9 +65,6 @@ public class Projectile : MonoBehaviour
                 enemy.TakeDamage((int)longRangeDamage);
             }
         }
-           
-        
-            
 
         Destroy(gameObject);
     }

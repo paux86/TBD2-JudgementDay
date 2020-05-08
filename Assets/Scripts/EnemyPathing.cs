@@ -7,6 +7,8 @@ public class EnemyPathing : MonoBehaviour
     [SerializeField] List<Transform> waypoints;
     [SerializeField] WaveConfig waveConfig;
     [SerializeField] bool isDoneSpawning = false;
+    private bool isBeingKnockedBack = false;
+    private float thrust = 100f;
     float minDistance = 10;
     float moveSpeed;
     int waypointIndex = 0;
@@ -94,8 +96,8 @@ public class EnemyPathing : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player)
         {
-            rigidBody.velocity = Vector3.zero;
-            rigidBody.angularVelocity = 0f;
+            //rigidBody.velocity = Vector3.zero;
+            //rigidBody.angularVelocity = 0f;
             Vector2 targetPosition = player.transform.position;
             if ((targetPosition - (Vector2)gameObject.transform.position).sqrMagnitude > minDistance)
             {
@@ -113,6 +115,31 @@ public class EnemyPathing : MonoBehaviour
         {
             Debug.Log("No Player Found in enemy pathing script");
         }
+    }
+
+
+    public IEnumerator Knockback()
+    {
+        //Debug.Log("Enemy Knockback test");
+        if (isBeingKnockedBack)
+            yield break;
+
+        isBeingKnockedBack = true;
+        //var knockbackThisFrame = thrust * Time.fixedDeltaTime;
+        //Vector2 knockbackTarget = new Vector2(gameObject.transform.position.x + 40, gameObject.transform.position.y + 40);
+        //Vector2 knockback;
+        //knockback = Vector2.MoveTowards(transform.position, knockbackTarget, knockbackThisFrame);
+        //rigidBody.MovePosition(knockback);
+
+        /////////////////////////////////
+
+        //rigidBody.AddForce(new Vector2(gameObject.transform.position.x + 40, gameObject.transform.position.y + 40), ForceMode2D.Impulse);
+        rigidBody.AddForce(Vector3.forward * -2000f, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.3f);
+        //rigidBody.velocity = transform.forward * -200f;
+        rigidBody.velocity = Vector3.zero;
+
+        isBeingKnockedBack = false;
     }
 
 }
