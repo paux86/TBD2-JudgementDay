@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0608a4291c89a745ab1903923285252, type: 3}
-  m_Name: ZombieBossLootTable
+  m_Script: {fileID: 11500000, guid: 6e45d16976b473de8b7b5b56b51ce8cb, type: 3}
+  m_Name: GigaHealthUp Effect
   m_EditorClassIdentifier: 
-  Drops:
-  - {fileID: 11400000, guid: d187a6422b56a6faaa52df9f0a33ed12, type: 2}
-  IsWeapon: 01
-  Weights: 64000000
-  Enabled: 01
-  totalWeight: 100
+  HealthAmount: 10000
