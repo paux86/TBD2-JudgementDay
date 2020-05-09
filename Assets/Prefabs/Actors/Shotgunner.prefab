@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: e0be65b7e0fd25149a79a65f5096bdf2, type: 3}
-  m_Color: {r: 0.509434, g: 0.42052335, b: 0.42052335, a: 1}
+  m_Color: {r: 0.71256894, g: 0.9622642, b: 0.49474904, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 150
+  health: 0
   money: 5
   moveSpeed: 10
   dropTable: {fileID: 11400000, guid: 7e07cb29ff10f0f44b2bb7455607626a, type: 2}
