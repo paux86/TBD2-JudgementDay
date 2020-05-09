@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour, TakeDamageInterface
 {
     [SerializeField] public int maxHealth = 100;
     public int health;
-    [SerializeField] int money = 1;
+    [SerializeField] public int money = 1;
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] LootTable dropTable = null;
     [SerializeField] GameObject coinsPrefab;
