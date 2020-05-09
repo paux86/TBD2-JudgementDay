@@ -88,6 +88,12 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         health += number;
     }
 
+    public void IncrementHealthMax(int number)
+    {
+        maxHealth += number;
+        health += number;
+    }
+
     public Weapon GetCurrentWeapon()
     {
         return currentWeapon;
