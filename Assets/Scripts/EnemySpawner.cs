@@ -41,6 +41,16 @@ public class EnemySpawner : MonoBehaviour
             waveConfigs[i].SetNumberOfEnemies(randomEnemyNumber);
         }
 
+        if(bossDifficultyModifier >= 1)
+        {
+            waveConfigs.Add(waveConfigs[Random.Range(0, waveConfigs.Count)]);
+            for(int i = 0; i < (int)(bossDifficultyModifier / 2); i++)
+            {
+                waveConfigs.Add(waveConfigs[Random.Range(0, waveConfigs.Count)]);
+            }
+        }
+        Debug.Log("waveConfigs.Count: " + waveConfigs.Count);
+
         yield return StartCoroutine(SpawnAllWaves());
     }
 
