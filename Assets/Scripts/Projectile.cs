@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour
                 {
                     //collision.gameObject.GetComponent<PlayerMovement>().StartCoroutine("Knockback"); // Unsure if we want to apply knockback to the player
                 }
-                else if(collision.gameObject.CompareTag("Enemy"))
+                else if(collision.gameObject.CompareTag("Enemy") && (!(collision.gameObject.GetComponent<Boss>()) && !(collision.gameObject.GetComponent<Boss2>())))
                 {
                     collision.gameObject.GetComponent<EnemyPathing>().StartCoroutine("Knockback");
                 }

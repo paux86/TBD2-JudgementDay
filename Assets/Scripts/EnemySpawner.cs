@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    GameState gameState;
+    private int bossesDefeated;
+    [SerializeField] private int bossDifficultyModifier;
+    private int MIN_ENEMY_NUMBER = 2;
     [SerializeField] List<WaveConfig> waveConfigs = default;
     [SerializeField] int startingWave = 0;
     [SerializeField] bool looping = false;
@@ -14,22 +18,30 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
+        gameState = FindObjectOfType<GameState>();
+        bossesDefeated = gameState.GetBossesDefeated();
+        this.bossDifficultyModifier = gameState.bossDifficultyMod;
+        Debug.Log("bossDifficultyModifier: " + bossDifficultyModifier);
 
         do
         {
-            yield return StartCoroutine(SpawnAllWaves());
+            yield return StartCoroutine(RandomizeEnemyNumbers());
         } while (looping);
     }
 
-    private IEnumerator SpawnAllEnemiesInWave(WaveConfig waveConfig)
+    private IEnumerator RandomizeEnemyNumbers()
     {
-        int numEnemies = waveConfig.GetNumberOfEnemies();
-        for (int i = 0; i < numEnemies; i++)
+        int minRandomEnemyNumber = (MIN_ENEMY_NUMBER + bossesDefeated + (int)(bossDifficultyModifier / 2));
+        int maxRandomEnemyNumber = (4 + (bossesDefeated * bossDifficultyModifier));
+        int randomEnemyNumber = Random.Range(minRandomEnemyNumber, maxRandomEnemyNumber);
+        Debug.Log("randomEnemyNumber: " + randomEnemyNumber);
+
+        for(int i = 0; i < waveConfigs.Count; i++)
         {
-            var newEnemy = Instantiate(waveConfig.GetEnemyPrefab(), waveConfig.GetWayPoints()[0].transform.position, Quaternion.identity);
-            newEnemy.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
-            yield return new WaitForSeconds(waveConfig.GetTimeBetweenSpawns());
+            waveConfigs[i].SetNumberOfEnemies(randomEnemyNumber);
         }
+
+        yield return StartCoroutine(SpawnAllWaves());
     }
 
     private IEnumerator SpawnAllWaves()
@@ -42,6 +54,18 @@ public class EnemySpawner : MonoBehaviour
                 yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
             }
             isComplete = true;
+        }
+    }
+
+    private IEnumerator SpawnAllEnemiesInWave(WaveConfig waveConfig)
+    {
+        int numEnemies = waveConfig.GetNumberOfEnemies();
+        for (int i = 0; i < numEnemies; i++)
+        {
+            var newEnemy = Instantiate(waveConfig.GetEnemyPrefab(), waveConfig.GetWayPoints()[0].transform.position, Quaternion.identity);
+            newEnemy.GetComponent<Enemy>().maxHealth += (25 * bossDifficultyModifier);
+            newEnemy.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
+            yield return new WaitForSeconds(waveConfig.GetTimeBetweenSpawns());
         }
     }
 
