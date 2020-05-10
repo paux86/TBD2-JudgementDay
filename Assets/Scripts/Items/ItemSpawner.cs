@@ -19,7 +19,7 @@ public class ItemSpawner : MonoBehaviour
         CircleCollider2D collider = itemObject.GetComponent<CircleCollider2D>();
         collider.isTrigger = true;
         SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.sortingOrder = 0;
+        spriteRenderer.sortingOrder = 1;
         GenerateDropContainer(type, lootDrop, itemObject);
 
         if (itemObject != null && spriteRenderer != null)
