@@ -28,11 +28,7 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         StartCoroutine(WaitAndUpdate()); 
 
 
-        health = maxHealth;
-        if(healthBar != null)
-        {
-            healthBar.SetMaxHealth(maxHealth);
-        }
+        
 
         //weaponInventory = new Weapon[weaponInventorySize];
         weaponInventorySize = weaponInventory.Length;
@@ -50,6 +46,12 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         this.currentWeaponSlot = persistentStats.currentWeaponSlot;
         currentWeapon = weaponInventory[currentWeaponSlot];
         this.itemInventory = persistentStats.GetItemInventory();
+
+        health = maxHealth;
+        if(healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth);
+        }
 
     }
 
