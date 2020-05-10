@@ -70,6 +70,7 @@ public class ItemSpawner : MonoBehaviour
             DropContainer dropContainer = itemObject.GetComponent<DropContainer>();
             dropContainer.UpdateType(POWERUP_TYPE);
             dropContainer.SetItem(item);
+            StartCoroutine(DelayCollider(dropContainer, 2f));
         }
     }
 
@@ -91,7 +92,11 @@ public class ItemSpawner : MonoBehaviour
         mapObj.SetIsBoss(isBoss);
     }
 
-    
-
-    
+    private IEnumerator DelayCollider(DropContainer container, float delayInSeconds)
+    {
+        CircleCollider2D containerCollider = container.GetComponent<CircleCollider2D>();
+        containerCollider.enabled = false;
+        yield return new WaitForSeconds(delayInSeconds);
+        containerCollider.enabled = true;
+    }
 }
