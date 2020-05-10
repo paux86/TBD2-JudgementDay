@@ -7,25 +7,22 @@ public class EnemyPathing : MonoBehaviour
     [SerializeField] List<Transform> waypoints;
     [SerializeField] WaveConfig waveConfig;
     [SerializeField] bool isDoneSpawning = false;
-    [SerializeField] float minDistance = 10;
+    private bool isBeingKnockedBack = false;
+    private float thrust = 2000f;
+    float minDistance = 10;
     float moveSpeed;
     int waypointIndex = 0;
     Rigidbody2D rigidBody;
     private float totalDeltaTime;
     [SerializeField] float maxPathingTime = 3;
 
-
     // Start is called before the first frame update
     void Start()
     {
-
         float wepDistance = gameObject.GetComponent<AttackWithWeapon>().equippedWeapon.range;
-        if (minDistance > wepDistance)
-        {
-            minDistance = wepDistance;
-        }
+        minDistance = wepDistance;
 
-        if(moveSpeed <= 0)
+        if (moveSpeed <= 0)
         {
             moveSpeed = GetComponent<Enemy>().GetMoveSpeed();
         }
@@ -39,23 +36,23 @@ public class EnemyPathing : MonoBehaviour
         else
         {
             isDoneSpawning = true;
-            
         }
-
         rigidBody =  gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
        if(!isDoneSpawning)
         {
             Move();
         }
        else
         {
-            MoveTowardsPlayer();
+            if(!isBeingKnockedBack)
+            {
+                MoveTowardsPlayer();
+            }
         }
     }
 
@@ -82,14 +79,11 @@ public class EnemyPathing : MonoBehaviour
             {
                 waypointIndex++;
             }
-
         }
         else
         {
             isDoneSpawning = true;
         }
-
-
     }
 
     private void MoveTowardsPlayer()
@@ -110,7 +104,6 @@ public class EnemyPathing : MonoBehaviour
             Vector2 lookDir = targetPosition - rigidBody.position;
             float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
             rigidBody.rotation = angle;
-
         }
         else
         {
@@ -118,4 +111,14 @@ public class EnemyPathing : MonoBehaviour
         }
     }
 
+    public IEnumerator Knockback()
+    {
+        if (isBeingKnockedBack)
+            yield break;
+
+        isBeingKnockedBack = true;
+        rigidBody.AddForce(Vector3.forward * -thrust, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.4f);
+        isBeingKnockedBack = false;
+    }
 }

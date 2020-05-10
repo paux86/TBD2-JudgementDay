@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -7744249323065494141}
   - component: {fileID: -5346659269109345701}
   m_Layer: 12
-  m_Name: Beans
+  m_Name: Frank
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 577be9ab3b2bceb46a6a9288e125cabe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a9480a5fd05ae744975586e7085a8fc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   maxHealth: 100
   money: 1
   moveSpeed: 10
-  dropTable: {fileID: 11400000, guid: 76b24bf6e5e0a78489a362919aed7e0a, type: 2}
+  dropTable: {fileID: 11400000, guid: a3bbfe5fc9cd8924581740fde028417f, type: 2}
   coinsPrefab: {fileID: 2734768024339917650, guid: ebda39b5721f2f144851978f9b4d85ac,
     type: 3}
 --- !u!50 &-6836263537827121752
@@ -125,7 +125,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &-5315118515349189343
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.875, y: 1.075}
+    oldSize: {x: 1.225, y: 1.075}
     newSize: {x: 1.225, y: 1.075}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -173,9 +173,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3790650516509750841}
-  equippedWeapon: {fileID: 11400000, guid: 420b3c426f9ec1f46893dacf2457aedd, type: 2}
-  lineRenderer: {fileID: 7403105637052539982, guid: 3f7d128a036df89419e7af83850ddf04,
-    type: 3}
+  equippedWeapon: {fileID: 11400000, guid: c7aef2b1cec81b51fb4af9bad8553d53, type: 2}
+  lineRenderer: {fileID: 0}
   inMeleeRange: 0
 --- !u!114 &-7744249323065494141
 MonoBehaviour:
@@ -208,5 +207,4 @@ MonoBehaviour:
   waypoints: []
   waveConfig: {fileID: 0}
   isDoneSpawning: 0
-  minDistance: 1
   maxPathingTime: 3
