@@ -25,7 +25,19 @@ public class ItemSpawner : MonoBehaviour
 
         if (itemObject != null && spriteRenderer != null)
         {
-            spriteRenderer.sprite = type == 0 ? weapon.sprite : item.sprite;
+            //spriteRenderer.sprite = type == 0 ? weapon.sprite : item.sprite;
+            switch(type)
+            {
+                case WEAPON_TYPE:
+                    spriteRenderer.sprite = weapon.sprite;
+                    break;
+                case ITEM_TYPE:
+                    spriteRenderer.sprite = item.sprite;
+                    break;
+                case POWERUP_TYPE:
+                    spriteRenderer.sprite = item.powerupSprite;
+                    break;
+            }
         }
         else
         {

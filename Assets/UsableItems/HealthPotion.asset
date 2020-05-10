@@ -17,6 +17,7 @@ MonoBehaviour:
   cost: 5
   sprite: {fileID: 21300000, guid: 6bb75e3fb3f5328469c04af4039aec44, type: 3}
   buttonSprite: {fileID: 21300000, guid: c7bcd6468a29a784fafe260061f12534, type: 3}
+  powerupSprite: {fileID: 21300000, guid: 56a7e42f779296a43811217393018e06, type: 3}
   IsConsumable: 1
   Effects:
   - {fileID: 11400000, guid: bf96316f1442d425481476b7ba06255d, type: 2}
