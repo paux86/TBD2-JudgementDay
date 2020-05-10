@@ -12,6 +12,7 @@ public class ItemSpawner : MonoBehaviour
 
     const int WEAPON_TYPE = 0;
     const int ITEM_TYPE = 1;
+    const int POWERUP_TYPE = 2;
 #pragma warning restore 0649
     public void SpawnUsableItemOrWeapon(Vector2 position, int type, ScriptableObject lootDrop)
     {
@@ -24,7 +25,19 @@ public class ItemSpawner : MonoBehaviour
 
         if (itemObject != null && spriteRenderer != null)
         {
-            spriteRenderer.sprite = type == 0 ? weapon.sprite : item.sprite;
+            //spriteRenderer.sprite = type == 0 ? weapon.sprite : item.sprite;
+            switch(type)
+            {
+                case WEAPON_TYPE:
+                    spriteRenderer.sprite = weapon.sprite;
+                    break;
+                case ITEM_TYPE:
+                    spriteRenderer.sprite = item.sprite;
+                    break;
+                case POWERUP_TYPE:
+                    spriteRenderer.sprite = item.powerupSprite;
+                    break;
+            }
         }
         else
         {
@@ -51,6 +64,13 @@ public class ItemSpawner : MonoBehaviour
             dropContainer.UpdateType(ITEM_TYPE);
             dropContainer.SetItem(item);
         }
+        else if (type == POWERUP_TYPE)
+        {
+            this.item = (UsableItem)lootDrop;
+            DropContainer dropContainer = itemObject.GetComponent<DropContainer>();
+            dropContainer.UpdateType(POWERUP_TYPE);
+            dropContainer.SetItem(item);
+        }
     }
 
     private GameObject CreateDropObject()
@@ -60,6 +80,7 @@ public class ItemSpawner : MonoBehaviour
         itemObject.AddComponent(typeof(CircleCollider2D));
         itemObject.AddComponent(typeof(DropContainer));
         itemObject.layer = LayerMask.NameToLayer("Item");
+        itemObject.GetComponent<SpriteRenderer>().sortingLayerName = "Item";
 
         return itemObject;
     }

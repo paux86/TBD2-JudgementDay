@@ -31,11 +31,17 @@ public class AttackWithWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Attack();
+         Attack();
     }
 
     void Attack()
     {
+        if(equippedWeapon == null)
+        {
+            Debug.Log("No weapon equipped");
+            return;
+        }
+
         if (nearestEnemy.nearestTarget && nearestEnemy.distanceToNearestEnemy <= equippedWeapon.range && Time.time >= nextFireTime)
         {
             if (equippedWeapon.hitscan)
