@@ -11,6 +11,7 @@ public class GameState : MonoBehaviour
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
     public int bossesDefeated = 0;
+    public int bossDifficultyMod = 0;
     ItemSpawner itemSpawner;
     DeathTransition deathTransition;
 
@@ -174,6 +175,14 @@ public class GameState : MonoBehaviour
     public void IncrementBossesDefeated()
     {
         this.bossesDefeated++;
+        if(this.bossesDefeated == 1)
+        {
+            this.bossDifficultyMod++;
+        }
+        else if(this.bossesDefeated % 2 == 0)
+        {
+            this.bossDifficultyMod++;
+        }
     }
 
     public NodeInformation GetCurrentSelectedNode()

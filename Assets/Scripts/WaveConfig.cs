@@ -15,13 +15,22 @@ public class WaveConfig : ScriptableObject
 
     public GameObject GetEnemyPrefab()
     {
-        //
         return enemyPrefab;
+    }
+
+    public void SetEnemyPrefab(GameObject enemy)
+    {
+        this.enemyPrefab = enemy;
     }
 
     public GameObject GetPathPrefab()
     {
         return pathPrefab;
+    }
+
+    public void SetPathPrefab(GameObject path)
+    {
+        this.pathPrefab = path;
     }
 
     public float GetTimeBetweenSpawns()
@@ -37,6 +46,11 @@ public class WaveConfig : ScriptableObject
     public int GetNumberOfEnemies()
     {
         return numberofEnemies;
+    }
+
+    public void SetNumberOfEnemies(int number)
+    {
+        this.numberofEnemies = number;
     }
 
     public float GetMoveSpeed()
