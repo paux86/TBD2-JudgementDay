@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ZombieBossLootTable
   m_EditorClassIdentifier: 
   Drops:
-  - {fileID: 11400000, guid: 9f408333acb662742a53efe721e746ae, type: 2}
-  IsWeapon: 01
+  - {fileID: 11400000, guid: d187a6422b56a6faaa52df9f0a33ed12, type: 2}
+  IsWeapon: 00
   Weights: 64000000
   Enabled: 01
   totalWeight: 100

@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyCount: 0
+  maxHealth: 150
+  currentWeaponSlot: 0
   weaponInventory:
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 11400000, guid: 0a497787e9c14ed44a48d634bfe02bfe, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   itemInventory:
   - {fileID: 11400000, guid: cb022c2cc1427448f8696f1080d20bec, type: 2}
   - {fileID: 0}

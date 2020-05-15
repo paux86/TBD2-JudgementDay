@@ -7,10 +7,7 @@ public class SwapWeapon : MonoBehaviour
     [SerializeField] AttackWithWeapon attack = null;
     [SerializeField] PlayerStats player = null;
 
-    private void Start()
-    {
-        Swap(0);
-    }
+   
 
     public void Swap()
     {

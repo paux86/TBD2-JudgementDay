@@ -11,12 +11,17 @@ public class InventoryHandler : MonoBehaviour
     [SerializeField] GameObject[] inventoryLists;
     [SerializeField] GameObject playerReference;
     [SerializeField] GameObject tooltipPanel;
+    [SerializeField] GameObject useItemButton;
+    [SerializeField] GameObject dropItemButton;
 #pragma warning restore 0649
 
 
     private bool isOpen = false;
     private TextMeshProUGUI tooltipName;
     private TextMeshProUGUI tooltipDescription;
+    private PlayerStats playerStatsReference;
+    private SwapWeapon swapReference;
+    private DropItem dropItemReference;
 
 
     private void Start()
@@ -25,9 +30,21 @@ public class InventoryHandler : MonoBehaviour
         tooltipDescription = GameObject.Find("Canvas/Inventory Button/Tooltip/Tooltip Background/Tooltip Description").GetComponent<TextMeshProUGUI>();
     }
 
+    private void Update()
+    {
+        if(isOpen)
+        {
+            if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                ToggleInventory();
+            }
+        }
+    }
+
     public void ToggleInventory()
     {
         LoadButtons();
+        SetSelectedButton();
         isOpen = !isOpen;
 
         if (inventoryLists.Length > 0)
@@ -36,6 +53,11 @@ public class InventoryHandler : MonoBehaviour
             {
                 list.SetActive(isOpen);
             }
+        }
+
+        if(!isOpen)
+        {
+            SetUseButtonsActive(false);
         }
 
         if (Time.timeScale == 0)
@@ -47,17 +69,17 @@ public class InventoryHandler : MonoBehaviour
     private void LoadButtons()
     {
         //init weapons
-        Component[] wepButtons;
-        wepButtons = inventoryLists[0].GetComponentsInChildren(typeof(Button));
-        SwapWeapon swapReference = playerReference.GetComponent<SwapWeapon>();
-        PlayerStats playerStatsReference = playerReference.GetComponent<PlayerStats>();
+        Component[] wepButtons = inventoryLists[0].GetComponentsInChildren(typeof(Button));
+        swapReference = playerReference.GetComponent<SwapWeapon>();
+        playerStatsReference = playerReference.GetComponent<PlayerStats>();
+        dropItemReference = playerReference.GetComponent<DropItem>();
 
         if (wepButtons != null)
         {
             for (int i = 0; i < wepButtons.Length; i++)
             {
                 int b = i;
-                wepButtons[i].GetComponent<Button>().onClick.AddListener(() => swapReference.Swap(b));
+                wepButtons[i].GetComponent<Button>().onClick.AddListener(() => SwapAndUpdateSelectedButtons(b));
                 UpdateWepButton(wepButtons, playerStatsReference, i);
 
                 EventTrigger triggerEnter = wepButtons[i].GetComponent<Button>().gameObject.GetComponent<EventTrigger>();
@@ -86,7 +108,7 @@ public class InventoryHandler : MonoBehaviour
             for (int i = 0; i < itemButtons.Length; i++)
             {
                 int b = i;
-                itemButtons[i].GetComponent<Button>().onClick.AddListener(() => playerStatsReference.UseItem(b));
+                itemButtons[i].GetComponent<Button>().onClick.AddListener(() => UpdateAndShowUseButtons(b));
                 UpdateItemButton(playerStatsReference, itemButtons, i);
 
                 CreateOrUpdateItemToolTipTrigger(playerStatsReference, itemButtons, i, b);
@@ -108,6 +130,7 @@ public class InventoryHandler : MonoBehaviour
         {
             enter.callback.AddListener((e) => SetTooltipText("Empty", "This item slot is empty"));
         }
+        enter.callback.AddListener((e) => SetUseButtonsActive(false));
         triggerEnter.triggers.Add(enter);
     }
 
@@ -151,5 +174,48 @@ public class InventoryHandler : MonoBehaviour
     {
         tooltipName.text = name;
         tooltipDescription.text = description;
+    }
+
+    private void SetSelectedButton()
+    {
+        int selectedButton = playerStatsReference.GetCurrentWeaponSlot();
+        int buttonNumber = 0;
+        foreach (Transform child in inventoryLists[0].transform)
+        {
+            if (child.tag == "ActiveButton")
+            {
+                if (buttonNumber == selectedButton)
+                {
+                    child.gameObject.SetActive(true);
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);
+                }
+                buttonNumber++;
+            }
+        }
+    }
+
+    private void SwapAndUpdateSelectedButtons(int buttonIndex)
+    {
+        swapReference.Swap(buttonIndex);
+        SetSelectedButton();
+        SetUseButtonsActive(false);
+    }
+
+    private void UpdateAndShowUseButtons(int itemIndex)
+    {
+        SetUseButtonsActive(true);
+        useItemButton.GetComponent<Button>().onClick.AddListener(() => playerStatsReference.UseItem(itemIndex));
+        useItemButton.GetComponent<Button>().onClick.AddListener(() => SetUseButtonsActive(false));
+        dropItemButton.GetComponent<Button>().onClick.AddListener(() => dropItemReference.DropInventoryItem(itemIndex));
+        dropItemButton.GetComponent<Button>().onClick.AddListener(() => SetUseButtonsActive(false));
+    }
+
+    private void SetUseButtonsActive(bool enabled)
+    {
+        useItemButton.gameObject.SetActive(enabled);
+        dropItemButton.gameObject.SetActive(enabled);
     }
 }

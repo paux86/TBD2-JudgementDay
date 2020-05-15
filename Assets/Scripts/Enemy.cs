@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, TakeDamageInterface
 {
-
-    [SerializeField] int maxHealth = 100;
-    [SerializeField] int money = 1;
+    [SerializeField] public int maxHealth = 100;
+    public int health;
+    [SerializeField] public int money = 1;
     [SerializeField] float moveSpeed = 10f;
     [SerializeField] LootTable dropTable = null;
+    [SerializeField] GameObject coinsPrefab;
     ItemSpawner itemSpawner;
+    PersistentStats persistentStats;
 
-    private int health;
     private Material matFlash;
     private Material matDefault;
     private SpriteRenderer rendererReference;
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour, TakeDamageInterface
     // Start is called before the first frame update
     void Start()
     {
+        persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
         health = maxHealth;
         itemSpawner = FindObjectOfType<ItemSpawner>().GetComponent<ItemSpawner>();
         rendererReference = GetComponent<SpriteRenderer>();
@@ -53,13 +55,23 @@ public class Enemy : MonoBehaviour, TakeDamageInterface
 
         GameObject onDeathEffect = (GameObject)Instantiate(deathSpatter);
         onDeathEffect.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+        if(this.money > 0)
+        {
+            Instantiate(coinsPrefab, transform.position, transform.rotation);
+        }
+
         Destroy(gameObject);
-        
     }
 
     public float GetMoveSpeed()
     {
         return this.moveSpeed;
+    }
+
+    public void IncrementMaxHealth(int number)
+    {
+        this.maxHealth += number;
     }
 
    private IEnumerator Flash()

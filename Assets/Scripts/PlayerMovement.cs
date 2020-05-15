@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public float playerSpeed = 9f;
+    private bool isBeingKnockedBack = false;
+    private float thrust = 2000f;
     private Vector3 destination;
     private Rigidbody2D rigidBody;
 
@@ -24,7 +26,10 @@ public class PlayerMovement : MonoBehaviour
             destination = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             destination.z = transform.position.z;
         }
-        Move();
+        if(!isBeingKnockedBack)
+        {
+            Move();
+        }
     }
 
     private void Move()
@@ -32,5 +37,17 @@ public class PlayerMovement : MonoBehaviour
         rigidBody.velocity = Vector3.zero;
         rigidBody.angularVelocity = 0f;
         rigidBody.MovePosition(Vector3.MoveTowards(transform.position, destination, playerSpeed * Time.fixedDeltaTime));
+    }
+
+    public IEnumerator Knockback()
+    {
+        if (isBeingKnockedBack)
+            yield break;
+
+        isBeingKnockedBack = true;
+        rigidBody.AddForce(Vector3.forward * -thrust, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(0.4f);
+        destination = transform.position;
+        isBeingKnockedBack = false;
     }
 }

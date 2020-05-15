@@ -10,6 +10,7 @@ public class UsableItem : ScriptableObject
     public int cost;
     public Sprite sprite;
     public Sprite buttonSprite;
+    public Sprite powerupSprite;
     public bool IsConsumable;
     public List<UsableItemEffect> Effects;
 

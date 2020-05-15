@@ -73,11 +73,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 727742969
+  m_SortingLayer: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 7a9480a5fd05ae744975586e7085a8fc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3304112, g: 0.6310937, b: 0.9339623, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -100,9 +100,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  health: 0
   money: 1
   moveSpeed: 10
   dropTable: {fileID: 11400000, guid: a3bbfe5fc9cd8924581740fde028417f, type: 2}
+  coinsPrefab: {fileID: 2734768024339917650, guid: ebda39b5721f2f144851978f9b4d85ac,
+    type: 3}
 --- !u!50 &-6836263537827121752
 Rigidbody2D:
   serializedVersion: 4
@@ -123,7 +126,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &-5315118515349189343
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -173,6 +176,7 @@ MonoBehaviour:
   firePoint: {fileID: 3790650516509750841}
   equippedWeapon: {fileID: 11400000, guid: c7aef2b1cec81b51fb4af9bad8553d53, type: 2}
   lineRenderer: {fileID: 0}
+  inMeleeRange: 0
 --- !u!114 &-7744249323065494141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,5 +208,4 @@ MonoBehaviour:
   waypoints: []
   waveConfig: {fileID: 0}
   isDoneSpawning: 0
-  minDistance: 10
   maxPathingTime: 3

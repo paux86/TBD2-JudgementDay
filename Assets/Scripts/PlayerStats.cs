@@ -6,29 +6,40 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour, TakeDamageInterface
 {
+    [SerializeField] int maxHealth = 100;
+    public int health;
     [SerializeField] private int moneyCount = 0;
     [SerializeField] private float armor = 0.0f;
-    [SerializeField] int maxHealth = 100;
     [SerializeField] HealthBar healthBar = default;
     [SerializeField] public Weapon[] weaponInventory = new Weapon[3]; // 0 melee < 5 range, 1 medium < 50, 2 long > 50
     [SerializeField] public Weapon currentWeapon;
     [SerializeField] public UsableItem[] itemInventory = new UsableItem[3];
 
-    private int health;
     private int currentWeaponSlot;
     private int weaponInventorySize;
 
-    public PersistentStats persistentStats;
+    PersistentStats persistentStats;
 
 
     private void Start()
     {
+        StartCoroutine(WaitAndUpdate()); 
 
+        //weaponInventory = new Weapon[weaponInventorySize];
+        weaponInventorySize = weaponInventory.Length;
+        armor = GetArmor();
+    }
+
+    IEnumerator WaitAndUpdate()
+    {
+        yield return new WaitForSecondsRealtime(.2f);
         persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
         this.moneyCount = persistentStats.moneyCount;
+        this.maxHealth = persistentStats.maxHealth;
         this.weaponInventory = persistentStats.GetWeaponInventory();
+        this.currentWeaponSlot = persistentStats.currentWeaponSlot;
+        currentWeapon = weaponInventory[currentWeaponSlot];
         this.itemInventory = persistentStats.GetItemInventory();
-
 
         health = maxHealth;
         if(healthBar != null)
@@ -36,12 +47,6 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
             healthBar.SetMaxHealth(maxHealth);
         }
 
-        //weaponInventory = new Weapon[weaponInventorySize];
-        currentWeapon = weaponInventory[0];
-        currentWeaponSlot = 0;
-        weaponInventorySize = weaponInventory.Length;
-
-        armor = GetArmor();
     }
 
     public int GetMoneyCount()
@@ -77,11 +82,23 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
     public void IncrementHealth(int number)
     {
         health += number;
+        healthBar.SetHealth(health);
+    }
+
+    public void IncrementHealthMax(int number)
+    {
+        maxHealth += number;
+        health += number;
     }
 
     public Weapon GetCurrentWeapon()
     {
         return currentWeapon;
+    }
+
+    public int GetCurrentWeaponSlot()
+    {
+        return currentWeaponSlot;
     }
 
     public void SwapToNextWeapon()
@@ -175,8 +192,6 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         InventoryHandler inventoryHandler = GameObject.Find("Inventory Button").GetComponent<InventoryHandler>();
         EventTrigger eventTrigger = invButtons[slotNum].GetComponent<EventTrigger>();
         eventTrigger.triggers.RemoveAt(2);
-
-        
         InventoryHandler.UpdateItemButton(this,invButtons,slotNum);
         inventoryHandler.CreateOrUpdateItemToolTipTrigger(this, invButtons, slotNum, slotNum);
     }
@@ -217,7 +232,6 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
                 foundSlot = true;
             }
         }
-
         return foundSlot;
     }
 
@@ -236,7 +250,6 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
                 itemButton.GetComponentInChildren<Text>().text = "noSpr";
             }
         }
-
         return itemButtonSprite;
     }
 
@@ -259,5 +272,40 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         return weaponButtonSprite;
     }
 
+    public Weapon GetWeaponAtInventorySlot(int slotIndex)
+    {
+        if (slotIndex < weaponInventory.Length)
+        {
+            return weaponInventory[slotIndex];
+        }
+        else
+            return null;
+    }
 
+    public UsableItem GetItemAtInventorySlot(int slotIndex)
+    {
+        if (slotIndex < itemInventory.Length)
+        {
+            return itemInventory[slotIndex];
+        }
+        else
+            return null;
+    }
+
+    public void RemoveItemFromInventorySlot(int slotIndex)
+    {
+        if(slotIndex < itemInventory.Length)
+        {
+            itemInventory[slotIndex] = null;
+            UpdateItemButton(slotIndex);
+        }
+    }
+
+    public void RemoveWeaponFromInventorySlot(int slotIndex)
+    {
+        if (slotIndex < weaponInventory.Length && weaponInventory[slotIndex] != null)
+        {
+            weaponInventory[slotIndex] = null;
+        }
+    }
 }
