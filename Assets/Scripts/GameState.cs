@@ -7,11 +7,13 @@ public class GameState : MonoBehaviour
     private EnemySpawner enemySpawner;
     private SceneLoader sceneLoader;
 
-    private PersistentStats persistentStats;
     NodeInformation[,] nodeTierMatrix;
     GameObject levelGrid;
     NodeInformation currentSelectedNode;
-    int bossesDefeated = 0;
+    public int bossesDefeated = 0;
+    public int bossDifficultyMod = 0;
+    ItemSpawner itemSpawner;
+    DeathTransition deathTransition;
 
     
 
@@ -34,13 +36,12 @@ public class GameState : MonoBehaviour
             {
                 enemySpawner.SetWaveComplete(false);
                 currentSelectedNode.SetIsComplete(true);
-                persistentStats.updateStats();
-                sceneLoader.ChangeToLevelSelect();
+                itemSpawner.SpawnExitToMapObject(false);
 
             }
-            else if(GameObject.FindGameObjectsWithTag("Player").Length <= 0)
+            else if (GameObject.FindGameObjectsWithTag("Player").Length < 1)
             {
-                SceneManager.LoadScene(0);
+                deathTransition.ActivateDeathTransition();
             }
         }
 
@@ -68,8 +69,7 @@ public class GameState : MonoBehaviour
         {
             enemySpawner = FindObjectOfType<EnemySpawner>().GetComponent<EnemySpawner>();
             sceneLoader = FindObjectOfType<SceneLoader>().GetComponent<SceneLoader>();
-            persistentStats = FindObjectOfType<PersistentStats>().GetComponent<PersistentStats>();
-
+            itemSpawner = FindObjectOfType<ItemSpawner>().GetComponent<ItemSpawner>();
         }
     }
 
@@ -175,6 +175,24 @@ public class GameState : MonoBehaviour
     public void IncrementBossesDefeated()
     {
         this.bossesDefeated++;
+        if(this.bossesDefeated == 1)
+        {
+            this.bossDifficultyMod++;
+        }
+        else if(this.bossesDefeated % 2 == 0)
+        {
+            this.bossDifficultyMod++;
+        }
+    }
+
+    public NodeInformation GetCurrentSelectedNode()
+    {
+        return this.currentSelectedNode;
+    }
+
+    public void SetDeathTransition(DeathTransition deathTransition)
+    {
+        this.deathTransition = deathTransition;
     }
 
 }
