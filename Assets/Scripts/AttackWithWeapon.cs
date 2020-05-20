@@ -26,6 +26,10 @@ public class AttackWithWeapon : MonoBehaviour
             Debug.Log("equipped weapon was null, reverting to default weapon on player");
              equippedWeapon = gameObject.GetComponent<PlayerStats>().weaponInventory[2];
         }
+        else if(gameObject.CompareTag("Player"))
+        {
+            equippedWeapon = gameObject.GetComponent<PlayerStats>().GetCurrentWeapon();
+        }
     }
 
     // Update is called once per frame

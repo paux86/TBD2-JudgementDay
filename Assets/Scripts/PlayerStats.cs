@@ -38,8 +38,9 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
         this.maxHealth = persistentStats.maxHealth;
         this.weaponInventory = persistentStats.GetWeaponInventory();
         this.currentWeaponSlot = persistentStats.currentWeaponSlot;
-        currentWeapon = weaponInventory[currentWeaponSlot];
+        this.currentWeapon = GetCurrentWeapon();
         this.itemInventory = persistentStats.GetItemInventory();
+        gameObject.GetComponent<AttackWithWeapon>().equippedWeapon = currentWeapon;
 
         health = maxHealth;
         if(healthBar != null)
@@ -93,7 +94,7 @@ public class PlayerStats : MonoBehaviour, TakeDamageInterface
 
     public Weapon GetCurrentWeapon()
     {
-        return currentWeapon;
+        return weaponInventory[GetCurrentWeaponSlot()];
     }
 
     public int GetCurrentWeaponSlot()
